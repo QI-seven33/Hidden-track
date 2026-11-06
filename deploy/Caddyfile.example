@@ -1,0 +1,9 @@
+# Replace this domain. DNS must point to your server; ports 80/443 must be reachable.
+music.example.com {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:3190
+    header {
+        X-Content-Type-Options nosniff
+        Referrer-Policy no-referrer
+    }
+}

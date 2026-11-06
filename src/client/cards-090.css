@@ -1,0 +1,126 @@
+/* Card artwork and its live labels only. No table or page geometry changes. */
+.demo-app .card-face.art-v090 {
+  container-type: inline-size;
+  font-synthesis: weight style;
+}
+.demo-app .card-face.art-v090 .face-title {
+  left: 28%;
+  right: 23%;
+  top: 3.5%;
+  height: 10.5%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  color: #111;
+  display: grid;
+  place-items: center;
+  font:
+    900 11cqw/1.1 'SimSun',
+    'Songti SC',
+    serif;
+  letter-spacing: 0;
+  text-shadow: none;
+  transform: rotate(-4deg);
+}
+.demo-app .card-face.art-v090 .face-cost {
+  left: 79%;
+  right: auto;
+  top: 4%;
+  width: 13%;
+  height: 10%;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: #fff;
+  font: 900 14cqw/1 sans-serif;
+  transform: rotate(3deg);
+}
+.demo-app .card-face.art-v090 .face-description {
+  left: 8%;
+  right: 8%;
+  top: 71%;
+  bottom: 7.2%;
+  padding: 0;
+  display: grid;
+  align-content: center;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: #111;
+  font:
+    700 5.1cqw/1.36 'Microsoft YaHei',
+    'PingFang SC',
+    sans-serif;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.demo-app .card-face.art-v090 .face-description.medium-copy {
+  font-size: 4.5cqw;
+}
+.demo-app .card-face.art-v090 .face-description.long-copy {
+  font-size: 3.9cqw;
+}
+.demo-app .card-face.art-v090 .face-category {
+  display: none;
+}
+.demo-app .event-front::before {
+  content: none;
+}
+.demo-app .event-front {
+  font-synthesis: weight style;
+}
+.demo-app .event-front .event-artwork {
+  object-fit: fill;
+  border-radius: inherit;
+}
+.demo-app .event-front .gt-event-title {
+  left: 26%;
+  right: 6%;
+  top: 3.3%;
+  height: 12%;
+  margin: 0;
+  padding: 0;
+  color: #111;
+  font:
+    900 10cqw/1.15 'SimSun',
+    'Songti SC',
+    serif;
+  transform: rotate(-3deg);
+  text-shadow: none;
+  letter-spacing: 0;
+}
+.demo-app .event-front .gt-event-rarity {
+  left: 28%;
+  right: 16%;
+  top: 58.8%;
+  height: 4.5%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font:
+    700 5.5cqw/1.1 'SimSun',
+    serif;
+  letter-spacing: 1px;
+}
+.demo-app .event-front .gt-event-desc {
+  top: 67.5%;
+  bottom: 7%;
+  left: 9%;
+  right: 9%;
+  padding: 0;
+  color: #111;
+  font:
+    700 clamp(8px, 5cqw, 12px)/1.3 'Microsoft YaHei',
+    'PingFang SC',
+    sans-serif;
+  text-align: left;
+  overflow: auto;
+  align-content: safe center;
+  scrollbar-width: thin;
+}

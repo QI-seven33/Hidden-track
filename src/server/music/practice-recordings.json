@@ -1,0 +1,3990 @@
+[
+  {
+    "id": "wish",
+    "provider": "fixture",
+    "providerId": "405007729",
+    "providerMid": "003N7EbT2mUdPG",
+    "title": "愿与愁",
+    "artists": [
+      "林俊杰"
+    ],
+    "album": "重拾_快乐",
+    "albumId": "37088284",
+    "albumMid": "004ZOIop1doXru",
+    "cover": "https://y.gtimg.cn/music/photo_new/T002R300x300M000004ZOIop1doXru_3.jpg",
+    "language": "国语",
+    "genre": "Pop 流行",
+    "bpm": 72,
+    "year": 2023,
+    "lyricists": [
+      "小寒"
+    ],
+    "composers": [
+      "林俊杰"
+    ],
+    "sources": [
+      {
+        "label": "QQ 音乐比赛 OpenAPI",
+        "url": "https://y.qq.com/music_developer/#/docs/openapi#/feature/song"
+      },
+      {
+        "label": "QQ 音乐公开网页资料（实验）",
+        "url": "https://y.qq.com/n/ryqq_v2/songDetail/003N7EbT2mUdPG"
+      },
+      {
+        "label": "QQ 音乐歌词署名（已核对歌曲版本）",
+        "url": "https://y.qq.com/n/ryqq/songDetail/003N7EbT2mUdPG"
+      }
+    ],
+    "artistGender": "1 男",
+    "lyricTranslations": {},
+    "lyricHint": "岁月在默数三四五六 第六天以后",
+    "lyricHints": [
+      "岁月在默数三四五六 第六天以后",
+      "人们开始存在宇宙 黑夜和白昼",
+      "呼吸第一口气的咽喉 最怕命运小偷",
+      "坏和美好我用血肉 去感受",
+      "问宿命是否 再多久 再持久 再永久",
+      "抵不了不朽",
+      "恋人从挥手 到牵手 到放手 到挥手",
+      "就该足够",
+      "对夜的长吼 我胸口 的伤口 随风陈旧",
+      "你我终会沦为尘埃漂流",
+      "等待花季烟雨稠",
+      "再化降水驻守"
+    ],
+    "duration": 231,
+    "evidence": {
+      "schemaVersion": 1,
+      "policyVersion": "music-evidence-v1",
+      "capturedAt": "2026-11-02T04:36:44.480Z",
+      "entity": {
+        "scope": "recording",
+        "id": "qq:003N7EbT2mUdPG"
+      },
+      "allowedSources": [
+        "qq_openapi",
+        "qq_lyric_credit",
+        "qq_public_web"
+      ],
+      "facts": {
+        "artistGender": {
+          "status": "known",
+          "selected": {
+            "field": "artistGender",
+            "value": "1 男",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artistGender",
+            "observedAt": "2026-11-02T04:36:43.831Z"
+          },
+          "candidates": [
+            {
+              "field": "artistGender",
+              "value": "1 男",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artistGender",
+              "observedAt": "2026-11-02T04:36:43.831Z"
+            }
+          ]
+        },
+        "lyricHint": {
+          "status": "known",
+          "selected": {
+            "field": "lyricHint",
+            "value": "岁月在默数三四五六 第六天以后",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_openapi",
+            "basis": "lyric.identityCheckedShortOriginal",
+            "observedAt": "2026-11-02T04:36:44.480Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricHint",
+              "value": "岁月在默数三四五六 第六天以后",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_openapi",
+              "basis": "lyric.identityCheckedShortOriginal",
+              "observedAt": "2026-11-02T04:36:44.480Z"
+            }
+          ]
+        },
+        "title": {
+          "status": "known",
+          "selected": {
+            "field": "title",
+            "value": "愿与愁",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_openapi",
+            "basis": "song.title",
+            "observedAt": "2026-11-02T04:36:43.831Z"
+          },
+          "candidates": [
+            {
+              "field": "title",
+              "value": "愿与愁",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_openapi",
+              "basis": "song.title",
+              "observedAt": "2026-11-02T04:36:43.831Z"
+            }
+          ]
+        },
+        "artists": {
+          "status": "known",
+          "selected": {
+            "field": "artists",
+            "value": [
+              "林俊杰"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artists",
+            "observedAt": "2026-11-02T04:36:43.831Z"
+          },
+          "candidates": [
+            {
+              "field": "artists",
+              "value": [
+                "林俊杰"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artists",
+              "observedAt": "2026-11-02T04:36:43.831Z"
+            }
+          ]
+        },
+        "album": {
+          "status": "known",
+          "selected": {
+            "field": "album",
+            "value": "重拾_快乐",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_openapi",
+            "basis": "song.album",
+            "observedAt": "2026-11-02T04:36:43.831Z"
+          },
+          "candidates": [
+            {
+              "field": "album",
+              "value": "重拾_快乐",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_openapi",
+              "basis": "song.album",
+              "observedAt": "2026-11-02T04:36:43.831Z"
+            }
+          ]
+        },
+        "year": {
+          "status": "known",
+          "selected": {
+            "field": "year",
+            "value": 2023,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_openapi",
+            "basis": "song.year",
+            "observedAt": "2026-11-02T04:36:43.831Z"
+          },
+          "candidates": [
+            {
+              "field": "year",
+              "value": 2023,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_openapi",
+              "basis": "song.year",
+              "observedAt": "2026-11-02T04:36:43.831Z"
+            }
+          ]
+        },
+        "language": {
+          "status": "known",
+          "selected": {
+            "field": "language",
+            "value": "国语",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_openapi",
+            "basis": "song.language",
+            "observedAt": "2026-11-02T04:36:43.831Z"
+          },
+          "candidates": [
+            {
+              "field": "language",
+              "value": "国语",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_openapi",
+              "basis": "song.language",
+              "observedAt": "2026-11-02T04:36:43.831Z"
+            }
+          ]
+        },
+        "genre": {
+          "status": "known",
+          "selected": {
+            "field": "genre",
+            "value": "Pop 流行",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_openapi",
+            "basis": "song.genre",
+            "observedAt": "2026-11-02T04:36:43.831Z"
+          },
+          "candidates": [
+            {
+              "field": "genre",
+              "value": "Pop 流行",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_openapi",
+              "basis": "song.genre",
+              "observedAt": "2026-11-02T04:36:43.831Z"
+            }
+          ]
+        },
+        "bpm": {
+          "status": "known",
+          "selected": {
+            "field": "bpm",
+            "value": 72,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_public_web",
+            "basis": "web.bpm",
+            "observedAt": "2026-11-02T04:36:44.023Z"
+          },
+          "candidates": [
+            {
+              "field": "bpm",
+              "value": 72,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_public_web",
+              "basis": "web.bpm",
+              "observedAt": "2026-11-02T04:36:44.023Z"
+            }
+          ]
+        },
+        "lyricists": {
+          "status": "known",
+          "selected": {
+            "field": "lyricists",
+            "value": [
+              "小寒"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作词",
+            "observedAt": "2026-11-02T04:36:44.480Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricists",
+              "value": [
+                "小寒"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作词",
+              "observedAt": "2026-11-02T04:36:44.480Z"
+            }
+          ]
+        },
+        "composers": {
+          "status": "known",
+          "selected": {
+            "field": "composers",
+            "value": [
+              "林俊杰"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作曲",
+            "observedAt": "2026-11-02T04:36:44.480Z"
+          },
+          "candidates": [
+            {
+              "field": "composers",
+              "value": [
+                "林俊杰"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作曲",
+              "observedAt": "2026-11-02T04:36:44.480Z"
+            }
+          ]
+        },
+        "credits": {
+          "status": "known",
+          "selected": {
+            "field": "credits",
+            "value": [
+              "作曲：林俊杰",
+              "作词：小寒"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.explicitRoles",
+            "observedAt": "2026-11-02T04:36:44.480Z"
+          },
+          "candidates": [
+            {
+              "field": "credits",
+              "value": [
+                "作曲：林俊杰",
+                "作词：小寒"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.explicitRoles",
+              "observedAt": "2026-11-02T04:36:44.480Z"
+            }
+          ]
+        },
+        "duration": {
+          "status": "known",
+          "selected": {
+            "field": "duration",
+            "value": 231,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003N7EbT2mUdPG"
+            },
+            "source": "qq_openapi",
+            "basis": "song.song_play_time",
+            "observedAt": "2026-11-02T04:36:43.831Z"
+          },
+          "candidates": [
+            {
+              "field": "duration",
+              "value": 231,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003N7EbT2mUdPG"
+              },
+              "source": "qq_openapi",
+              "basis": "song.song_play_time",
+              "observedAt": "2026-11-02T04:36:43.831Z"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "coral",
+    "provider": "fixture",
+    "providerId": "718486",
+    "providerMid": "001K0AjL2huSxx",
+    "title": "珊瑚海",
+    "artists": [
+      "周杰伦",
+      "Lara梁心颐"
+    ],
+    "album": "十一月的萧邦",
+    "albumId": "60671",
+    "albumMid": "0024bjiL2aocxT",
+    "cover": "https://y.gtimg.cn/music/photo_new/T002R300x300M0000024bjiL2aocxT_5.jpg",
+    "language": "国语",
+    "genre": "Pop 流行",
+    "bpm": 73,
+    "year": 2005,
+    "lyricists": [
+      "方文山"
+    ],
+    "composers": [
+      "周杰伦"
+    ],
+    "sources": [
+      {
+        "label": "QQ 音乐比赛 OpenAPI",
+        "url": "https://y.qq.com/music_developer/#/docs/openapi#/feature/song"
+      },
+      {
+        "label": "QQ 音乐公开网页资料（实验）",
+        "url": "https://y.qq.com/n/ryqq_v2/songDetail/001K0AjL2huSxx"
+      },
+      {
+        "label": "QQ 音乐歌词署名（已核对歌曲版本）",
+        "url": "https://y.qq.com/n/ryqq/songDetail/001K0AjL2huSxx"
+      }
+    ],
+    "artistGender": "1 男、1 女",
+    "lyricTranslations": {},
+    "lyricHint": "海平面远方开始阴霾",
+    "lyricHints": [
+      "海平面远方开始阴霾",
+      "悲伤要怎么平静纯白",
+      "我的脸上始终挟带",
+      "一抹浅浅的无奈",
+      "你用唇语说你要离开",
+      "那难过无声慢了下来",
+      "汹涌潮水你听明白",
+      "不是浪而是泪海",
+      "转身离开",
+      "你有话说不出来",
+      "分手说不出来",
+      "海鸟跟鱼相爱"
+    ],
+    "duration": 255,
+    "evidence": {
+      "schemaVersion": 1,
+      "policyVersion": "music-evidence-v1",
+      "capturedAt": "2026-11-02T04:36:46.412Z",
+      "entity": {
+        "scope": "recording",
+        "id": "qq:001K0AjL2huSxx"
+      },
+      "allowedSources": [
+        "qq_openapi",
+        "qq_lyric_credit",
+        "qq_public_web"
+      ],
+      "facts": {
+        "artistGender": {
+          "status": "known",
+          "selected": {
+            "field": "artistGender",
+            "value": "1 男、1 女",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artistGender",
+            "observedAt": "2026-11-02T04:36:45.427Z"
+          },
+          "candidates": [
+            {
+              "field": "artistGender",
+              "value": "1 男、1 女",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artistGender",
+              "observedAt": "2026-11-02T04:36:45.427Z"
+            }
+          ]
+        },
+        "lyricHint": {
+          "status": "known",
+          "selected": {
+            "field": "lyricHint",
+            "value": "海平面远方开始阴霾",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_openapi",
+            "basis": "lyric.identityCheckedShortOriginal",
+            "observedAt": "2026-11-02T04:36:46.412Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricHint",
+              "value": "海平面远方开始阴霾",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_openapi",
+              "basis": "lyric.identityCheckedShortOriginal",
+              "observedAt": "2026-11-02T04:36:46.412Z"
+            }
+          ]
+        },
+        "title": {
+          "status": "known",
+          "selected": {
+            "field": "title",
+            "value": "珊瑚海",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_openapi",
+            "basis": "song.title",
+            "observedAt": "2026-11-02T04:36:45.427Z"
+          },
+          "candidates": [
+            {
+              "field": "title",
+              "value": "珊瑚海",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_openapi",
+              "basis": "song.title",
+              "observedAt": "2026-11-02T04:36:45.427Z"
+            }
+          ]
+        },
+        "artists": {
+          "status": "known",
+          "selected": {
+            "field": "artists",
+            "value": [
+              "Lara梁心颐",
+              "周杰伦"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artists",
+            "observedAt": "2026-11-02T04:36:45.427Z"
+          },
+          "candidates": [
+            {
+              "field": "artists",
+              "value": [
+                "Lara梁心颐",
+                "周杰伦"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artists",
+              "observedAt": "2026-11-02T04:36:45.427Z"
+            }
+          ]
+        },
+        "album": {
+          "status": "known",
+          "selected": {
+            "field": "album",
+            "value": "十一月的萧邦",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_openapi",
+            "basis": "song.album",
+            "observedAt": "2026-11-02T04:36:45.427Z"
+          },
+          "candidates": [
+            {
+              "field": "album",
+              "value": "十一月的萧邦",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_openapi",
+              "basis": "song.album",
+              "observedAt": "2026-11-02T04:36:45.427Z"
+            }
+          ]
+        },
+        "year": {
+          "status": "known",
+          "selected": {
+            "field": "year",
+            "value": 2005,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_openapi",
+            "basis": "song.year",
+            "observedAt": "2026-11-02T04:36:45.427Z"
+          },
+          "candidates": [
+            {
+              "field": "year",
+              "value": 2005,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_openapi",
+              "basis": "song.year",
+              "observedAt": "2026-11-02T04:36:45.427Z"
+            }
+          ]
+        },
+        "language": {
+          "status": "known",
+          "selected": {
+            "field": "language",
+            "value": "国语",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_openapi",
+            "basis": "song.language",
+            "observedAt": "2026-11-02T04:36:45.427Z"
+          },
+          "candidates": [
+            {
+              "field": "language",
+              "value": "国语",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_openapi",
+              "basis": "song.language",
+              "observedAt": "2026-11-02T04:36:45.427Z"
+            }
+          ]
+        },
+        "genre": {
+          "status": "known",
+          "selected": {
+            "field": "genre",
+            "value": "Pop 流行",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_openapi",
+            "basis": "song.genre",
+            "observedAt": "2026-11-02T04:36:45.427Z"
+          },
+          "candidates": [
+            {
+              "field": "genre",
+              "value": "Pop 流行",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_openapi",
+              "basis": "song.genre",
+              "observedAt": "2026-11-02T04:36:45.427Z"
+            }
+          ]
+        },
+        "bpm": {
+          "status": "known",
+          "selected": {
+            "field": "bpm",
+            "value": 73,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_public_web",
+            "basis": "web.bpm",
+            "observedAt": "2026-11-02T04:36:45.547Z"
+          },
+          "candidates": [
+            {
+              "field": "bpm",
+              "value": 73,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_public_web",
+              "basis": "web.bpm",
+              "observedAt": "2026-11-02T04:36:45.547Z"
+            }
+          ]
+        },
+        "lyricists": {
+          "status": "known",
+          "selected": {
+            "field": "lyricists",
+            "value": [
+              "方文山"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作词",
+            "observedAt": "2026-11-02T04:36:46.412Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricists",
+              "value": [
+                "方文山"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作词",
+              "observedAt": "2026-11-02T04:36:46.412Z"
+            }
+          ]
+        },
+        "composers": {
+          "status": "known",
+          "selected": {
+            "field": "composers",
+            "value": [
+              "周杰伦"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作曲",
+            "observedAt": "2026-11-02T04:36:46.412Z"
+          },
+          "candidates": [
+            {
+              "field": "composers",
+              "value": [
+                "周杰伦"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作曲",
+              "observedAt": "2026-11-02T04:36:46.412Z"
+            }
+          ]
+        },
+        "credits": {
+          "status": "known",
+          "selected": {
+            "field": "credits",
+            "value": [
+              "作曲：周杰伦",
+              "作词：方文山",
+              "制作人：周杰伦",
+              "编曲：钟兴民"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.explicitRoles",
+            "observedAt": "2026-11-02T04:36:46.412Z"
+          },
+          "candidates": [
+            {
+              "field": "credits",
+              "value": [
+                "作曲：周杰伦",
+                "作词：方文山",
+                "制作人：周杰伦",
+                "编曲：钟兴民"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.explicitRoles",
+              "observedAt": "2026-11-02T04:36:46.412Z"
+            }
+          ]
+        },
+        "duration": {
+          "status": "known",
+          "selected": {
+            "field": "duration",
+            "value": 255,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001K0AjL2huSxx"
+            },
+            "source": "qq_openapi",
+            "basis": "song.song_play_time",
+            "observedAt": "2026-11-02T04:36:45.427Z"
+          },
+          "candidates": [
+            {
+              "field": "duration",
+              "value": 255,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001K0AjL2huSxx"
+              },
+              "source": "qq_openapi",
+              "basis": "song.song_play_time",
+              "observedAt": "2026-11-02T04:36:45.427Z"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "first-day",
+    "provider": "fixture",
+    "providerId": "97256",
+    "providerMid": "001Ss4AC2Ol5Yg",
+    "title": "第一天",
+    "artists": [
+      "孙燕姿"
+    ],
+    "album": "完美的一天",
+    "albumId": "8188",
+    "albumMid": "0019FoJV2aPJiz",
+    "cover": "https://y.gtimg.cn/music/photo_new/T002R300x300M0000019FoJV2aPJiz_5.jpg",
+    "language": "国语",
+    "genre": "Pop 流行",
+    "bpm": 88,
+    "year": 2005,
+    "lyricists": [
+      "阿信"
+    ],
+    "composers": [
+      "孙燕姿",
+      "五月天",
+      "F.I.R."
+    ],
+    "sources": [
+      {
+        "label": "QQ 音乐比赛 OpenAPI",
+        "url": "https://y.qq.com/music_developer/#/docs/openapi#/feature/song"
+      },
+      {
+        "label": "QQ 音乐公开网页资料（实验）",
+        "url": "https://y.qq.com/n/ryqq_v2/songDetail/001Ss4AC2Ol5Yg"
+      },
+      {
+        "label": "QQ 音乐歌词署名（已核对歌曲版本）",
+        "url": "https://y.qq.com/n/ryqq/songDetail/001Ss4AC2Ol5Yg"
+      }
+    ],
+    "artistGender": "1 女",
+    "lyricTranslations": {},
+    "lyricHint": "下过雨的",
+    "lyricHints": [
+      "下过雨的",
+      "夏天傍晚我都会期待",
+      "唱歌的蝉",
+      "嘿把星星都吵醒",
+      "月光晒了很凉快",
+      "就是这样",
+      "回忆起来第一次告白",
+      "尴尬的我",
+      "看爱装得很哲学的你",
+      "其实很可爱",
+      "你说活在明天活在期待",
+      "不如活得今天很自在"
+    ],
+    "duration": 253,
+    "evidence": {
+      "schemaVersion": 1,
+      "policyVersion": "music-evidence-v1",
+      "capturedAt": "2026-11-02T04:36:47.963Z",
+      "entity": {
+        "scope": "recording",
+        "id": "qq:001Ss4AC2Ol5Yg"
+      },
+      "allowedSources": [
+        "qq_openapi",
+        "qq_lyric_credit",
+        "qq_public_web"
+      ],
+      "facts": {
+        "artistGender": {
+          "status": "known",
+          "selected": {
+            "field": "artistGender",
+            "value": "1 女",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artistGender",
+            "observedAt": "2026-11-02T04:36:47.306Z"
+          },
+          "candidates": [
+            {
+              "field": "artistGender",
+              "value": "1 女",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artistGender",
+              "observedAt": "2026-11-02T04:36:47.306Z"
+            }
+          ]
+        },
+        "lyricHint": {
+          "status": "known",
+          "selected": {
+            "field": "lyricHint",
+            "value": "下过雨的",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_openapi",
+            "basis": "lyric.identityCheckedShortOriginal",
+            "observedAt": "2026-11-02T04:36:47.963Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricHint",
+              "value": "下过雨的",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_openapi",
+              "basis": "lyric.identityCheckedShortOriginal",
+              "observedAt": "2026-11-02T04:36:47.963Z"
+            }
+          ]
+        },
+        "title": {
+          "status": "known",
+          "selected": {
+            "field": "title",
+            "value": "第一天",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_openapi",
+            "basis": "song.title",
+            "observedAt": "2026-11-02T04:36:47.306Z"
+          },
+          "candidates": [
+            {
+              "field": "title",
+              "value": "第一天",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_openapi",
+              "basis": "song.title",
+              "observedAt": "2026-11-02T04:36:47.306Z"
+            }
+          ]
+        },
+        "artists": {
+          "status": "known",
+          "selected": {
+            "field": "artists",
+            "value": [
+              "孙燕姿"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artists",
+            "observedAt": "2026-11-02T04:36:47.306Z"
+          },
+          "candidates": [
+            {
+              "field": "artists",
+              "value": [
+                "孙燕姿"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artists",
+              "observedAt": "2026-11-02T04:36:47.306Z"
+            }
+          ]
+        },
+        "album": {
+          "status": "known",
+          "selected": {
+            "field": "album",
+            "value": "完美的一天",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_openapi",
+            "basis": "song.album",
+            "observedAt": "2026-11-02T04:36:47.306Z"
+          },
+          "candidates": [
+            {
+              "field": "album",
+              "value": "完美的一天",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_openapi",
+              "basis": "song.album",
+              "observedAt": "2026-11-02T04:36:47.306Z"
+            }
+          ]
+        },
+        "year": {
+          "status": "known",
+          "selected": {
+            "field": "year",
+            "value": 2005,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_openapi",
+            "basis": "song.year",
+            "observedAt": "2026-11-02T04:36:47.306Z"
+          },
+          "candidates": [
+            {
+              "field": "year",
+              "value": 2005,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_openapi",
+              "basis": "song.year",
+              "observedAt": "2026-11-02T04:36:47.306Z"
+            }
+          ]
+        },
+        "language": {
+          "status": "known",
+          "selected": {
+            "field": "language",
+            "value": "国语",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_openapi",
+            "basis": "song.language",
+            "observedAt": "2026-11-02T04:36:47.306Z"
+          },
+          "candidates": [
+            {
+              "field": "language",
+              "value": "国语",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_openapi",
+              "basis": "song.language",
+              "observedAt": "2026-11-02T04:36:47.306Z"
+            }
+          ]
+        },
+        "genre": {
+          "status": "known",
+          "selected": {
+            "field": "genre",
+            "value": "Pop 流行",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_openapi",
+            "basis": "song.genre",
+            "observedAt": "2026-11-02T04:36:47.306Z"
+          },
+          "candidates": [
+            {
+              "field": "genre",
+              "value": "Pop 流行",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_openapi",
+              "basis": "song.genre",
+              "observedAt": "2026-11-02T04:36:47.306Z"
+            }
+          ]
+        },
+        "bpm": {
+          "status": "known",
+          "selected": {
+            "field": "bpm",
+            "value": 88,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_public_web",
+            "basis": "web.bpm",
+            "observedAt": "2026-11-02T04:36:47.458Z"
+          },
+          "candidates": [
+            {
+              "field": "bpm",
+              "value": 88,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_public_web",
+              "basis": "web.bpm",
+              "observedAt": "2026-11-02T04:36:47.458Z"
+            }
+          ]
+        },
+        "lyricists": {
+          "status": "known",
+          "selected": {
+            "field": "lyricists",
+            "value": [
+              "阿信"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作词",
+            "observedAt": "2026-11-02T04:36:47.963Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricists",
+              "value": [
+                "阿信"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作词",
+              "observedAt": "2026-11-02T04:36:47.963Z"
+            }
+          ]
+        },
+        "composers": {
+          "status": "known",
+          "selected": {
+            "field": "composers",
+            "value": [
+              "F.I.R.",
+              "五月天",
+              "孙燕姿"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作曲",
+            "observedAt": "2026-11-02T04:36:47.963Z"
+          },
+          "candidates": [
+            {
+              "field": "composers",
+              "value": [
+                "F.I.R.",
+                "五月天",
+                "孙燕姿"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作曲",
+              "observedAt": "2026-11-02T04:36:47.963Z"
+            }
+          ]
+        },
+        "credits": {
+          "status": "known",
+          "selected": {
+            "field": "credits",
+            "value": [
+              "作曲：孙燕姿、五月天、F.I.R.",
+              "作词：阿信",
+              "编曲：五月天、F.I.R."
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.explicitRoles",
+            "observedAt": "2026-11-02T04:36:47.963Z"
+          },
+          "candidates": [
+            {
+              "field": "credits",
+              "value": [
+                "作曲：孙燕姿、五月天、F.I.R.",
+                "作词：阿信",
+                "编曲：五月天、F.I.R."
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.explicitRoles",
+              "observedAt": "2026-11-02T04:36:47.963Z"
+            }
+          ]
+        },
+        "duration": {
+          "status": "known",
+          "selected": {
+            "field": "duration",
+            "value": 253,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:001Ss4AC2Ol5Yg"
+            },
+            "source": "qq_openapi",
+            "basis": "song.song_play_time",
+            "observedAt": "2026-11-02T04:36:47.306Z"
+          },
+          "candidates": [
+            {
+              "field": "duration",
+              "value": 253,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:001Ss4AC2Ol5Yg"
+              },
+              "source": "qq_openapi",
+              "basis": "song.song_play_time",
+              "observedAt": "2026-11-02T04:36:47.306Z"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "light-years",
+    "provider": "fixture",
+    "providerId": "200255722",
+    "providerMid": "002E3MtF0IAMMY",
+    "title": "光年之外",
+    "artists": [
+      "G.E.M.邓紫棋"
+    ],
+    "album": "光年之外",
+    "albumId": "1796874",
+    "albumMid": "001mTkmb4GJlh4",
+    "cover": "https://y.gtimg.cn/music/photo_new/T002R300x300M000001mTkmb4GJlh4_3.jpg",
+    "language": "国语",
+    "genre": "Pop 流行",
+    "bpm": 88,
+    "year": 2016,
+    "lyricists": [
+      "G.E.M.邓紫棋"
+    ],
+    "composers": [
+      "G.E.M.邓紫棋"
+    ],
+    "sources": [
+      {
+        "label": "QQ 音乐比赛 OpenAPI",
+        "url": "https://y.qq.com/music_developer/#/docs/openapi#/feature/song"
+      },
+      {
+        "label": "QQ 音乐公开网页资料（实验）",
+        "url": "https://y.qq.com/n/ryqq_v2/songDetail/002E3MtF0IAMMY"
+      },
+      {
+        "label": "QQ 音乐歌词署名（已核对歌曲版本）",
+        "url": "https://y.qq.com/n/ryqq/songDetail/002E3MtF0IAMMY"
+      }
+    ],
+    "artistGender": "1 女",
+    "lyricTranslations": {},
+    "lyricHint": "感受停在我发端的指尖",
+    "lyricHints": [
+      "感受停在我发端的指尖",
+      "如何瞬间冻结时间",
+      "记住望着我坚定的双眼",
+      "也许已经没有明天",
+      "面对浩瀚的星海",
+      "我们微小得像尘埃",
+      "漂浮在一片无奈",
+      "缘分让我们相遇乱世以外",
+      "命运却要我们危难中相爱",
+      "我愿守候未知里为你等待",
+      "我没想到为了你我能疯狂到",
+      "山崩海啸没有你根本不想逃"
+    ],
+    "duration": 235,
+    "evidence": {
+      "schemaVersion": 1,
+      "policyVersion": "music-evidence-v1",
+      "capturedAt": "2026-11-02T04:36:49.618Z",
+      "entity": {
+        "scope": "recording",
+        "id": "qq:002E3MtF0IAMMY"
+      },
+      "allowedSources": [
+        "qq_openapi",
+        "qq_lyric_credit",
+        "qq_public_web"
+      ],
+      "facts": {
+        "artistGender": {
+          "status": "known",
+          "selected": {
+            "field": "artistGender",
+            "value": "1 女",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artistGender",
+            "observedAt": "2026-11-02T04:36:48.935Z"
+          },
+          "candidates": [
+            {
+              "field": "artistGender",
+              "value": "1 女",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artistGender",
+              "observedAt": "2026-11-02T04:36:48.935Z"
+            }
+          ]
+        },
+        "lyricHint": {
+          "status": "known",
+          "selected": {
+            "field": "lyricHint",
+            "value": "感受停在我发端的指尖",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_openapi",
+            "basis": "lyric.identityCheckedShortOriginal",
+            "observedAt": "2026-11-02T04:36:49.618Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricHint",
+              "value": "感受停在我发端的指尖",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_openapi",
+              "basis": "lyric.identityCheckedShortOriginal",
+              "observedAt": "2026-11-02T04:36:49.618Z"
+            }
+          ]
+        },
+        "title": {
+          "status": "known",
+          "selected": {
+            "field": "title",
+            "value": "光年之外",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_openapi",
+            "basis": "song.title",
+            "observedAt": "2026-11-02T04:36:48.935Z"
+          },
+          "candidates": [
+            {
+              "field": "title",
+              "value": "光年之外",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_openapi",
+              "basis": "song.title",
+              "observedAt": "2026-11-02T04:36:48.935Z"
+            }
+          ]
+        },
+        "artists": {
+          "status": "known",
+          "selected": {
+            "field": "artists",
+            "value": [
+              "G.E.M.邓紫棋"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artists",
+            "observedAt": "2026-11-02T04:36:48.935Z"
+          },
+          "candidates": [
+            {
+              "field": "artists",
+              "value": [
+                "G.E.M.邓紫棋"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artists",
+              "observedAt": "2026-11-02T04:36:48.935Z"
+            }
+          ]
+        },
+        "album": {
+          "status": "known",
+          "selected": {
+            "field": "album",
+            "value": "光年之外",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_openapi",
+            "basis": "song.album",
+            "observedAt": "2026-11-02T04:36:48.935Z"
+          },
+          "candidates": [
+            {
+              "field": "album",
+              "value": "光年之外",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_openapi",
+              "basis": "song.album",
+              "observedAt": "2026-11-02T04:36:48.935Z"
+            }
+          ]
+        },
+        "year": {
+          "status": "known",
+          "selected": {
+            "field": "year",
+            "value": 2016,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_openapi",
+            "basis": "song.year",
+            "observedAt": "2026-11-02T04:36:48.935Z"
+          },
+          "candidates": [
+            {
+              "field": "year",
+              "value": 2016,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_openapi",
+              "basis": "song.year",
+              "observedAt": "2026-11-02T04:36:48.935Z"
+            }
+          ]
+        },
+        "language": {
+          "status": "known",
+          "selected": {
+            "field": "language",
+            "value": "国语",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_openapi",
+            "basis": "song.language",
+            "observedAt": "2026-11-02T04:36:48.935Z"
+          },
+          "candidates": [
+            {
+              "field": "language",
+              "value": "国语",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_openapi",
+              "basis": "song.language",
+              "observedAt": "2026-11-02T04:36:48.935Z"
+            }
+          ]
+        },
+        "genre": {
+          "status": "known",
+          "selected": {
+            "field": "genre",
+            "value": "Pop 流行",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_openapi",
+            "basis": "song.genre",
+            "observedAt": "2026-11-02T04:36:48.935Z"
+          },
+          "candidates": [
+            {
+              "field": "genre",
+              "value": "Pop 流行",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_openapi",
+              "basis": "song.genre",
+              "observedAt": "2026-11-02T04:36:48.935Z"
+            }
+          ]
+        },
+        "bpm": {
+          "status": "known",
+          "selected": {
+            "field": "bpm",
+            "value": 88,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_public_web",
+            "basis": "web.bpm",
+            "observedAt": "2026-11-02T04:36:49.066Z"
+          },
+          "candidates": [
+            {
+              "field": "bpm",
+              "value": 88,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_public_web",
+              "basis": "web.bpm",
+              "observedAt": "2026-11-02T04:36:49.066Z"
+            }
+          ]
+        },
+        "lyricists": {
+          "status": "known",
+          "selected": {
+            "field": "lyricists",
+            "value": [
+              "G.E.M.邓紫棋"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作词",
+            "observedAt": "2026-11-02T04:36:49.618Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricists",
+              "value": [
+                "G.E.M.邓紫棋"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作词",
+              "observedAt": "2026-11-02T04:36:49.618Z"
+            }
+          ]
+        },
+        "composers": {
+          "status": "known",
+          "selected": {
+            "field": "composers",
+            "value": [
+              "G.E.M.邓紫棋"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作曲",
+            "observedAt": "2026-11-02T04:36:49.618Z"
+          },
+          "candidates": [
+            {
+              "field": "composers",
+              "value": [
+                "G.E.M.邓紫棋"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作曲",
+              "observedAt": "2026-11-02T04:36:49.618Z"
+            }
+          ]
+        },
+        "credits": {
+          "status": "known",
+          "selected": {
+            "field": "credits",
+            "value": [
+              "作曲：G.E.M.邓紫棋",
+              "作词：G.E.M.邓紫棋",
+              "编曲：Lupo Groinig"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.explicitRoles",
+            "observedAt": "2026-11-02T04:36:49.618Z"
+          },
+          "candidates": [
+            {
+              "field": "credits",
+              "value": [
+                "作曲：G.E.M.邓紫棋",
+                "作词：G.E.M.邓紫棋",
+                "编曲：Lupo Groinig"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.explicitRoles",
+              "observedAt": "2026-11-02T04:36:49.618Z"
+            }
+          ]
+        },
+        "duration": {
+          "status": "known",
+          "selected": {
+            "field": "duration",
+            "value": 235,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002E3MtF0IAMMY"
+            },
+            "source": "qq_openapi",
+            "basis": "song.song_play_time",
+            "observedAt": "2026-11-02T04:36:48.935Z"
+          },
+          "candidates": [
+            {
+              "field": "duration",
+              "value": 235,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002E3MtF0IAMMY"
+              },
+              "source": "qq_openapi",
+              "basis": "song.song_play_time",
+              "observedAt": "2026-11-02T04:36:48.935Z"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "darwin",
+    "provider": "fixture",
+    "providerId": "102193382",
+    "providerMid": "0012h8671XIN4F",
+    "title": "达尔文",
+    "artists": [
+      "蔡健雅"
+    ],
+    "album": "Goodbye & Hello",
+    "albumId": "33111",
+    "albumMid": "001VqGlj2Oj52k",
+    "cover": "https://y.gtimg.cn/music/photo_new/T002R300x300M000001VqGlj2Oj52k_3.jpg",
+    "language": "国语",
+    "genre": "Pop 流行",
+    "bpm": 77,
+    "year": 2007,
+    "lyricists": [
+      "小寒"
+    ],
+    "composers": [
+      "蔡健雅"
+    ],
+    "sources": [
+      {
+        "label": "QQ 音乐比赛 OpenAPI",
+        "url": "https://y.qq.com/music_developer/#/docs/openapi#/feature/song"
+      },
+      {
+        "label": "QQ 音乐公开网页资料（实验）",
+        "url": "https://y.qq.com/n/ryqq_v2/songDetail/0012h8671XIN4F"
+      },
+      {
+        "label": "QQ 音乐歌词署名（已核对歌曲版本）",
+        "url": "https://y.qq.com/n/ryqq/songDetail/0012h8671XIN4F"
+      }
+    ],
+    "artistGender": "1 女",
+    "lyricTranslations": {},
+    "lyricHint": "我的青春 也不是没伤痕",
+    "lyricHints": [
+      "我的青春 也不是没伤痕",
+      "是明白爱是信仰的延伸",
+      "什么特征 人缘还是眼神",
+      "也不会预知爱不爱的可能",
+      "保持单身 忍不住又沉沦",
+      "兜着圈子来去有时苦等",
+      "人的一生 感情是旋转门",
+      "转到了最后真心的就不分",
+      "有过竞争 有过牺牲",
+      "被爱筛选过程",
+      "学会认真 学会忠诚",
+      "适者才能生存"
+    ],
+    "duration": 265,
+    "evidence": {
+      "schemaVersion": 1,
+      "policyVersion": "music-evidence-v1",
+      "capturedAt": "2026-11-02T04:36:51.226Z",
+      "entity": {
+        "scope": "recording",
+        "id": "qq:0012h8671XIN4F"
+      },
+      "allowedSources": [
+        "qq_openapi",
+        "qq_lyric_credit",
+        "qq_public_web"
+      ],
+      "facts": {
+        "artistGender": {
+          "status": "known",
+          "selected": {
+            "field": "artistGender",
+            "value": "1 女",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artistGender",
+            "observedAt": "2026-11-02T04:36:50.564Z"
+          },
+          "candidates": [
+            {
+              "field": "artistGender",
+              "value": "1 女",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artistGender",
+              "observedAt": "2026-11-02T04:36:50.564Z"
+            }
+          ]
+        },
+        "lyricHint": {
+          "status": "known",
+          "selected": {
+            "field": "lyricHint",
+            "value": "我的青春 也不是没伤痕",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_openapi",
+            "basis": "lyric.identityCheckedShortOriginal",
+            "observedAt": "2026-11-02T04:36:51.226Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricHint",
+              "value": "我的青春 也不是没伤痕",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_openapi",
+              "basis": "lyric.identityCheckedShortOriginal",
+              "observedAt": "2026-11-02T04:36:51.226Z"
+            }
+          ]
+        },
+        "title": {
+          "status": "known",
+          "selected": {
+            "field": "title",
+            "value": "达尔文",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_openapi",
+            "basis": "song.title",
+            "observedAt": "2026-11-02T04:36:50.564Z"
+          },
+          "candidates": [
+            {
+              "field": "title",
+              "value": "达尔文",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_openapi",
+              "basis": "song.title",
+              "observedAt": "2026-11-02T04:36:50.564Z"
+            }
+          ]
+        },
+        "artists": {
+          "status": "known",
+          "selected": {
+            "field": "artists",
+            "value": [
+              "蔡健雅"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artists",
+            "observedAt": "2026-11-02T04:36:50.564Z"
+          },
+          "candidates": [
+            {
+              "field": "artists",
+              "value": [
+                "蔡健雅"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artists",
+              "observedAt": "2026-11-02T04:36:50.564Z"
+            }
+          ]
+        },
+        "album": {
+          "status": "known",
+          "selected": {
+            "field": "album",
+            "value": "Goodbye & Hello",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_openapi",
+            "basis": "song.album",
+            "observedAt": "2026-11-02T04:36:50.564Z"
+          },
+          "candidates": [
+            {
+              "field": "album",
+              "value": "Goodbye & Hello",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_openapi",
+              "basis": "song.album",
+              "observedAt": "2026-11-02T04:36:50.564Z"
+            }
+          ]
+        },
+        "year": {
+          "status": "known",
+          "selected": {
+            "field": "year",
+            "value": 2007,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_openapi",
+            "basis": "song.year",
+            "observedAt": "2026-11-02T04:36:50.564Z"
+          },
+          "candidates": [
+            {
+              "field": "year",
+              "value": 2007,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_openapi",
+              "basis": "song.year",
+              "observedAt": "2026-11-02T04:36:50.564Z"
+            }
+          ]
+        },
+        "language": {
+          "status": "known",
+          "selected": {
+            "field": "language",
+            "value": "国语",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_openapi",
+            "basis": "song.language",
+            "observedAt": "2026-11-02T04:36:50.564Z"
+          },
+          "candidates": [
+            {
+              "field": "language",
+              "value": "国语",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_openapi",
+              "basis": "song.language",
+              "observedAt": "2026-11-02T04:36:50.564Z"
+            }
+          ]
+        },
+        "genre": {
+          "status": "known",
+          "selected": {
+            "field": "genre",
+            "value": "Pop 流行",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_openapi",
+            "basis": "song.genre",
+            "observedAt": "2026-11-02T04:36:50.564Z"
+          },
+          "candidates": [
+            {
+              "field": "genre",
+              "value": "Pop 流行",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_openapi",
+              "basis": "song.genre",
+              "observedAt": "2026-11-02T04:36:50.564Z"
+            }
+          ]
+        },
+        "bpm": {
+          "status": "known",
+          "selected": {
+            "field": "bpm",
+            "value": 77,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_public_web",
+            "basis": "web.bpm",
+            "observedAt": "2026-11-02T04:36:50.694Z"
+          },
+          "candidates": [
+            {
+              "field": "bpm",
+              "value": 77,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_public_web",
+              "basis": "web.bpm",
+              "observedAt": "2026-11-02T04:36:50.694Z"
+            }
+          ]
+        },
+        "lyricists": {
+          "status": "known",
+          "selected": {
+            "field": "lyricists",
+            "value": [
+              "小寒"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作词",
+            "observedAt": "2026-11-02T04:36:51.226Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricists",
+              "value": [
+                "小寒"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作词",
+              "observedAt": "2026-11-02T04:36:51.226Z"
+            }
+          ]
+        },
+        "composers": {
+          "status": "known",
+          "selected": {
+            "field": "composers",
+            "value": [
+              "蔡健雅"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作曲",
+            "observedAt": "2026-11-02T04:36:51.226Z"
+          },
+          "candidates": [
+            {
+              "field": "composers",
+              "value": [
+                "蔡健雅"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作曲",
+              "observedAt": "2026-11-02T04:36:51.226Z"
+            }
+          ]
+        },
+        "credits": {
+          "status": "known",
+          "selected": {
+            "field": "credits",
+            "value": [
+              "作曲：蔡健雅",
+              "作词：小寒"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.explicitRoles",
+            "observedAt": "2026-11-02T04:36:51.226Z"
+          },
+          "candidates": [
+            {
+              "field": "credits",
+              "value": [
+                "作曲：蔡健雅",
+                "作词：小寒"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.explicitRoles",
+              "observedAt": "2026-11-02T04:36:51.226Z"
+            }
+          ]
+        },
+        "duration": {
+          "status": "known",
+          "selected": {
+            "field": "duration",
+            "value": 265,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:0012h8671XIN4F"
+            },
+            "source": "qq_openapi",
+            "basis": "song.song_play_time",
+            "observedAt": "2026-11-02T04:36:50.564Z"
+          },
+          "candidates": [
+            {
+              "field": "duration",
+              "value": 265,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:0012h8671XIN4F"
+              },
+              "source": "qq_openapi",
+              "basis": "song.song_play_time",
+              "observedAt": "2026-11-02T04:36:50.564Z"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "flower",
+    "provider": "fixture",
+    "providerId": "105905349",
+    "providerMid": "003BM7re120wtL",
+    "title": "花田错",
+    "artists": [
+      "王力宏"
+    ],
+    "album": "盖世英雄",
+    "albumId": "14570",
+    "albumMid": "001a0Dts37jw2M",
+    "cover": "https://y.gtimg.cn/music/photo_new/T002R300x300M000001a0Dts37jw2M_3.jpg",
+    "language": "国语",
+    "genre": "Pop 流行",
+    "bpm": 66,
+    "year": 2005,
+    "lyricists": [
+      "陈镇川"
+    ],
+    "composers": [
+      "王力宏"
+    ],
+    "sources": [
+      {
+        "label": "QQ 音乐比赛 OpenAPI",
+        "url": "https://y.qq.com/music_developer/#/docs/openapi#/feature/song"
+      },
+      {
+        "label": "QQ 音乐公开网页资料（实验）",
+        "url": "https://y.qq.com/n/ryqq_v2/songDetail/003BM7re120wtL"
+      },
+      {
+        "label": "QQ 音乐歌词署名（已核对歌曲版本）",
+        "url": "https://y.qq.com/n/ryqq/songDetail/003BM7re120wtL"
+      }
+    ],
+    "artistGender": "1 男",
+    "lyricTranslations": {},
+    "lyricHint": "我犯了错",
+    "lyricHints": [
+      "我犯了错",
+      "夜好深了纸窗里怎么亮着",
+      "那不是彻夜等候你为我点的烛火",
+      "不过是一次邂逅红楼那一场梦",
+      "我的山水全部褪色像被大雨洗过",
+      "杯中景色鬼魅我忘了我是谁",
+      "心情就像夜凉如水",
+      "手里握着蝴蝶杯单飞不醉不归",
+      "花田里犯了错",
+      "说好破晓前忘掉",
+      "拥抱变成了煎熬",
+      "犯错像迷恋镜花水月的无聊"
+    ],
+    "duration": 227,
+    "evidence": {
+      "schemaVersion": 1,
+      "policyVersion": "music-evidence-v1",
+      "capturedAt": "2026-11-02T04:36:52.854Z",
+      "entity": {
+        "scope": "recording",
+        "id": "qq:003BM7re120wtL"
+      },
+      "allowedSources": [
+        "qq_openapi",
+        "qq_lyric_credit",
+        "qq_public_web"
+      ],
+      "facts": {
+        "artistGender": {
+          "status": "known",
+          "selected": {
+            "field": "artistGender",
+            "value": "1 男",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artistGender",
+            "observedAt": "2026-11-02T04:36:52.183Z"
+          },
+          "candidates": [
+            {
+              "field": "artistGender",
+              "value": "1 男",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artistGender",
+              "observedAt": "2026-11-02T04:36:52.183Z"
+            }
+          ]
+        },
+        "lyricHint": {
+          "status": "known",
+          "selected": {
+            "field": "lyricHint",
+            "value": "我犯了错",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_openapi",
+            "basis": "lyric.identityCheckedShortOriginal",
+            "observedAt": "2026-11-02T04:36:52.854Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricHint",
+              "value": "我犯了错",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_openapi",
+              "basis": "lyric.identityCheckedShortOriginal",
+              "observedAt": "2026-11-02T04:36:52.854Z"
+            }
+          ]
+        },
+        "title": {
+          "status": "known",
+          "selected": {
+            "field": "title",
+            "value": "花田错",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_openapi",
+            "basis": "song.title",
+            "observedAt": "2026-11-02T04:36:52.183Z"
+          },
+          "candidates": [
+            {
+              "field": "title",
+              "value": "花田错",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_openapi",
+              "basis": "song.title",
+              "observedAt": "2026-11-02T04:36:52.183Z"
+            }
+          ]
+        },
+        "artists": {
+          "status": "known",
+          "selected": {
+            "field": "artists",
+            "value": [
+              "王力宏"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artists",
+            "observedAt": "2026-11-02T04:36:52.183Z"
+          },
+          "candidates": [
+            {
+              "field": "artists",
+              "value": [
+                "王力宏"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artists",
+              "observedAt": "2026-11-02T04:36:52.183Z"
+            }
+          ]
+        },
+        "album": {
+          "status": "known",
+          "selected": {
+            "field": "album",
+            "value": "盖世英雄",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_openapi",
+            "basis": "song.album",
+            "observedAt": "2026-11-02T04:36:52.183Z"
+          },
+          "candidates": [
+            {
+              "field": "album",
+              "value": "盖世英雄",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_openapi",
+              "basis": "song.album",
+              "observedAt": "2026-11-02T04:36:52.183Z"
+            }
+          ]
+        },
+        "year": {
+          "status": "known",
+          "selected": {
+            "field": "year",
+            "value": 2005,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_openapi",
+            "basis": "song.year",
+            "observedAt": "2026-11-02T04:36:52.183Z"
+          },
+          "candidates": [
+            {
+              "field": "year",
+              "value": 2005,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_openapi",
+              "basis": "song.year",
+              "observedAt": "2026-11-02T04:36:52.183Z"
+            }
+          ]
+        },
+        "language": {
+          "status": "known",
+          "selected": {
+            "field": "language",
+            "value": "国语",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_openapi",
+            "basis": "song.language",
+            "observedAt": "2026-11-02T04:36:52.183Z"
+          },
+          "candidates": [
+            {
+              "field": "language",
+              "value": "国语",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_openapi",
+              "basis": "song.language",
+              "observedAt": "2026-11-02T04:36:52.183Z"
+            }
+          ]
+        },
+        "genre": {
+          "status": "known",
+          "selected": {
+            "field": "genre",
+            "value": "Pop 流行",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_openapi",
+            "basis": "song.genre",
+            "observedAt": "2026-11-02T04:36:52.183Z"
+          },
+          "candidates": [
+            {
+              "field": "genre",
+              "value": "Pop 流行",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_openapi",
+              "basis": "song.genre",
+              "observedAt": "2026-11-02T04:36:52.183Z"
+            }
+          ]
+        },
+        "bpm": {
+          "status": "known",
+          "selected": {
+            "field": "bpm",
+            "value": 66,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_public_web",
+            "basis": "web.bpm",
+            "observedAt": "2026-11-02T04:36:52.309Z"
+          },
+          "candidates": [
+            {
+              "field": "bpm",
+              "value": 66,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_public_web",
+              "basis": "web.bpm",
+              "observedAt": "2026-11-02T04:36:52.309Z"
+            }
+          ]
+        },
+        "lyricists": {
+          "status": "known",
+          "selected": {
+            "field": "lyricists",
+            "value": [
+              "陈镇川"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作词",
+            "observedAt": "2026-11-02T04:36:52.854Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricists",
+              "value": [
+                "陈镇川"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作词",
+              "observedAt": "2026-11-02T04:36:52.854Z"
+            }
+          ]
+        },
+        "composers": {
+          "status": "known",
+          "selected": {
+            "field": "composers",
+            "value": [
+              "王力宏"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作曲",
+            "observedAt": "2026-11-02T04:36:52.854Z"
+          },
+          "candidates": [
+            {
+              "field": "composers",
+              "value": [
+                "王力宏"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作曲",
+              "observedAt": "2026-11-02T04:36:52.854Z"
+            }
+          ]
+        },
+        "credits": {
+          "status": "known",
+          "selected": {
+            "field": "credits",
+            "value": [
+              "作曲：王力宏",
+              "作词：陈镇川"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.explicitRoles",
+            "observedAt": "2026-11-02T04:36:52.854Z"
+          },
+          "candidates": [
+            {
+              "field": "credits",
+              "value": [
+                "作曲：王力宏",
+                "作词：陈镇川"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.explicitRoles",
+              "observedAt": "2026-11-02T04:36:52.854Z"
+            }
+          ]
+        },
+        "duration": {
+          "status": "known",
+          "selected": {
+            "field": "duration",
+            "value": 227,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003BM7re120wtL"
+            },
+            "source": "qq_openapi",
+            "basis": "song.song_play_time",
+            "observedAt": "2026-11-02T04:36:52.183Z"
+          },
+          "candidates": [
+            {
+              "field": "duration",
+              "value": 227,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003BM7re120wtL"
+              },
+              "source": "qq_openapi",
+              "basis": "song.song_play_time",
+              "observedAt": "2026-11-02T04:36:52.183Z"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "bedtime",
+    "provider": "fixture",
+    "providerId": "107192071",
+    "providerMid": "002MVjb31ZNK5m",
+    "title": "床边故事",
+    "artists": [
+      "周杰伦"
+    ],
+    "album": "周杰伦的床边故事",
+    "albumId": "1458791",
+    "albumMid": "003RMaRI1iFoYd",
+    "cover": "https://y.gtimg.cn/music/photo_new/T002R300x300M000003RMaRI1iFoYd_1.jpg",
+    "language": "国语",
+    "genre": "Rap/Hip Hop 嘻哈说唱",
+    "bpm": 106,
+    "year": 2016,
+    "lyricists": [
+      "方文山"
+    ],
+    "composers": [
+      "周杰伦"
+    ],
+    "sources": [
+      {
+        "label": "QQ 音乐比赛 OpenAPI",
+        "url": "https://y.qq.com/music_developer/#/docs/openapi#/feature/song"
+      },
+      {
+        "label": "QQ 音乐公开网页资料（实验）",
+        "url": "https://y.qq.com/n/ryqq_v2/songDetail/002MVjb31ZNK5m"
+      },
+      {
+        "label": "QQ 音乐歌词署名（已核对歌曲版本）",
+        "url": "https://y.qq.com/n/ryqq/songDetail/002MVjb31ZNK5m"
+      }
+    ],
+    "artistGender": "1 男",
+    "lyricTranslations": {},
+    "lyricHint": "从前从前有只猫头鹰",
+    "lyricHints": [
+      "从前从前有只猫头鹰",
+      "牠站在屋顶",
+      "屋顶后面一遍森林",
+      "森林很安静",
+      "安静的钢琴在大厅",
+      "阁楼里 仔细听",
+      "仔细听 叮叮叮",
+      "什么声音",
+      "乖乖睡 不要怕 听我说",
+      "乖乖睡 醒来就 吃苹果",
+      "不睡觉 的时候 有传说",
+      "会有人 咬你的 小指头"
+    ],
+    "duration": 225,
+    "evidence": {
+      "schemaVersion": 1,
+      "policyVersion": "music-evidence-v1",
+      "capturedAt": "2026-11-02T04:36:54.427Z",
+      "entity": {
+        "scope": "recording",
+        "id": "qq:002MVjb31ZNK5m"
+      },
+      "allowedSources": [
+        "qq_openapi",
+        "qq_lyric_credit",
+        "qq_public_web"
+      ],
+      "facts": {
+        "artistGender": {
+          "status": "known",
+          "selected": {
+            "field": "artistGender",
+            "value": "1 男",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artistGender",
+            "observedAt": "2026-11-02T04:36:53.773Z"
+          },
+          "candidates": [
+            {
+              "field": "artistGender",
+              "value": "1 男",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artistGender",
+              "observedAt": "2026-11-02T04:36:53.773Z"
+            }
+          ]
+        },
+        "lyricHint": {
+          "status": "known",
+          "selected": {
+            "field": "lyricHint",
+            "value": "从前从前有只猫头鹰",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_openapi",
+            "basis": "lyric.identityCheckedShortOriginal",
+            "observedAt": "2026-11-02T04:36:54.427Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricHint",
+              "value": "从前从前有只猫头鹰",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_openapi",
+              "basis": "lyric.identityCheckedShortOriginal",
+              "observedAt": "2026-11-02T04:36:54.427Z"
+            }
+          ]
+        },
+        "title": {
+          "status": "known",
+          "selected": {
+            "field": "title",
+            "value": "床边故事",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_openapi",
+            "basis": "song.title",
+            "observedAt": "2026-11-02T04:36:53.773Z"
+          },
+          "candidates": [
+            {
+              "field": "title",
+              "value": "床边故事",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_openapi",
+              "basis": "song.title",
+              "observedAt": "2026-11-02T04:36:53.773Z"
+            }
+          ]
+        },
+        "artists": {
+          "status": "known",
+          "selected": {
+            "field": "artists",
+            "value": [
+              "周杰伦"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artists",
+            "observedAt": "2026-11-02T04:36:53.773Z"
+          },
+          "candidates": [
+            {
+              "field": "artists",
+              "value": [
+                "周杰伦"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artists",
+              "observedAt": "2026-11-02T04:36:53.773Z"
+            }
+          ]
+        },
+        "album": {
+          "status": "known",
+          "selected": {
+            "field": "album",
+            "value": "周杰伦的床边故事",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_openapi",
+            "basis": "song.album",
+            "observedAt": "2026-11-02T04:36:53.773Z"
+          },
+          "candidates": [
+            {
+              "field": "album",
+              "value": "周杰伦的床边故事",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_openapi",
+              "basis": "song.album",
+              "observedAt": "2026-11-02T04:36:53.773Z"
+            }
+          ]
+        },
+        "year": {
+          "status": "known",
+          "selected": {
+            "field": "year",
+            "value": 2016,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_openapi",
+            "basis": "song.year",
+            "observedAt": "2026-11-02T04:36:53.773Z"
+          },
+          "candidates": [
+            {
+              "field": "year",
+              "value": 2016,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_openapi",
+              "basis": "song.year",
+              "observedAt": "2026-11-02T04:36:53.773Z"
+            }
+          ]
+        },
+        "language": {
+          "status": "known",
+          "selected": {
+            "field": "language",
+            "value": "国语",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_openapi",
+            "basis": "song.language",
+            "observedAt": "2026-11-02T04:36:53.773Z"
+          },
+          "candidates": [
+            {
+              "field": "language",
+              "value": "国语",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_openapi",
+              "basis": "song.language",
+              "observedAt": "2026-11-02T04:36:53.773Z"
+            }
+          ]
+        },
+        "genre": {
+          "status": "known",
+          "selected": {
+            "field": "genre",
+            "value": "Rap/Hip Hop 嘻哈说唱",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_openapi",
+            "basis": "song.genre",
+            "observedAt": "2026-11-02T04:36:53.773Z"
+          },
+          "candidates": [
+            {
+              "field": "genre",
+              "value": "Rap/Hip Hop 嘻哈说唱",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_openapi",
+              "basis": "song.genre",
+              "observedAt": "2026-11-02T04:36:53.773Z"
+            }
+          ]
+        },
+        "bpm": {
+          "status": "known",
+          "selected": {
+            "field": "bpm",
+            "value": 106,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_public_web",
+            "basis": "web.bpm",
+            "observedAt": "2026-11-02T04:36:53.902Z"
+          },
+          "candidates": [
+            {
+              "field": "bpm",
+              "value": 106,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_public_web",
+              "basis": "web.bpm",
+              "observedAt": "2026-11-02T04:36:53.902Z"
+            }
+          ]
+        },
+        "lyricists": {
+          "status": "known",
+          "selected": {
+            "field": "lyricists",
+            "value": [
+              "方文山"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作词",
+            "observedAt": "2026-11-02T04:36:54.427Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricists",
+              "value": [
+                "方文山"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作词",
+              "observedAt": "2026-11-02T04:36:54.427Z"
+            }
+          ]
+        },
+        "composers": {
+          "status": "known",
+          "selected": {
+            "field": "composers",
+            "value": [
+              "周杰伦"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作曲",
+            "observedAt": "2026-11-02T04:36:54.427Z"
+          },
+          "candidates": [
+            {
+              "field": "composers",
+              "value": [
+                "周杰伦"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作曲",
+              "observedAt": "2026-11-02T04:36:54.427Z"
+            }
+          ]
+        },
+        "credits": {
+          "status": "known",
+          "selected": {
+            "field": "credits",
+            "value": [
+              "作曲：周杰伦",
+              "作词：方文山",
+              "编曲：黄雨勋"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.explicitRoles",
+            "observedAt": "2026-11-02T04:36:54.427Z"
+          },
+          "candidates": [
+            {
+              "field": "credits",
+              "value": [
+                "作曲：周杰伦",
+                "作词：方文山",
+                "编曲：黄雨勋"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.explicitRoles",
+              "observedAt": "2026-11-02T04:36:54.427Z"
+            }
+          ]
+        },
+        "duration": {
+          "status": "known",
+          "selected": {
+            "field": "duration",
+            "value": 225,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:002MVjb31ZNK5m"
+            },
+            "source": "qq_openapi",
+            "basis": "song.song_play_time",
+            "observedAt": "2026-11-02T04:36:53.773Z"
+          },
+          "candidates": [
+            {
+              "field": "duration",
+              "value": 225,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:002MVjb31ZNK5m"
+              },
+              "source": "qq_openapi",
+              "basis": "song.song_play_time",
+              "observedAt": "2026-11-02T04:36:53.773Z"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "lonely",
+    "provider": "fixture",
+    "providerId": "4830417",
+    "providerMid": "003SrkT00CsXoo",
+    "title": "寂寞先生",
+    "artists": [
+      "曹格"
+    ],
+    "album": "超级4th场",
+    "albumId": "96846",
+    "albumMid": "002za7fg4CCM77",
+    "cover": "https://y.gtimg.cn/music/photo_new/T002R300x300M000002za7fg4CCM77_1.jpg",
+    "language": "国语",
+    "genre": "Pop 流行",
+    "bpm": 67,
+    "year": 2009,
+    "lyricists": [
+      "小寒"
+    ],
+    "composers": [
+      "曹格"
+    ],
+    "sources": [
+      {
+        "label": "QQ 音乐比赛 OpenAPI",
+        "url": "https://y.qq.com/music_developer/#/docs/openapi#/feature/song"
+      },
+      {
+        "label": "QQ 音乐公开网页资料（实验）",
+        "url": "https://y.qq.com/n/ryqq_v2/songDetail/003SrkT00CsXoo"
+      },
+      {
+        "label": "QQ 音乐歌词署名（已核对歌曲版本）",
+        "url": "https://y.qq.com/n/ryqq/songDetail/003SrkT00CsXoo"
+      }
+    ],
+    "artistGender": "1 男",
+    "lyricTranslations": {},
+    "lyricHint": "你的笑容是恩惠",
+    "lyricHints": [
+      "你的笑容是恩惠",
+      "世界难得那么美",
+      "于是追 要你陪",
+      "可惜本能终会将美丽汗水化成泪水",
+      "黑夜之所以会黑",
+      "叫醒人心里的鬼",
+      "在游说 在萦回",
+      "在体内是什么",
+      "在把我摧毁在伤痕累累",
+      "我可以无所谓",
+      "寂寞却一直掉眼泪",
+      "人类除了擅长颓废"
+    ],
+    "duration": 267,
+    "evidence": {
+      "schemaVersion": 1,
+      "policyVersion": "music-evidence-v1",
+      "capturedAt": "2026-11-02T04:36:56.048Z",
+      "entity": {
+        "scope": "recording",
+        "id": "qq:003SrkT00CsXoo"
+      },
+      "allowedSources": [
+        "qq_openapi",
+        "qq_lyric_credit",
+        "qq_public_web"
+      ],
+      "facts": {
+        "artistGender": {
+          "status": "known",
+          "selected": {
+            "field": "artistGender",
+            "value": "1 男",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artistGender",
+            "observedAt": "2026-11-02T04:36:55.370Z"
+          },
+          "candidates": [
+            {
+              "field": "artistGender",
+              "value": "1 男",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artistGender",
+              "observedAt": "2026-11-02T04:36:55.370Z"
+            }
+          ]
+        },
+        "lyricHint": {
+          "status": "known",
+          "selected": {
+            "field": "lyricHint",
+            "value": "你的笑容是恩惠",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_openapi",
+            "basis": "lyric.identityCheckedShortOriginal",
+            "observedAt": "2026-11-02T04:36:56.048Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricHint",
+              "value": "你的笑容是恩惠",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_openapi",
+              "basis": "lyric.identityCheckedShortOriginal",
+              "observedAt": "2026-11-02T04:36:56.048Z"
+            }
+          ]
+        },
+        "title": {
+          "status": "known",
+          "selected": {
+            "field": "title",
+            "value": "寂寞先生",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_openapi",
+            "basis": "song.title",
+            "observedAt": "2026-11-02T04:36:55.370Z"
+          },
+          "candidates": [
+            {
+              "field": "title",
+              "value": "寂寞先生",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_openapi",
+              "basis": "song.title",
+              "observedAt": "2026-11-02T04:36:55.370Z"
+            }
+          ]
+        },
+        "artists": {
+          "status": "known",
+          "selected": {
+            "field": "artists",
+            "value": [
+              "曹格"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artists",
+            "observedAt": "2026-11-02T04:36:55.370Z"
+          },
+          "candidates": [
+            {
+              "field": "artists",
+              "value": [
+                "曹格"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artists",
+              "observedAt": "2026-11-02T04:36:55.370Z"
+            }
+          ]
+        },
+        "album": {
+          "status": "known",
+          "selected": {
+            "field": "album",
+            "value": "超级4th场",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_openapi",
+            "basis": "song.album",
+            "observedAt": "2026-11-02T04:36:55.370Z"
+          },
+          "candidates": [
+            {
+              "field": "album",
+              "value": "超级4th场",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_openapi",
+              "basis": "song.album",
+              "observedAt": "2026-11-02T04:36:55.370Z"
+            }
+          ]
+        },
+        "year": {
+          "status": "known",
+          "selected": {
+            "field": "year",
+            "value": 2009,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_openapi",
+            "basis": "song.year",
+            "observedAt": "2026-11-02T04:36:55.370Z"
+          },
+          "candidates": [
+            {
+              "field": "year",
+              "value": 2009,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_openapi",
+              "basis": "song.year",
+              "observedAt": "2026-11-02T04:36:55.370Z"
+            }
+          ]
+        },
+        "language": {
+          "status": "known",
+          "selected": {
+            "field": "language",
+            "value": "国语",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_openapi",
+            "basis": "song.language",
+            "observedAt": "2026-11-02T04:36:55.370Z"
+          },
+          "candidates": [
+            {
+              "field": "language",
+              "value": "国语",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_openapi",
+              "basis": "song.language",
+              "observedAt": "2026-11-02T04:36:55.370Z"
+            }
+          ]
+        },
+        "genre": {
+          "status": "known",
+          "selected": {
+            "field": "genre",
+            "value": "Pop 流行",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_openapi",
+            "basis": "song.genre",
+            "observedAt": "2026-11-02T04:36:55.370Z"
+          },
+          "candidates": [
+            {
+              "field": "genre",
+              "value": "Pop 流行",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_openapi",
+              "basis": "song.genre",
+              "observedAt": "2026-11-02T04:36:55.370Z"
+            }
+          ]
+        },
+        "bpm": {
+          "status": "known",
+          "selected": {
+            "field": "bpm",
+            "value": 67,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_public_web",
+            "basis": "web.bpm",
+            "observedAt": "2026-11-02T04:36:55.490Z"
+          },
+          "candidates": [
+            {
+              "field": "bpm",
+              "value": 67,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_public_web",
+              "basis": "web.bpm",
+              "observedAt": "2026-11-02T04:36:55.490Z"
+            }
+          ]
+        },
+        "lyricists": {
+          "status": "known",
+          "selected": {
+            "field": "lyricists",
+            "value": [
+              "小寒"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作词",
+            "observedAt": "2026-11-02T04:36:56.048Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricists",
+              "value": [
+                "小寒"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作词",
+              "observedAt": "2026-11-02T04:36:56.048Z"
+            }
+          ]
+        },
+        "composers": {
+          "status": "known",
+          "selected": {
+            "field": "composers",
+            "value": [
+              "曹格"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作曲",
+            "observedAt": "2026-11-02T04:36:56.048Z"
+          },
+          "candidates": [
+            {
+              "field": "composers",
+              "value": [
+                "曹格"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作曲",
+              "observedAt": "2026-11-02T04:36:56.048Z"
+            }
+          ]
+        },
+        "credits": {
+          "status": "known",
+          "selected": {
+            "field": "credits",
+            "value": [
+              "作曲：曹格",
+              "作词：小寒"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.explicitRoles",
+            "observedAt": "2026-11-02T04:36:56.048Z"
+          },
+          "candidates": [
+            {
+              "field": "credits",
+              "value": [
+                "作曲：曹格",
+                "作词：小寒"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.explicitRoles",
+              "observedAt": "2026-11-02T04:36:56.048Z"
+            }
+          ]
+        },
+        "duration": {
+          "status": "known",
+          "selected": {
+            "field": "duration",
+            "value": 267,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:003SrkT00CsXoo"
+            },
+            "source": "qq_openapi",
+            "basis": "song.song_play_time",
+            "observedAt": "2026-11-02T04:36:55.370Z"
+          },
+          "candidates": [
+            {
+              "field": "duration",
+              "value": 267,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:003SrkT00CsXoo"
+              },
+              "source": "qq_openapi",
+              "basis": "song.song_play_time",
+              "observedAt": "2026-11-02T04:36:55.370Z"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "guilt",
+    "provider": "fixture",
+    "providerId": "1260806",
+    "providerMid": "004SmM9I1NwSbk",
+    "title": "于心有愧",
+    "artists": [
+      "陈奕迅"
+    ],
+    "album": "H3M",
+    "albumId": "38111",
+    "albumMid": "0022CVkS4GIYsQ",
+    "cover": "https://y.gtimg.cn/music/photo_new/T002R300x300M0000022CVkS4GIYsQ_5.jpg",
+    "language": "粤语",
+    "genre": "Pop 流行",
+    "bpm": 68,
+    "year": 2009,
+    "lyricists": [
+      "林夕"
+    ],
+    "composers": [
+      "钟达茵"
+    ],
+    "sources": [
+      {
+        "label": "QQ 音乐比赛 OpenAPI",
+        "url": "https://y.qq.com/music_developer/#/docs/openapi#/feature/song"
+      },
+      {
+        "label": "QQ 音乐公开网页资料（实验）",
+        "url": "https://y.qq.com/n/ryqq_v2/songDetail/004SmM9I1NwSbk"
+      },
+      {
+        "label": "QQ 音乐歌词署名（已核对歌曲版本）",
+        "url": "https://y.qq.com/n/ryqq/songDetail/004SmM9I1NwSbk"
+      }
+    ],
+    "artistGender": "1 男",
+    "lyricTranslations": {},
+    "lyricHint": "如果我听歌可眼红",
+    "lyricHints": [
+      "如果我听歌可眼红",
+      "何以待你好偏不懂",
+      "自细做过多少美梦",
+      "慈悲的伟论",
+      "连乞丐喊穷心也痛",
+      "竟怕放怀拥抱你",
+      "让你露欢容",
+      "追悔无用转眼发现",
+      "曾听说过你某夜结婚",
+      "未曾露笑容",
+      "实在不敢知道我是元凶",
+      "大概当初我未懂得顾忌"
+    ],
+    "duration": 238,
+    "evidence": {
+      "schemaVersion": 1,
+      "policyVersion": "music-evidence-v1",
+      "capturedAt": "2026-11-02T04:36:57.704Z",
+      "entity": {
+        "scope": "recording",
+        "id": "qq:004SmM9I1NwSbk"
+      },
+      "allowedSources": [
+        "qq_openapi",
+        "qq_lyric_credit",
+        "qq_public_web"
+      ],
+      "facts": {
+        "artistGender": {
+          "status": "known",
+          "selected": {
+            "field": "artistGender",
+            "value": "1 男",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artistGender",
+            "observedAt": "2026-11-02T04:36:57.029Z"
+          },
+          "candidates": [
+            {
+              "field": "artistGender",
+              "value": "1 男",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artistGender",
+              "observedAt": "2026-11-02T04:36:57.029Z"
+            }
+          ]
+        },
+        "lyricHint": {
+          "status": "known",
+          "selected": {
+            "field": "lyricHint",
+            "value": "如果我听歌可眼红",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_openapi",
+            "basis": "lyric.identityCheckedShortOriginal",
+            "observedAt": "2026-11-02T04:36:57.704Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricHint",
+              "value": "如果我听歌可眼红",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_openapi",
+              "basis": "lyric.identityCheckedShortOriginal",
+              "observedAt": "2026-11-02T04:36:57.704Z"
+            }
+          ]
+        },
+        "title": {
+          "status": "known",
+          "selected": {
+            "field": "title",
+            "value": "于心有愧",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_openapi",
+            "basis": "song.title",
+            "observedAt": "2026-11-02T04:36:57.029Z"
+          },
+          "candidates": [
+            {
+              "field": "title",
+              "value": "于心有愧",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_openapi",
+              "basis": "song.title",
+              "observedAt": "2026-11-02T04:36:57.029Z"
+            }
+          ]
+        },
+        "artists": {
+          "status": "known",
+          "selected": {
+            "field": "artists",
+            "value": [
+              "陈奕迅"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_openapi",
+            "basis": "song.artists",
+            "observedAt": "2026-11-02T04:36:57.029Z"
+          },
+          "candidates": [
+            {
+              "field": "artists",
+              "value": [
+                "陈奕迅"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_openapi",
+              "basis": "song.artists",
+              "observedAt": "2026-11-02T04:36:57.029Z"
+            }
+          ]
+        },
+        "album": {
+          "status": "known",
+          "selected": {
+            "field": "album",
+            "value": "H3M",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_openapi",
+            "basis": "song.album",
+            "observedAt": "2026-11-02T04:36:57.029Z"
+          },
+          "candidates": [
+            {
+              "field": "album",
+              "value": "H3M",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_openapi",
+              "basis": "song.album",
+              "observedAt": "2026-11-02T04:36:57.029Z"
+            }
+          ]
+        },
+        "year": {
+          "status": "known",
+          "selected": {
+            "field": "year",
+            "value": 2009,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_openapi",
+            "basis": "song.year",
+            "observedAt": "2026-11-02T04:36:57.029Z"
+          },
+          "candidates": [
+            {
+              "field": "year",
+              "value": 2009,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_openapi",
+              "basis": "song.year",
+              "observedAt": "2026-11-02T04:36:57.029Z"
+            }
+          ]
+        },
+        "language": {
+          "status": "known",
+          "selected": {
+            "field": "language",
+            "value": "粤语",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_openapi",
+            "basis": "song.language",
+            "observedAt": "2026-11-02T04:36:57.029Z"
+          },
+          "candidates": [
+            {
+              "field": "language",
+              "value": "粤语",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_openapi",
+              "basis": "song.language",
+              "observedAt": "2026-11-02T04:36:57.029Z"
+            }
+          ]
+        },
+        "genre": {
+          "status": "known",
+          "selected": {
+            "field": "genre",
+            "value": "Pop 流行",
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_openapi",
+            "basis": "song.genre",
+            "observedAt": "2026-11-02T04:36:57.029Z"
+          },
+          "candidates": [
+            {
+              "field": "genre",
+              "value": "Pop 流行",
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_openapi",
+              "basis": "song.genre",
+              "observedAt": "2026-11-02T04:36:57.029Z"
+            }
+          ]
+        },
+        "bpm": {
+          "status": "known",
+          "selected": {
+            "field": "bpm",
+            "value": 68,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_public_web",
+            "basis": "web.bpm",
+            "observedAt": "2026-11-02T04:36:57.162Z"
+          },
+          "candidates": [
+            {
+              "field": "bpm",
+              "value": 68,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_public_web",
+              "basis": "web.bpm",
+              "observedAt": "2026-11-02T04:36:57.162Z"
+            }
+          ]
+        },
+        "lyricists": {
+          "status": "known",
+          "selected": {
+            "field": "lyricists",
+            "value": [
+              "林夕"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作词",
+            "observedAt": "2026-11-02T04:36:57.704Z"
+          },
+          "candidates": [
+            {
+              "field": "lyricists",
+              "value": [
+                "林夕"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作词",
+              "observedAt": "2026-11-02T04:36:57.704Z"
+            }
+          ]
+        },
+        "composers": {
+          "status": "known",
+          "selected": {
+            "field": "composers",
+            "value": [
+              "钟达茵"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.作曲",
+            "observedAt": "2026-11-02T04:36:57.704Z"
+          },
+          "candidates": [
+            {
+              "field": "composers",
+              "value": [
+                "钟达茵"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.作曲",
+              "observedAt": "2026-11-02T04:36:57.704Z"
+            }
+          ]
+        },
+        "credits": {
+          "status": "known",
+          "selected": {
+            "field": "credits",
+            "value": [
+              "作曲：钟达茵",
+              "作词：林夕"
+            ],
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_lyric_credit",
+            "basis": "credit.explicitRoles",
+            "observedAt": "2026-11-02T04:36:57.704Z"
+          },
+          "candidates": [
+            {
+              "field": "credits",
+              "value": [
+                "作曲：钟达茵",
+                "作词：林夕"
+              ],
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_lyric_credit",
+              "basis": "credit.explicitRoles",
+              "observedAt": "2026-11-02T04:36:57.704Z"
+            }
+          ]
+        },
+        "duration": {
+          "status": "known",
+          "selected": {
+            "field": "duration",
+            "value": 238,
+            "entity": {
+              "scope": "recording",
+              "id": "qq:004SmM9I1NwSbk"
+            },
+            "source": "qq_openapi",
+            "basis": "song.song_play_time",
+            "observedAt": "2026-11-02T04:36:57.029Z"
+          },
+          "candidates": [
+            {
+              "field": "duration",
+              "value": 238,
+              "entity": {
+                "scope": "recording",
+                "id": "qq:004SmM9I1NwSbk"
+              },
+              "source": "qq_openapi",
+              "basis": "song.song_play_time",
+              "observedAt": "2026-11-02T04:36:57.029Z"
+            }
+          ]
+        }
+      }
+    }
+  }
+]

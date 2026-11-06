@@ -1,0 +1,95 @@
+/* AI assets remain decorative. All readable text and controls are real DOM elements. */
+:root {
+  --game-card-surface: #fafaf5;
+  --game-card-attack: #b68b68;
+  --game-card-defense: #62878c;
+  --game-card-information: #9c8b54;
+  --game-card-special: #83739a;
+  --game-effect-duration: 500ms;
+}
+.skill-card {
+  background: var(--game-card-surface);
+}
+.skill-card.attack {
+  border-top-color: var(--game-card-attack);
+}
+.skill-card.defense {
+  border-top-color: var(--game-card-defense);
+}
+.skill-card.information {
+  border-top-color: var(--game-card-information);
+}
+.skill-card.special {
+  border-top-color: var(--game-card-special);
+}
+.board {
+  position: relative;
+  isolation: isolate;
+}
+.game-art {
+  display: block;
+  max-width: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.card-art {
+  width: 100%;
+  height: 72px;
+  flex: 0 0 72px;
+  border-radius: 6px;
+}
+.scene-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  z-index: -1;
+}
+.effect-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+.effect-cue {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: min(240px, 60%);
+  max-height: 60%;
+  object-fit: contain;
+  animation: game-cue var(--effect-duration, var(--game-effect-duration))
+    ease-out both;
+}
+.clue-source {
+  display: block;
+  font-size: 11px;
+  opacity: 0.75;
+}
+@keyframes game-cue {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  25% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .effect-layer {
+    display: none;
+  }
+  .game-grid *,
+  .game-grid *::before,
+  .game-grid *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

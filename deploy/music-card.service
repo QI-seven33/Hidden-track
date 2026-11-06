@@ -1,0 +1,28 @@
+[Unit]
+Description=Music Card API and H5
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=musiccard
+Group=musiccard
+WorkingDirectory=/opt/tencent-music
+Environment=NODE_ENV=production
+Environment=NODE_OPTIONS=--max-old-space-size=256
+ExecStart=/usr/bin/node --env-file=.env dist/server.mjs
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/tencent-music/data
+MemoryHigh=450M
+MemoryMax=650M
+LimitNOFILE=4096
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target

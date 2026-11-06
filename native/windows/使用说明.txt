@@ -1,0 +1,12 @@
+Hidden Track 1.0.9 / Windows x64
+
+解压整个 HiddenTrack-Windows 文件夹，双击 HiddenTrack.exe。
+请保留同目录下的 DLL 文件。程序联网进入 http://43.129.205.113:3000/。
+如缺少 Microsoft WebView2 Runtime，启动提示可打开微软官方下载页安装。
+https://developer.microsoft.com/microsoft-edge/webview2/#download-section
+
+登录默认为扫码；登录状态保存在当前 Windows 用户目录，不写进程序文件夹。
+游戏内容来自服务器，更新服务器后客户端展示最新页面。断网不能进行对战。
+Windows 客户端尚无发布者代码签名，文件属性中没有可信发布者签名。
+
+

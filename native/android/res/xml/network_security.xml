@@ -1,0 +1,5 @@
+<network-security-config>
+  <base-config cleartextTrafficPermitted="false" />
+  <!-- Only the user's current IP demo is HTTP. Replace this exception when HTTPS is available. -->
+  <domain-config cleartextTrafficPermitted="true"><domain includeSubdomains="false">43.129.205.113</domain></domain-config>
+</network-security-config>

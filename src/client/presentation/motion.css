@@ -1,0 +1,209 @@
+/* Motion only: do not change any resting sizes, spacing, positioning or grid. */
+:root {
+  --motion-settle: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-travel: cubic-bezier(0.22, 0.68, 0.28, 1);
+}
+.demo-app button,
+.demo-app a {
+  transition-timing-function: var(--motion-settle);
+}
+.demo-app .home-copy h1 {
+  animation: motion-page-enter 420ms var(--motion-settle) both;
+}
+.demo-app .home-bottom,
+.demo-app .home-kicker {
+  animation: motion-page-enter 340ms 70ms var(--motion-settle) both;
+}
+.demo-app .preparation-copy,
+.demo-app .preparation .secret-preparation {
+  animation: motion-page-enter 360ms var(--motion-settle) both;
+}
+.demo-app .preparation .secret-preparation {
+  animation-delay: 60ms;
+}
+.demo-app .modal[open],
+.demo-app .guess-dialog[open],
+.demo-app .event-overlay[open] {
+  animation: motion-modal-enter 220ms var(--motion-settle) both;
+}
+.demo-app .modal[open]::backdrop,
+.demo-app .guess-dialog[open]::backdrop,
+.demo-app .event-overlay[open]::backdrop {
+  animation: motion-backdrop 180ms ease-out both;
+}
+.demo-app .event-overlay .gt-event-wrap {
+  animation: motion-event-deal 320ms var(--ev-delay, 0ms) var(--motion-settle)
+    both;
+}
+.demo-app .event-overlay .event-flipper {
+  transition: transform 460ms var(--motion-travel);
+}
+.demo-app .event-overlay .gt-event {
+  transition:
+    transform 180ms var(--motion-settle),
+    filter 180ms ease-out;
+}
+@media (hover: hover) and (pointer: fine) {
+  .demo-app .event-overlay .gt-event.is-revealed:hover:not(:disabled) {
+    transform: translateY(-4px);
+    filter: brightness(1.035);
+  }
+}
+.demo-app .original-demo-table .hand-card-wrap {
+  transition: transform 200ms var(--motion-settle);
+}
+.demo-app .original-demo-table .hand-card-wrap.just-drawn,
+.demo-app .original-demo-table .hand-card-wrap .skill-card,
+.demo-app .original-demo-table .stage-cards .played-card {
+  animation: none;
+}
+.demo-app .original-demo-table .pressure-meter,
+.demo-app .original-demo-table .health {
+  animation: none;
+}
+.demo-app .original-demo-table .pressure-track i {
+  transform-origin: left center;
+  transition:
+    transform 280ms var(--motion-settle),
+    background-color 180ms ease-out;
+}
+.demo-app .original-demo-table .energy-drop svg {
+  transition:
+    opacity 180ms ease-out,
+    filter 240ms ease-out;
+}
+.demo-app .original-demo-table .energy-drop {
+  transition:
+    opacity 180ms ease-out,
+    color 180ms ease-out;
+}
+.demo-app .original-demo-table .clue-preview article,
+.demo-app .original-demo-table .clue-list article {
+  animation: motion-clue-enter 260ms var(--motion-settle) both;
+}
+.demo-app .original-demo-table .attack-trail {
+  animation: motion-target 1.2s ease-in-out infinite;
+}
+.demo-app .result,
+.demo-app .song-reveal {
+  animation: none;
+}
+.demo-app .result-heading {
+  animation: motion-page-enter 360ms var(--motion-settle) both;
+}
+.demo-app .song-artwork {
+  animation: motion-song-reveal 560ms var(--motion-settle) both;
+}
+.demo-app .reveal-information {
+  animation: motion-page-enter 380ms 80ms var(--motion-settle) both;
+}
+.demo-app .result-actions {
+  animation: motion-page-enter 300ms 120ms var(--motion-settle) both;
+}
+.demo-app .demo-decision,
+.demo-app .response-prompt {
+  animation: motion-page-enter 200ms var(--motion-settle) both;
+}
+@keyframes motion-page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes motion-modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes motion-backdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes motion-event-deal {
+  from {
+    opacity: 0;
+    transform: translateY(16px) rotate(-1.5deg) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes motion-clue-enter {
+  from {
+    opacity: 0.3;
+    transform: translateX(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes motion-target {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+@keyframes motion-song-reveal {
+  from {
+    opacity: 0.2;
+    transform: translateY(12px) rotate(-3deg) scale(0.97);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(-1px) rotate(0.3deg) scale(1.006);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-app .home-copy h1,
+  .demo-app .home-bottom,
+  .demo-app .home-kicker,
+  .demo-app .preparation-copy,
+  .demo-app .preparation .secret-preparation,
+  .demo-app .modal[open],
+  .demo-app .guess-dialog[open],
+  .demo-app .event-overlay[open],
+  .demo-app .event-overlay .gt-event-wrap,
+  .demo-app .event-overlay .event-flipper,
+  .demo-app .original-demo-table .hand-card-wrap,
+  .demo-app .original-demo-table .pressure-track i,
+  .demo-app .original-demo-table .energy-drop,
+  .demo-app .original-demo-table .clue-preview article,
+  .demo-app .original-demo-table .clue-list article,
+  .demo-app .original-demo-table .attack-trail,
+  .demo-app .result-heading,
+  .demo-app .song-artwork,
+  .demo-app .reveal-information,
+  .demo-app .result-actions,
+  .demo-app .demo-decision,
+  .demo-app .response-prompt {
+    animation: none !important;
+    transition: none !important;
+  }
+  .demo-app .modal[open]::backdrop,
+  .demo-app .guess-dialog[open]::backdrop,
+  .demo-app .event-overlay[open]::backdrop {
+    animation: none !important;
+  }
+}

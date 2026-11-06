@@ -1,0 +1,2602 @@
+/* Layout and motion adapted from the user supplied 04-music-duel.html. */
+
+.md-duel {
+  --paper: #f6f5f0;
+  --card: #ffffff;
+  --ink: #111214;
+  --lime: #c6f04a;
+  --lime-deep: #b4e22f;
+  --lime-soft: #eefbd0;
+  --muted: #8a8f8a;
+  --line: rgba(17, 18, 20, 0.14);
+  --silver: #c9ccd1;
+  --gold: #e8c15a;
+}
+.md-duel * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.md-duel [hidden] {
+  display: none !important;
+}
+.md-duel,
+.md-duel {
+  height: 100%;
+}
+.md-duel {
+  font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  font-weight: 500;
+}
+.md-duel button,
+.md-duel input {
+  font: inherit;
+  color: inherit;
+}
+.md-duel button {
+  cursor: pointer;
+  border: 0;
+  background: none;
+}
+.md-duel button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+.md-duel {
+  height: var(--vph);
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+}
+.md-duel .page {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+.md-duel .page.active {
+  display: flex;
+}
+
+/* ================= 顶栏 ================= */
+.md-duel .topbar {
+  flex: none;
+  height: 46px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+}
+.md-duel .tl,
+.md-duel .tr {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.md-duel .tr {
+  justify-content: flex-end;
+}
+.md-duel .tc {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.md-duel .ib {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 11px;
+  background: var(--card);
+  font-size: 15px;
+  font-weight: 900;
+}
+.md-duel .ib:active {
+  transform: translateY(1px);
+}
+.md-duel .ib.sq {
+  width: auto;
+  padding: 0 11px;
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.md-duel .room {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.4px;
+}
+.md-duel .pill {
+  height: 26px;
+  padding: 0 11px;
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  background: var(--card);
+  font-size: 10.5px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.md-duel .pill.turn {
+  background: var(--lime);
+}
+.md-duel .pill.turn.opp {
+  background: var(--card);
+  color: var(--muted);
+}
+.md-duel .pill.due {
+  background: var(--card);
+  gap: 5px;
+}
+.md-duel .pill.due::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--lime);
+}
+.md-duel .timer {
+  height: 26px;
+  min-width: 42px;
+  padding: 0 7px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 9px;
+  background: var(--card);
+  font-size: 10.5px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ================= 布局 ================= */
+.md-duel .board {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 268px;
+  gap: 12px;
+  padding: 0 16px 8px;
+}
+.md-duel .main {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- 通用小件 ---- */
+.md-duel .av {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--lime);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 900;
+}
+.md-duel .av.me {
+  background: var(--lime);
+  color: var(--ink);
+}
+.md-duel .press {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.md-duel .press .bar {
+  width: 62px;
+  height: 6px;
+  border: 1.5px solid var(--ink);
+  border-radius: 99px;
+  background: var(--card);
+  overflow: hidden;
+}
+.md-duel .press .bar i {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+}
+.md-duel .press em {
+  font-style: normal;
+  font-size: 8.5px;
+  font-weight: 800;
+  color: var(--muted);
+}
+.md-duel .pips {
+  display: flex;
+  gap: 3px;
+}
+.md-duel .pip {
+  width: 10px;
+  height: 6px;
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  background: var(--card);
+}
+.md-duel .pip.on {
+  background: var(--lime);
+}
+.md-duel .hx {
+  width: 26px;
+  height: 29px;
+  flex: none;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  display: grid;
+  place-items: center;
+  background: var(--silver);
+}
+.md-duel .hx i {
+  width: 19px;
+  height: 22px;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: var(--card);
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 900;
+}
+.md-duel .hx.gold {
+  background: var(--gold);
+}
+.md-duel .hx.pris {
+  background: linear-gradient(140deg, var(--lime), #5c6b27);
+}
+.md-duel .hx.locked {
+  background: repeating-linear-gradient(45deg, #dddcd4 0 4px, #eeede6 4px 8px);
+}
+.md-duel .hx.locked i {
+  background: transparent;
+  color: var(--muted);
+  font-size: 7px;
+}
+.md-duel .hx:active {
+  transform: translateY(1px);
+}
+.md-duel .evs {
+  display: flex;
+  gap: 5px;
+}
+.md-duel .spacer {
+  flex: 1;
+}
+.md-duel .mini-hand {
+  display: flex;
+}
+.md-duel .mb {
+  width: 20px;
+  height: 28px;
+  border: 1.5px solid var(--ink);
+  border-radius: 5px;
+  background: var(--ink);
+  margin-left: -9px;
+  display: grid;
+  place-items: center;
+}
+.md-duel .mb:first-child {
+  margin-left: 0;
+}
+.md-duel .mb::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid var(--lime);
+  border-radius: 50%;
+}
+.md-duel .decktag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 7.5px;
+  color: var(--muted);
+  line-height: 1.4;
+  gap: 1px;
+}
+.md-duel .decktag b {
+  font-size: 11px;
+  color: var(--ink);
+}
+.md-duel .dk {
+  width: 22px;
+  height: 29px;
+  border: 1.8px solid var(--ink);
+  border-radius: 5px;
+  background: var(--card);
+  position: relative;
+  margin-bottom: 2px;
+}
+.md-duel .dk::before,
+.md-duel .dk::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1.8px solid var(--ink);
+  border-radius: 5px;
+  background: var(--card);
+}
+.md-duel .dk::before {
+  transform: translate(2px, -2px);
+  z-index: -1;
+}
+.md-duel .dk::after {
+  transform: translate(4px, -4px);
+  z-index: -2;
+}
+
+/* ---- 对手条 ---- */
+.md-duel .opp-row {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+}
+.md-duel .who {
+  min-width: 0;
+  flex: none;
+  max-width: 118px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.md-duel .who strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- 牌桌 ---- */
+.md-duel .stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 2px 0 8px;
+  border: 1.5px dashed rgba(17, 18, 20, 0.2);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 16px,
+    rgba(17, 18, 20, 0.04) 16px 17px
+  );
+}
+.md-duel .stage.drop-on {
+  border-color: var(--lime-deep);
+  border-style: solid;
+  background: var(--lime-soft);
+}
+.md-duel .stage.drop-on::after {
+  content: '松手打出';
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--ink);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.md-duel .hint {
+  text-align: center;
+  color: var(--muted);
+  pointer-events: none;
+  user-select: none;
+}
+.md-duel .hint .n {
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 900;
+  opacity: 0.16;
+}
+.md-duel .hint p {
+  margin-top: 8px;
+  font-size: 11px;
+  letter-spacing: 0.6px;
+}
+.md-duel .hint p b {
+  color: var(--ink);
+  font-weight: 900;
+}
+.md-duel .ticker {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  max-width: 70%;
+  padding: 5px 11px;
+  border: 1.5px solid var(--ink);
+  border-radius: 99px;
+  background: var(--card);
+  font-size: 9px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.md-duel .ticker b {
+  color: var(--ink);
+  font-weight: 900;
+}
+.md-duel .pv {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  animation: pvIn 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* 位移和旋转由 useCardMotion 的飞行关键帧负责（从手牌那一侧飞出）；
+   这里只保留一个极轻的淡入，避免两层 transform 叠加把起点推到奇怪的方向。 */
+@keyframes pvIn {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.md-duel .pv .card.big {
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.md-duel .pv-copy {
+  max-width: 250px;
+}
+.md-duel .pv-copy .tag {
+  display: inline-block;
+  padding: 2px 9px;
+  border: 1.5px solid var(--ink);
+  border-radius: 99px;
+  background: var(--lime);
+  font-size: 9px;
+  font-weight: 900;
+}
+.md-duel .pv-copy h3 {
+  font-size: 22px;
+  margin: 7px 0 5px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+.md-duel .pv-copy p {
+  font-size: 11px;
+  line-height: 1.55;
+  color: #4a4e4a;
+}
+.md-duel .ripple {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  pointer-events: none;
+}
+.md-duel .ripple i {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  opacity: 0;
+  animation: ring 1.1s ease-out forwards;
+}
+.md-duel .ripple i:nth-child(2) {
+  animation-delay: 0.13s;
+}
+.md-duel .ripple i:nth-child(3) {
+  animation-delay: 0.26s;
+  border-color: var(--lime-deep);
+}
+@keyframes ring {
+  0% {
+    opacity: 0.45;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+/* ---- 试听播放器（置入牌桌顶部中央） ---- */
+.md-duel .player {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%) translateY(-8px);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: 3px 3px 0 var(--ink);
+  opacity: 0;
+  transition: 0.18s;
+  pointer-events: none;
+}
+.md-duel .player.on {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.md-duel .player .pcv {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--ink);
+  display: grid;
+  place-items: center;
+  color: var(--lime);
+  font-size: 12px;
+}
+.md-duel .pmain {
+  min-width: 0;
+}
+.md-duel .pmain b {
+  display: block;
+  font-size: 10px;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+}
+.md-duel .pmain small {
+  display: block;
+  font-size: 7.5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.md-duel .wave {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 16px;
+  margin-top: 3px;
+}
+.md-duel .wave i {
+  width: 2px;
+  height: 5px;
+  background: var(--ink);
+  border-radius: 1px;
+  animation: wv 0.9s ease-in-out infinite;
+}
+@keyframes wv {
+  0%,
+  100% {
+    height: 4px;
+  }
+  50% {
+    height: 14px;
+  }
+}
+.md-duel .ptime {
+  font-size: 10px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+.md-duel .px {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border: 1.5px solid var(--ink);
+  border-radius: 7px;
+  background: var(--card);
+  font-size: 9px;
+  font-weight: 900;
+}
+
+/* ---- 底部：头像堆叠 + 手牌 + 牌库 ---- */
+.md-duel .dock {
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  padding-bottom: 2px;
+}
+.md-duel .me-stack {
+  flex: none;
+  width: 132px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  padding-bottom: 1px;
+}
+.md-duel .me-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 8.5px;
+  color: var(--muted);
+  font-weight: 800;
+}
+.md-duel .me-line .lab {
+  flex: none;
+  width: 20px;
+  font-size: 8px;
+  letter-spacing: 0.5px;
+}
+.md-duel .me-line em {
+  font-style: normal;
+  font-size: 8px;
+  font-weight: 900;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.md-duel .me-id {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  margin-top: 2px;
+}
+.md-duel .me-id .av {
+  width: 34px;
+  height: 34px;
+  font-size: 11px;
+}
+.md-duel .me-id strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 84px;
+}
+
+.md-duel .hand-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+.md-duel .hand {
+  --cw: 114px;
+  --step: 9px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 20px 4px 4px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.md-duel .hand.scroll {
+  justify-content: flex-start;
+}
+.md-duel .hand::-webkit-scrollbar {
+  display: none;
+}
+.md-duel .hand-count {
+  position: absolute;
+  right: 2px;
+  top: 0;
+  padding: 2px 8px;
+  border: 1.5px solid var(--ink);
+  border-radius: 99px;
+  background: var(--card);
+  font-size: 8px;
+  font-weight: 900;
+  color: var(--muted);
+  opacity: 0;
+  transition: 0.15s;
+}
+.md-duel .hand-count.show {
+  opacity: 1;
+}
+.md-duel .my-deck {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding-bottom: 2px;
+}
+.md-duel .acts {
+  flex: none;
+  display: flex;
+  gap: 8px;
+}
+.md-duel .guess {
+  position: relative;
+  flex: 1;
+  height: 46px;
+  border: 2px solid var(--ink);
+  border-radius: 13px;
+  background: var(--lime);
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: 3px 3px 0 var(--ink);
+  white-space: nowrap;
+}
+.md-duel .guess:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.md-duel .guess .badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  background: var(--card);
+  font-size: 9.5px;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+}
+.md-duel .end {
+  flex: 1;
+  height: 46px;
+  border: 2px solid var(--ink);
+  border-radius: 13px;
+  background: var(--card);
+  font-size: 12.5px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.md-duel .end:active {
+  transform: translateY(1px);
+}
+.md-duel .tapbar {
+  position: absolute;
+  transform: translateX(-50%);
+  bottom: calc(100% - 6px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 6px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: 3px 3px 0 var(--ink);
+  z-index: 40;
+}
+.md-duel .tapbar .go {
+  height: 32px;
+  padding: 0 13px;
+  border: 2px solid var(--ink);
+  border-radius: 9px;
+  background: var(--lime);
+  font-size: 12px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.md-duel .tapbar .x {
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  background: var(--card);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+/* ================= 卡牌 ================= */
+.md-duel .card {
+  position: relative;
+  flex: 0 0 var(--cw);
+  width: var(--cw);
+  height: calc(var(--cw) * 1.44);
+  margin-left: var(--step);
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--ink);
+  border-radius: 13px;
+  background: var(--card);
+  box-shadow: 3px 3px 0 var(--ink);
+  overflow: hidden;
+  text-align: left;
+  scroll-snap-align: center;
+  transition:
+    transform 0.14s,
+    box-shadow 0.14s;
+  touch-action: none;
+}
+.md-duel .card:first-child {
+  margin-left: 0;
+}
+.md-duel .card:hover {
+  transform: translateY(-5px);
+  z-index: 6;
+}
+.md-duel .card.sel {
+  transform: translateY(-14px);
+  box-shadow:
+    0 0 0 2px var(--lime-deep),
+    4px 6px 0 var(--ink);
+  z-index: 7;
+}
+.md-duel .card.dragging {
+  opacity: 0.28;
+}
+.md-duel .card.ghost {
+  position: fixed;
+  z-index: 90;
+  pointer-events: none;
+  transform: rotate(-3deg) scale(1.03);
+  box-shadow: 9px 9px 0 rgba(17, 18, 20, 0.35);
+  transition: none;
+}
+.md-duel .ch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  font-size: 12.5px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+.md-duel .ch .cn {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.md-duel .ch .cost {
+  margin-left: auto;
+  flex: none;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 3px;
+  border: 1.5px solid var(--ink);
+  border-radius: 7px;
+  background: var(--card);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 900;
+}
+.md-duel .hand.overlap .ch {
+  gap: 5px;
+}
+.md-duel .hand.overlap .ch .cost {
+  order: -1;
+  margin-left: 0;
+  margin-right: 1px;
+}
+.md-duel .hand.overlap .ch .cn {
+  flex: 1;
+  min-width: 0;
+}
+.md-duel .card.atk .ch {
+  background: var(--ink);
+  color: var(--card);
+}
+.md-duel .card.res .ch {
+  background: var(--card);
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.md-duel .card.func .ch {
+  background: var(--lime);
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.md-duel .card.info .ch {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--lime) 0 5px,
+    #fff 5px 10px
+  );
+  color: var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.md-duel .art {
+  position: relative;
+  flex: 1;
+  margin: 5px 5px 0;
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(
+        circle at 30% 30%,
+        rgba(17, 18, 20, 0.18) 1.2px,
+        transparent 1.3px
+      )
+      0 0/7px 7px,
+    #fff;
+}
+.md-duel .art::before {
+  content: '';
+  position: absolute;
+  left: -25%;
+  top: 62%;
+  width: 150%;
+  height: 9px;
+  background: rgba(17, 18, 20, 0.1);
+  transform: rotate(-22deg);
+}
+.md-duel .art span {
+  position: relative;
+  font-size: 26px;
+  font-weight: 900;
+  opacity: 0.82;
+}
+.md-duel .ct {
+  padding: 4px 8px 0;
+  font-size: 7.6px;
+  font-weight: 900;
+  color: var(--muted);
+  letter-spacing: 0.4px;
+}
+.md-duel .cx {
+  padding: 2px 8px 7px;
+  font-size: 8.4px;
+  line-height: 1.42;
+  color: #3d4140;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.md-duel .card.big {
+  flex: none;
+  width: 150px;
+  height: 216px;
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.md-duel .card.big .ch {
+  font-size: 15px;
+  padding: 8px 10px;
+}
+.md-duel .card.big .art span {
+  font-size: 36px;
+}
+.md-duel .card.big .ct {
+  font-size: 9px;
+}
+.md-duel .card.big .cx {
+  font-size: 10.5px;
+  -webkit-line-clamp: 4;
+}
+
+/* ================= 右侧：线索 + 右下操作 ================= */
+.md-duel .side {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.md-duel .clue {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  background: var(--card);
+  overflow: hidden;
+}
+.md-duel .clue-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 13px 5px;
+}
+.md-duel .clue-head h2 {
+  font-size: 13.5px;
+  font-weight: 900;
+  letter-spacing: -0.3px;
+}
+.md-duel .clue-head .cnt {
+  margin-left: auto;
+  padding: 2px 8px;
+  border: 1.5px solid var(--ink);
+  border-radius: 99px;
+  background: var(--lime);
+  font-size: 9px;
+  font-weight: 900;
+}
+.md-duel .clue-rule {
+  flex: none;
+  padding: 0 13px 9px;
+  font-size: 8.5px;
+  color: var(--muted);
+  line-height: 1.4;
+  border-bottom: 1.5px solid var(--line);
+}
+.md-duel .clue-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  /* 滚动条在 music-duel-integration.css 里统一画成细胶囊并预留宽度。
+     这里不能再写 scrollbar-width / scrollbar-color：Chrome 一旦看到标准属性
+     就会忽略 ::-webkit-scrollbar，条子会退回系统覆盖式样式压住卡片右缘。 */
+}
+.md-duel .row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 10px;
+  border: 1.5px solid var(--ink);
+  border-radius: 11px;
+  background: var(--paper);
+  min-height: 46px;
+}
+.md-duel .tier {
+  flex: none;
+  font-size: 7.5px;
+  font-weight: 900;
+  padding: 2px 6px;
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+  background: var(--card);
+  white-space: nowrap;
+}
+.md-duel .row.t-adv .tier {
+  background: var(--lime);
+}
+.md-duel .row.t-key .tier {
+  background: var(--ink);
+  color: var(--card);
+}
+.md-duel .row.t-ult .tier {
+  background: var(--ink);
+  color: var(--lime);
+}
+.md-duel .rc {
+  min-width: 0;
+  flex: 1;
+}
+.md-duel .rc p {
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.md-duel .rc small {
+  display: block;
+  font-size: 8.5px;
+  color: var(--muted);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.md-duel .gen {
+  flex: none;
+  font-size: 7px;
+  font-weight: 900;
+  color: var(--muted);
+  padding: 1px 5px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+}
+.md-duel .ract {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--card);
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+}
+.md-duel .ract.p {
+  background: var(--ink);
+  color: var(--lime);
+}
+.md-duel .ract.p:active {
+  transform: translateY(1px);
+}
+.md-duel .thumb {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border: 1.5px solid var(--ink);
+  border-radius: 9px;
+  background:
+    radial-gradient(
+        circle at 30% 30%,
+        rgba(17, 18, 20, 0.3) 1.2px,
+        transparent 1.3px
+      )
+      0 0/7px 7px,
+    #fff;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 900;
+  opacity: 0.7;
+}
+.md-duel .row.album {
+  padding: 9px 9px;
+}
+.md-duel .row.slot {
+  flex: 1 0 46px;
+  border-style: dashed;
+  border-color: var(--line);
+  background: transparent;
+  justify-content: center;
+  min-height: 46px;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.5px;
+}
+.md-duel .clue-empty {
+  padding: 16px 10px;
+  text-align: center;
+  font-size: 9.5px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.md-duel .clue-foot {
+  flex: none;
+  padding: 8px 11px 9px;
+  border-top: 1.5px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.md-duel .bud {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.md-duel .bud .lab {
+  font-size: 8px;
+  font-weight: 900;
+  color: var(--muted);
+  letter-spacing: 0.4px;
+  flex: none;
+}
+.md-duel .segs {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.md-duel .segs i {
+  flex: 1;
+  height: 6px;
+  border: 1.2px solid var(--ink);
+  border-radius: 2px;
+  background: var(--card);
+}
+.md-duel .segs i.on {
+  background: var(--lime);
+}
+.md-duel .bud em {
+  font-style: normal;
+  font-size: 8px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+.md-duel .cnts {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.md-duel .cnts span {
+  font-size: 7.5px;
+  font-weight: 800;
+  color: var(--muted);
+  padding: 1px 6px;
+  border: 1.2px solid var(--line);
+  border-radius: 99px;
+}
+.md-duel .cnts span b {
+  color: var(--ink);
+}
+
+/* ================= 弹层 ================= */
+.md-duel .ov {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  padding: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(17, 18, 20, 0.44);
+}
+.md-duel .dlg {
+  width: min(600px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  padding: 16px;
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.md-duel .dh {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.md-duel .dh h2 {
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: -0.4px;
+}
+.md-duel .dh p {
+  margin-top: 3px;
+  font-size: 10px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.md-duel .xb {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  margin-left: auto;
+  border: 2px solid var(--ink);
+  border-radius: 11px;
+  background: var(--card);
+  font-size: 14px;
+  font-weight: 900;
+}
+.md-duel .search {
+  width: 100%;
+  height: 44px;
+  padding: 0 13px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--paper);
+  font-size: 13px;
+  outline: none;
+  font-weight: 700;
+}
+.md-duel .search:focus {
+  background: var(--lime-soft);
+}
+.md-duel .cands {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 10px;
+}
+.md-duel .cand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--card);
+  text-align: left;
+}
+.md-duel .cand.sel {
+  background: var(--lime-soft);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.md-duel .mcv {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  background:
+    radial-gradient(
+        circle at 30% 30%,
+        rgba(17, 18, 20, 0.26) 1.1px,
+        transparent 1.2px
+      )
+      0 0/6px 6px,
+    #fff;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+}
+.md-duel .cc {
+  min-width: 0;
+  flex: 1;
+}
+.md-duel .cc b,
+.md-duel .cc small {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.md-duel .cc b {
+  font-size: 12.5px;
+  font-weight: 900;
+}
+.md-duel .cc small {
+  font-size: 9.5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.md-duel .rd {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.md-duel .sel .rd {
+  background: var(--lime);
+}
+.md-duel .sel .rd::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.md-duel .gfoot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+.md-duel .risk {
+  font-size: 9px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.md-duel .risk b {
+  color: var(--ink);
+}
+.md-duel .gconfirm {
+  margin-left: auto;
+  min-width: 118px;
+  height: 44px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--lime);
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.md-duel .tabs {
+  display: flex;
+  gap: 6px;
+}
+.md-duel .tabs i {
+  font-style: normal;
+  font-size: 9.5px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border: 1.5px solid var(--ink);
+  border-radius: 99px;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.md-duel .tabs i.on {
+  background: var(--ink);
+  color: var(--lime);
+}
+.md-duel .tabs i.done {
+  background: var(--lime);
+  color: var(--ink);
+}
+.md-duel .evd {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.md-duel .evd .hx {
+  width: 46px;
+  height: 51px;
+}
+.md-duel .evd .hx i {
+  width: 35px;
+  height: 39px;
+  font-size: 15px;
+}
+.md-duel .evd p {
+  font-size: 11.5px;
+  line-height: 1.65;
+  color: #3d4140;
+}
+.md-duel .logs {
+  display: flex;
+  flex-direction: column;
+}
+.md-duel .log {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.md-duel .log:last-child {
+  border-bottom: 0;
+}
+.md-duel .log span {
+  font-size: 9px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+/* ================= 阶段前：事件选择（覆盖在牌桌之上的图层） ================= */
+.md-duel .evlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 46px;
+  bottom: 0;
+  z-index: 96;
+  display: grid;
+  place-items: center;
+  padding: 14px 16px;
+  background: rgba(17, 18, 20, 0.42);
+}
+.md-duel .evwin {
+  width: auto;
+  max-width: min(820px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: 6px 6px 0 rgba(17, 18, 20, 0.45);
+  animation: evIn 0.18s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+@keyframes evIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.md-duel .evhead {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  min-width: 0;
+}
+.md-duel .evttl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.md-duel .evttl .flag {
+  flex: none;
+  padding: 2px 9px;
+  border: 1.5px solid var(--ink);
+  border-radius: 99px;
+  background: var(--lime);
+  font-size: 8.5px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+}
+.md-duel .evttl b {
+  font-size: 13px;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.md-duel .evhead .tabs {
+  margin-left: auto;
+}
+.md-duel .evhead .pill {
+  height: 26px;
+  font-size: 9.5px;
+  padding: 0 10px;
+}
+.md-duel .evbody {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.md-duel .evgrid {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.md-duel .pcard {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  background: var(--card);
+  box-shadow: 4px 4px 0 var(--ink);
+  text-align: left;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    background 0.18s;
+}
+.md-duel .pcard:active {
+  transform: translate(1px, 1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.md-duel .pcard.on {
+  background: var(--lime-soft);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.md-duel .ptag {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 2;
+  padding: 2px 9px;
+  border: 1.5px solid var(--ink);
+  border-radius: 99px;
+  background: var(--card);
+  font-size: 8.5px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+}
+.md-duel .pcard.on .ptag {
+  background: var(--lime);
+}
+.md-duel .prf {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 3;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--card);
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1;
+}
+.md-duel .prf:active {
+  transform: rotate(-40deg);
+}
+.md-duel .prf:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+  transform: none;
+}
+.md-duel .part {
+  flex: 1;
+  min-height: 0;
+  margin: 18px 0 11px;
+  border: 1.5px solid var(--ink);
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+        circle at 32% 30%,
+        rgba(17, 18, 20, 0.14) 1.3px,
+        transparent 1.4px
+      )
+      0 0/9px 9px,
+    #fff;
+}
+.md-duel .part::before {
+  content: '';
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  border: 1.5px dashed rgba(17, 18, 20, 0.16);
+  border-radius: 50%;
+}
+.md-duel .part::after {
+  content: '';
+  position: absolute;
+  width: 116px;
+  height: 116px;
+  border: 1.5px solid rgba(17, 18, 20, 0.08);
+  border-radius: 50%;
+}
+.md-duel .part .gem {
+  position: relative;
+  z-index: 2;
+  width: 58px;
+  height: 66px;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: var(--ink);
+  display: grid;
+  place-items: center;
+}
+.md-duel .part .gem i {
+  width: 43px;
+  height: 51px;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background: var(--card);
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  font-size: 22px;
+  font-weight: 900;
+}
+.md-duel .pico {
+  display: none;
+  font-style: normal;
+  margin-right: 5px;
+}
+.md-duel .pcard h3 {
+  flex: none;
+  font-size: 17px;
+  font-weight: 900;
+  margin-bottom: 5px;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 26px;
+}
+.md-duel .pd {
+  flex: none;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #4a4e4a;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.md-duel .pcard .pick {
+  flex: none;
+  height: 36px;
+  border: 2px solid var(--ink);
+  border-radius: 11px;
+  background: var(--card);
+  font-size: 11.5px;
+  font-weight: 900;
+}
+.md-duel .pcard.on .pick {
+  background: var(--lime);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.md-duel .evfoot {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+.md-duel .evnote {
+  flex: 1;
+  min-width: 0;
+  font-size: 9.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.md-duel .evnote b {
+  color: var(--ink);
+  font-weight: 900;
+}
+.md-duel .pgo {
+  flex: none;
+  height: 44px;
+  padding: 0 20px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--card);
+  font-size: 12.5px;
+  font-weight: 900;
+  box-shadow: 3px 3px 0 var(--ink);
+  white-space: nowrap;
+}
+.md-duel .pgo.on {
+  background: var(--lime);
+}
+.md-duel .pgo.on:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+/* 顶栏里的同一个按钮：展开 / 收起 */
+.md-duel .evtab {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 4px 0 10px;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  background: var(--card);
+  font-size: 9.5px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.md-duel .evtab.on {
+  display: inline-flex;
+}
+.md-duel .evtab:active {
+  transform: translateY(1px);
+}
+.md-duel .evtab .dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--lime);
+}
+.md-duel .evtab b {
+  padding: 3px 9px;
+  border: 1.5px solid var(--ink);
+  border-radius: 99px;
+  background: var(--lime);
+  font-size: 9px;
+  font-weight: 900;
+}
+
+/* ================= 结算 ================= */
+.md-duel .rmain {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: 14px 20px;
+  overflow: auto;
+}
+.md-duel .rcard {
+  width: min(840px, 100%);
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 24px;
+  padding: 20px;
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.md-duel .cover {
+  aspect-ratio: 1;
+  border: 2px solid var(--ink);
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(
+        circle at 30% 30%,
+        rgba(17, 18, 20, 0.16) 1.4px,
+        transparent 1.5px
+      )
+      0 0/9px 9px,
+    #fff;
+}
+.md-duel .vinyl {
+  width: 72%;
+  aspect-ratio: 1;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--ink);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.md-duel .vinyl::before {
+  content: '';
+  position: absolute;
+  inset: 19%;
+  border: 1px solid #4e524a;
+  border-radius: 50%;
+}
+.md-duel .vinyl::after {
+  content: '';
+  width: 30%;
+  aspect-ratio: 1;
+  border: 2px solid var(--card);
+  border-radius: 50%;
+  background: var(--lime);
+}
+.md-duel .rbody {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.md-duel .rbadge {
+  align-self: flex-start;
+  padding: 4px 11px;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  background: var(--lime);
+  font-size: 10.5px;
+  font-weight: 900;
+}
+.md-duel .rbadge.loss {
+  background: var(--ink);
+  color: var(--card);
+}
+.md-duel .rbody h1 {
+  margin: 9px 0 12px;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -1.2px;
+}
+.md-duel .ans {
+  padding-top: 11px;
+  border-top: 2px solid var(--ink);
+}
+.md-duel .ans small {
+  font-size: 9px;
+  color: var(--muted);
+  font-weight: 800;
+}
+.md-duel .ans h2 {
+  font-size: 25px;
+  margin: 4px 0 3px;
+  font-weight: 900;
+}
+.md-duel .ans p {
+  font-size: 12.5px;
+  font-weight: 800;
+}
+.md-duel .ans .al {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 500;
+  margin-top: 2px;
+}
+.md-duel .stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-top: 12px;
+}
+.md-duel .st {
+  padding: 7px;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  background: var(--paper);
+  text-align: center;
+}
+.md-duel .st b {
+  display: block;
+  font-size: 15px;
+}
+.md-duel .st span {
+  font-size: 8px;
+  color: var(--muted);
+}
+.md-duel .racts {
+  display: flex;
+  gap: 9px;
+  margin-top: 14px;
+}
+.md-duel .racts button {
+  flex: 1;
+  height: 44px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  font-size: 12.5px;
+  font-weight: 900;
+  background: var(--card);
+}
+.md-duel .racts .pri {
+  background: var(--lime);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.md-duel .racts .pri:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.md-duel .toast {
+  position: fixed;
+  left: 50%;
+  bottom: 190px;
+  transform: translate(-50%, 10px);
+  z-index: 120;
+  padding: 9px 15px;
+  border: 2px solid var(--card);
+  border-radius: 11px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.16s;
+  white-space: nowrap;
+}
+.md-duel .toast.on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.md-duel .rotate {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--paper);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+}
+.md-duel .rotate .ph {
+  width: 62px;
+  height: 62px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--lime);
+  box-shadow: 4px 4px 0 var(--ink);
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+  margin-bottom: 18px;
+}
+.md-duel .rotate h2 {
+  font-size: 19px;
+}
+.md-duel .rotate p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 7px;
+}
+
+/* ================= 中等屏 ================= */
+@media (max-width: 1000px) {
+  .md-duel .board {
+    grid-template-columns: minmax(0, 1fr) 200px;
+    gap: 9px;
+    padding: 0 10px 8px;
+  }
+  .md-duel .hand {
+    --cw: 92px;
+    --step: 8px;
+  }
+  .md-duel .ch {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+  .md-duel .ch .cost {
+    min-width: 17px;
+    height: 17px;
+    font-size: 10px;
+    border-radius: 6px;
+  }
+  .md-duel .art span {
+    font-size: 19px;
+  }
+  .md-duel .ct {
+    font-size: 6.8px;
+    padding: 3px 6px 0;
+  }
+  .md-duel .cx {
+    font-size: 7.4px;
+    padding: 1px 6px 5px;
+  }
+  .md-duel .card.big {
+    width: 112px;
+    height: 162px;
+  }
+  .md-duel .card.big .ch {
+    font-size: 12px;
+    padding: 5px 7px;
+  }
+  .md-duel .card.big .art span {
+    font-size: 26px;
+  }
+  .md-duel .card.big .cx {
+    font-size: 8.4px;
+  }
+  .md-duel .me-stack {
+    width: 112px;
+    gap: 6px;
+  }
+  .md-duel .clue-head {
+    padding: 8px 10px 4px;
+  }
+  .md-duel .clue-head h2 {
+    font-size: 11.5px;
+  }
+  .md-duel .clue-rule {
+    font-size: 7.8px;
+    padding: 0 10px 7px;
+  }
+  .md-duel .rc p {
+    font-size: 9.5px;
+  }
+  .md-duel .guess,
+  .md-duel .end {
+    height: 42px;
+    font-size: 11.5px;
+  }
+  .md-duel .guess {
+    font-size: 12px;
+  }
+  .md-duel .rcard {
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: 16px;
+    padding: 16px;
+  }
+  .md-duel .rbody h1 {
+    font-size: 24px;
+  }
+  .md-duel .ans h2 {
+    font-size: 20px;
+  }
+  .md-duel .evwin {
+    padding: 11px 12px;
+    max-width: 720px;
+  }
+  .md-duel .pcard {
+    padding: 9px;
+    border-radius: 14px;
+  }
+  .md-duel .pcard h3 {
+    font-size: 13.5px;
+  }
+  .md-duel .pd {
+    font-size: 9.4px;
+  }
+  .md-duel .evttl b {
+    font-size: 11px;
+  }
+  .md-duel .pgo {
+    height: 40px;
+    font-size: 11px;
+    padding: 0 15px;
+  }
+}
+@media (max-height: 460px), (max-width: 460px) {
+  .md-duel .topbar {
+    height: 36px;
+    padding: 0 10px;
+  }
+  .md-duel .ib {
+    width: 29px;
+    height: 29px;
+    font-size: 12px;
+    border-radius: 9px;
+  }
+  .md-duel .ib.sq {
+    font-size: 9.5px;
+    padding: 0 8px;
+  }
+  .md-duel .room {
+    display: none;
+  }
+  .md-duel .pill {
+    height: 22px;
+    font-size: 9px;
+    padding: 0 8px;
+    border-width: 1.5px;
+  }
+  .md-duel .timer {
+    height: 22px;
+    min-width: 36px;
+    font-size: 9px;
+    border-width: 1.5px;
+  }
+  .md-duel .board {
+    grid-template-columns: minmax(0, 1fr) 178px;
+    gap: 7px;
+    padding: 0 8px 8px;
+  }
+  .md-duel .opp-row {
+    height: 34px;
+    gap: 7px;
+  }
+  .md-duel .av {
+    width: 27px;
+    height: 27px;
+    font-size: 9.5px;
+    border-width: 1.5px;
+  }
+  .md-duel .who {
+    max-width: 84px;
+    gap: 2px;
+  }
+  .md-duel .who strong {
+    font-size: 9.5px;
+  }
+  .md-duel .press .bar {
+    width: 42px;
+    height: 5px;
+  }
+  .md-duel .press em {
+    font-size: 7px;
+  }
+  .md-duel .pips {
+    gap: 2px;
+  }
+  .md-duel .pip {
+    width: 8px;
+    height: 5px;
+  }
+  .md-duel .hx {
+    width: 19px;
+    height: 21px;
+  }
+  .md-duel .hx i {
+    width: 14px;
+    height: 16px;
+    font-size: 7.5px;
+  }
+  .md-duel .hx.locked i {
+    font-size: 5.5px;
+  }
+  .md-duel .evs {
+    gap: 3px;
+  }
+  .md-duel .mb {
+    width: 15px;
+    height: 21px;
+    margin-left: -7px;
+  }
+  .md-duel .mb::after {
+    width: 5px;
+    height: 5px;
+  }
+  .md-duel .dk {
+    width: 16px;
+    height: 21px;
+    border-width: 1.4px;
+  }
+  .md-duel .dk::before,
+  .md-duel .dk::after {
+    border-width: 1.4px;
+  }
+  .md-duel .decktag {
+    font-size: 6.5px;
+  }
+  .md-duel .decktag b {
+    font-size: 9px;
+  }
+  .md-duel .stage {
+    margin: 1px 0 4px;
+    border-radius: 13px;
+  }
+  .md-duel .hint .n {
+    font-size: 26px;
+  }
+  .md-duel .hint p {
+    font-size: 9px;
+    margin-top: 4px;
+  }
+  .md-duel .ticker {
+    left: 7px;
+    bottom: 6px;
+    font-size: 7.5px;
+    padding: 3px 8px;
+    max-width: 74%;
+  }
+  .md-duel .pv {
+    gap: 13px;
+  }
+  .md-duel .pv-copy {
+    max-width: 150px;
+  }
+  .md-duel .pv-copy h3 {
+    font-size: 14px;
+    margin: 3px 0 3px;
+  }
+  .md-duel .pv-copy p {
+    font-size: 8px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .md-duel .pv-copy .tag {
+    font-size: 7.5px;
+    padding: 1px 7px;
+  }
+  .md-duel .ripple {
+    width: 100px;
+    height: 100px;
+    margin: -50px 0 0 -50px;
+  }
+  .md-duel .player {
+    top: 6px;
+    padding: 5px 7px;
+    border-radius: 11px;
+    box-shadow: 2px 2px 0 var(--ink);
+    gap: 7px;
+  }
+  .md-duel .player .pcv {
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
+  }
+  .md-duel .pmain b {
+    font-size: 8.5px;
+    max-width: 120px;
+  }
+  .md-duel .pmain small {
+    font-size: 6.5px;
+  }
+  .md-duel .wave {
+    height: 12px;
+    margin-top: 1px;
+  }
+  .md-duel .ptime {
+    font-size: 8.5px;
+  }
+  .md-duel .px {
+    width: 19px;
+    height: 19px;
+    font-size: 8px;
+    border-radius: 6px;
+  }
+  .md-duel .dock {
+    gap: 8px;
+  }
+  .md-duel .me-stack {
+    width: 96px;
+    gap: 4px;
+  }
+  .md-duel .me-line {
+    font-size: 7px;
+    gap: 4px;
+  }
+  .md-duel .me-line .lab {
+    width: 16px;
+    font-size: 6.5px;
+  }
+  .md-duel .me-line em {
+    font-size: 6.5px;
+  }
+  .md-duel .me-id {
+    gap: 5px;
+    margin-top: 1px;
+  }
+  .md-duel .me-id .av {
+    width: 26px;
+    height: 26px;
+    font-size: 9px;
+  }
+  .md-duel .me-id strong {
+    font-size: 8.5px;
+    max-width: 62px;
+  }
+  .md-duel .hand {
+    --cw: 76px;
+    --step: 7px;
+    padding: 13px 3px 2px;
+  }
+  .md-duel .card {
+    border-radius: 9px;
+    border-width: 1.6px;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .md-duel .ch {
+    font-size: 8.8px;
+    padding: 3px 5px;
+    gap: 4px;
+  }
+  .md-duel .ch .cost {
+    min-width: 14px;
+    height: 14px;
+    font-size: 8.4px;
+    border-radius: 5px;
+    border-width: 1.2px;
+  }
+  .md-duel .art {
+    margin: 3px 3px 0;
+    border-radius: 6px;
+  }
+  .md-duel .art span {
+    font-size: 15px;
+  }
+  .md-duel .ct {
+    display: none;
+  }
+  .md-duel .cx {
+    font-size: 6.9px;
+    padding: 1px 5px 4px;
+    -webkit-line-clamp: 2;
+    line-height: 1.35;
+  }
+  .md-duel .card.big {
+    width: 96px;
+    height: 138px;
+  }
+  .md-duel .card.big .ch {
+    font-size: 10px;
+  }
+  .md-duel .card.big .art span {
+    font-size: 22px;
+  }
+  .md-duel .card.big .cx {
+    font-size: 7.2px;
+  }
+  .md-duel .acts {
+    gap: 6px;
+  }
+  .md-duel .guess,
+  .md-duel .end {
+    height: 36px;
+    font-size: 10px;
+    border-radius: 10px;
+  }
+  .md-duel .guess {
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .md-duel .guess .badge {
+    min-width: 16px;
+    height: 16px;
+    font-size: 8px;
+    top: -6px;
+    right: -6px;
+    border-width: 1.5px;
+  }
+  .md-duel .tapbar {
+    padding: 4px 5px;
+    gap: 4px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .md-duel .tapbar .go {
+    height: 26px;
+    padding: 0 10px;
+    font-size: 10px;
+    border-radius: 8px;
+  }
+  .md-duel .tapbar .x {
+    width: 22px;
+    height: 22px;
+    font-size: 9.5px;
+    border-radius: 6px;
+  }
+  .md-duel .clue-head {
+    padding: 7px 9px 3px;
+  }
+  .md-duel .clue-head h2 {
+    font-size: 10px;
+  }
+  .md-duel .clue-head .cnt {
+    font-size: 7.5px;
+    padding: 1px 6px;
+  }
+  .md-duel .clue-rule {
+    font-size: 7px;
+    padding: 0 9px 5px;
+    line-height: 1.3;
+  }
+  .md-duel .clue-list {
+    padding: 5px 6px;
+    gap: 3px;
+  }
+  .md-duel .row {
+    padding: 4px 6px;
+    gap: 5px;
+    border-radius: 9px;
+    min-height: 26px;
+  }
+  .md-duel .tier {
+    font-size: 6.8px;
+    padding: 1px 4px;
+    border-width: 1.2px;
+  }
+  .md-duel .rc p {
+    font-size: 8.8px;
+    line-height: 1.32;
+  }
+  .md-duel .rc small {
+    font-size: 6.8px;
+    margin-top: 1px;
+  }
+  .md-duel .gen {
+    font-size: 5.8px;
+    padding: 0 3px;
+  }
+  .md-duel .ract {
+    width: 22px;
+    height: 22px;
+    font-size: 7.5px;
+  }
+  .md-duel .thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    font-size: 9px;
+  }
+  .md-duel .row.slot {
+    display: none;
+  }
+  .md-duel .clue-foot {
+    padding: 5px 8px 6px;
+    gap: 4px;
+  }
+  .md-duel .bud .lab {
+    font-size: 6.5px;
+  }
+  .md-duel .segs i {
+    height: 5px;
+  }
+  .md-duel .bud em {
+    font-size: 6.5px;
+  }
+  .md-duel .cnts {
+    display: none;
+  }
+  .md-duel .toast {
+    bottom: 120px;
+    font-size: 10px;
+  }
+  .md-duel .tabs i {
+    font-size: 8px;
+    padding: 2px 7px;
+  }
+  .md-duel .dh h2 {
+    font-size: 15px;
+  }
+  .md-duel .dh p {
+    font-size: 9px;
+  }
+  /* 事件选择图层（手机横屏短高度） */
+  .md-duel .evlay {
+    top: 36px;
+    padding: 6px 10px 8px;
+  }
+  .md-duel .evwin {
+    padding: 8px 10px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 0 rgba(17, 18, 20, 0.5);
+  }
+  .md-duel .evhead {
+    gap: 7px;
+    margin-bottom: 7px;
+  }
+  .md-duel .evttl {
+    gap: 6px;
+  }
+  .md-duel .evttl .flag {
+    font-size: 7px;
+    padding: 1px 6px;
+    border-width: 1.2px;
+  }
+  .md-duel .evttl b {
+    font-size: 10px;
+  }
+  .md-duel .evhead .tabs i {
+    font-size: 7.6px;
+    padding: 1px 7px;
+    border-width: 1.2px;
+  }
+  .md-duel .evhead .pill {
+    height: 20px;
+    font-size: 7.6px;
+    padding: 0 8px;
+    border-width: 1.5px;
+  }
+  .md-duel .evgrid {
+    gap: 8px;
+  }
+  .md-duel .pcard {
+    padding: 7px;
+    border-radius: 12px;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .md-duel .ptag {
+    left: 7px;
+    top: 7px;
+    font-size: 6.6px;
+    padding: 1px 6px;
+    border-width: 1.2px;
+  }
+  .md-duel .prf {
+    right: 6px;
+    top: 6px;
+    width: 20px;
+    height: 20px;
+    font-size: 9.5px;
+    border-width: 1.2px;
+  }
+  .md-duel .part {
+    margin: 11px 0 6px;
+    border-radius: 8px;
+  }
+  .md-duel .part .gem {
+    width: 30px;
+    height: 34px;
+  }
+  .md-duel .part .gem i {
+    width: 22px;
+    height: 25px;
+    font-size: 11px;
+  }
+  .md-duel .pcard h3 {
+    font-size: 11px;
+    margin-bottom: 3px;
+    padding-right: 22px;
+  }
+  .md-duel .pd {
+    font-size: 8.2px;
+    line-height: 1.42;
+    margin-bottom: 5px;
+    -webkit-line-clamp: 2;
+  }
+  .md-duel .pcard .pick {
+    height: 24px;
+    font-size: 8.8px;
+    border-radius: 8px;
+  }
+  .md-duel .evfoot {
+    margin-top: 7px;
+    gap: 8px;
+  }
+  .md-duel .evnote {
+    font-size: 7.2px;
+  }
+  .md-duel .pgo {
+    height: 31px;
+    padding: 0 13px;
+    font-size: 9.8px;
+    border-radius: 9px;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .md-duel .evtab {
+    height: 22px;
+    font-size: 8px;
+    padding: 0 3px 0 8px;
+    border-width: 1.5px;
+    gap: 5px;
+  }
+  .md-duel .evtab .dot {
+    width: 6px;
+    height: 6px;
+  }
+  .md-duel .evtab b {
+    font-size: 7.6px;
+    padding: 2px 7px;
+    border-width: 1.2px;
+  }
+  .md-duel .rulebox {
+    display: none;
+  }
+}

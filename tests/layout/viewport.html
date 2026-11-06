@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><title>布局验收窗口</title
+  ><style>
+    body {
+      font: 13px system-ui;
+      margin: 0;
+      background: #26372e;
+      color: white;
+    }
+    header {
+      padding: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    select,
+    input,
+    button {
+      font: inherit;
+      padding: 5px;
+    }
+    input {
+      min-width: 80px;
+      flex: 1;
+    }
+    #stage {
+      margin: 0 8px;
+      overflow: hidden;
+    }
+    iframe {
+      border: 0;
+      transform-origin: top left;
+      background: #eef1ed;
+    }
+  </style>
+  <header>
+    <label
+      >视口
+      <select id="size">
+        <option value="1366,768">1366 × 768</option>
+        <option value="1366,600">1366 × 600</option>
+        <option value="1366,540">1366 × 540</option>
+        <option value="1920,1080">1920 × 1080</option>
+        <option value="1280,720">1280 × 720</option>
+        <option value="1024,768">1024 × 768</option>
+        <option value="390,844">390 × 844</option>
+        <option value="360,740">360 × 740</option>
+      </select></label
+    ><label>页面 <input id="route" value="/" /></label
+    ><button id="load">打开</button><span id="metrics"></span>
+  </header>
+  <div id="stage">
+    <iframe title="待测应用" id="app" src="http://127.0.0.1:5190/"></iframe>
+  </div>
+  <script>
+    const frame = document.querySelector('#app'),
+      size = document.querySelector('#size'),
+      stage = document.querySelector('#stage');
+    function fit() {
+      const [w, h] = size.value.split(',').map(Number);
+      const scale = Math.min(
+        1,
+        (document.documentElement.clientWidth - 16) / w,
+        (innerHeight - document.querySelector('header').offsetHeight - 16) / h,
+      );
+      frame.style.width = w + 'px';
+      frame.style.height = h + 'px';
+      frame.style.transform = `scale(${scale})`;
+      stage.style.width = w * scale + 'px';
+      stage.style.height = h * scale + 'px';
+      document.querySelector('#metrics').textContent = `CSS ${w} × ${h}`;
+    }
+    size.addEventListener('change', fit);
+    addEventListener('resize', fit);
+    document.querySelector('#load').onclick = () => {
+      const path = document.querySelector('#route').value;
+      frame.src = 'http://127.0.0.1:5190' + (path.startsWith('/') ? path : '/');
+    };
+    fit();
+  </script>
+</html>

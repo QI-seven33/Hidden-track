@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#111214" />
+    <title>Hidden Track · 客户端下载</title>
+    <style>
+      :root {
+        --ink: #111214;
+        --sub: #5a5f66;
+        --line: #e2e1dd;
+        --paper: #faf9f6;
+        --acc: #d4553f;
+        --safe: max(env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+      }
+      * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+      html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        padding: 0 var(--safe);
+        background: var(--paper);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+        line-height: 1.6;
+      }
+      .bar { height: 6px; background: var(--ink); }
+      .bar > i { display: block; width: 22%; height: 100%; background: var(--acc); }
+      main {
+        max-width: 620px;
+        margin: 0 auto;
+        padding: 26px 20px 40px;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(26px, 7vw, 38px);
+        letter-spacing: -0.02em;
+      }
+      .tag {
+        margin: 6px 0 0;
+        font-size: 13px;
+        color: var(--sub);
+      }
+      .ver {
+        margin: 10px 0 0;
+        font-size: 12px;
+        color: var(--acc);
+        letter-spacing: 0.04em;
+      }
+      .rule { height: 1px; background: var(--line); margin: 22px 0; border: 0; }
+      .lead {
+        margin: 0 0 18px;
+        font-size: 14px;
+        color: var(--sub);
+      }
+      a.btn {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 18px;
+        margin: 0 0 12px;
+        border: 2px solid var(--ink);
+        border-radius: 14px;
+        text-decoration: none;
+        color: var(--ink);
+        background: #fff;
+        box-shadow: 4px 5px 0 var(--ink);
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
+      }
+      a.btn:active {
+        transform: translate(3px, 4px);
+        box-shadow: 1px 1px 0 var(--ink);
+      }
+      a.btn.primary { background: var(--ink); color: #fff; }
+      a.btn.primary .meta { color: rgba(255, 255, 255, 0.72); }
+      a.btn .icon {
+        flex: 0 0 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 9px;
+        border: 2px solid currentColor;
+        font-size: 15px;
+        font-weight: 700;
+      }
+      a.btn.primary .icon { border-color: #fff; }
+      a.btn .txt { flex: 1 1 auto; min-width: 0; }
+      a.btn .name { font-size: 16px; font-weight: 700; }
+      a.btn .meta { display: block; font-size: 12px; color: var(--sub); font-weight: 400; }
+      .note {
+        margin: 20px 0 0;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #fff;
+        font-size: 13px;
+        color: var(--sub);
+      }
+      .note strong { color: var(--ink); }
+      .note p { margin: 6px 0 0; }
+      .note ol { margin: 8px 0 0; padding-left: 20px; }
+      .note li { margin: 4px 0; }
+      .note.warn {
+        border-color: rgba(212, 85, 63, 0.32);
+        background: #fff7f4;
+      }
+      .note.warn strong { color: var(--acc); }
+      footer {
+        margin-top: 26px;
+        font-size: 12px;
+        color: var(--sub);
+        text-align: center;
+      }
+      .wechat { display: none; }
+      body.in-wechat .wechat { display: block; }
+      body.in-wechat .browser-tip { display: none; }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        font-size: 11px;
+        color: var(--sub);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar"><i></i></div>
+    <main>
+      <h1>Hidden Track</h1>
+      <p class="tag">「拜托，这么小众的歌都被你发现了，我的底牌又少了一张」</p>
+      <p class="ver">网页版本 1.0.26 · 腾讯音乐娱乐 · 音乐互动体验</p>
+      <hr class="rule" />
+      <p class="lead">手机网页版暂时关闭，请下载安装客户端。电脑端仍可通过浏览器访问游戏。</p>
+
+      <a class="btn primary" href="./downloads/HiddenTrack-Android.apk" download>
+        <span class="icon">↓</span>
+        <span class="txt">
+          <span class="name">下载 Android 安装包</span>
+          <span class="meta">APK · 约 53 KB · Android 客户端</span>
+        </span>
+      </a>
+
+      <a class="btn" href="./downloads/HiddenTrack-Windows-x64.exe" download>
+        <span class="icon">↓</span>
+        <span class="txt">
+          <span class="name">下载 Windows 客户端</span>
+          <span class="meta">EXE · 约 1 MB · Windows 10 / 11</span>
+        </span>
+      </a>
+
+
+      <div class="note warn">
+        <strong>手机网页版暂时关闭</strong>
+        <p>手机浏览器暂不提供游戏对局，请下载 Android 客户端游玩。电脑浏览器仍可正常访问游戏。</p>
+        <p>iOS 暂无正式客户端，请使用电脑体验。已安装的 Android / Windows 客户端可继续正常使用。</p>
+      </div>
+
+      <div class="note wechat">
+        <strong>当前在微信内打开，可能无法直接下载安装包。</strong>
+        <ol>
+          <li>点右上角「···」选择「在浏览器打开」，再点上面的下载按钮；</li>
+          <li>若没有该选项，请复制当前页面地址，在系统浏览器中打开后下载安装。</li>
+        </ol>
+      </div>
+
+      <div class="note browser-tip">
+        <strong>安装提示</strong>
+        <ol>
+          <li>首次安装需允许「未知来源应用」，属于正常的侧载提示；</li>
+          <li>安装包只是轻量外壳，游戏内容随服务端更新，无需反复重装；</li>
+          <li>进入客户端后用 QQ 音乐账号授权，即可创建房间或单人练习。</li>
+        </ol>
+      </div>
+
+      <footer>
+        <span class="badge">服务端热更新</span>
+        &nbsp;网页版本 1.0.26 · 43.129.205.113:3000
+      </footer>
+    </main>
+    <script>
+      if (/MicroMessenger/i.test(navigator.userAgent)) document.body.classList.add('in-wechat');
+    </script>
+  </body>
+</html>

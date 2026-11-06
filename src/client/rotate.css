@@ -1,0 +1,523 @@
+/* ── 竖屏 = 横屏舞台 ───────────────────────────────────────────────
+ *
+ * 手机竖屏时把整个应用顺时针旋转 90°，玩家横着拿就是原生横屏排版。
+ * 这是 H5 横屏游戏的主流做法，但纯 CSS 里只有 transform 是不够的：
+ * 旋转不会改变 dvh / 媒体查询的参照系，它们仍然按物理视口算。
+ *
+ * 所以配合两条约定：
+ *   1. --vph 是「虚拟视口高度」。竖屏下它等于物理宽度（390px），
+ *      于是 clamp(84px, calc(var(--vph) * 0.3), 203px) 改写成 calc(var(--vph) * .3) 以后，
+ *      算出来和「390 高的横屏手机」完全一致。
+ *   2. 所有 (max-height: N) 断点都补了一条 (orientation: portrait) and (max-width: N)。
+ *      竖屏旋转后，虚拟高度 == 物理宽度，两条条件等价。
+ *
+ * 平台限定：只在窄屏竖屏生效。平板竖屏（<= 900px 宽以外的）和桌面完全不受影响。
+ */
+
+:root {
+  /* 虚拟视口：横屏/桌面就是真实视口。竖屏旋转后宽高互换，见下方媒体查询。 */
+  --vph: 100dvh;
+  --vpw: 100vw;
+}
+
+/* 老内核（不支持 dvh）退回 vh，否则 var(--vph) 整条失效、高度塌成 auto。 */
+@supports not (height: 100dvh) {
+  :root {
+    --vph: 100vh;
+  }
+}
+
+/* ── 顶层对话框的容器重置 ──────────────────────────────────────────
+ *
+ * <dialog>.showModal() 会把元素提升到 top layer：它的包含块变成物理视口，
+ * 祖先 #root 的 transform 对它完全无效。横屏看不出来，竖屏就会侧躺着显示。
+ *
+ * 所以所有弹窗都拆成两层：
+ *   <dialog class="dlg-frame">  只负责「顶层 + 遮罩 + 居中」，本身透明无边框
+ *     <div class="…原类名…">    真正的卡片，样式规则一行没改
+ * 横屏下 dialog 仍是 fit-content + margin:auto，视觉与拆分前一致。
+ */
+.demo-app dialog.dlg-frame:where(:not(.duel-event-dialog)) {
+  width: auto;
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  overflow: visible;
+  scrollbar-width: auto;
+}
+
+@media (orientation: portrait) and (max-width: 900px) {
+  :root {
+    /* 竖屏旋转后，视觉上的「高」其实是物理宽度。
+       优先用 stage.ts 量出来的精确像素，避免 iOS 地址栏收起时的 1~2px 抖动。 */
+    --vph: var(--stage-w, 100vw);
+    /* 反过来，视觉上的「宽」是物理高度。CSS 里的 vw 尺寸全部改走 --vpw。 */
+    --vpw: var(--stage-h, 100vh);
+    /* 视觉左右留白来自物理的上下安全区（刘海 / Home 条），要反过来用。 */
+    --app-safe-inline: max(
+      env(safe-area-inset-top, 0px),
+      env(safe-area-inset-bottom, 0px)
+    );
+  }
+
+  /* 让 body 成为固定视口，避免旋转体撑出滚动条。 */
+  body {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+    background: #f7f7f2;
+    /* 防止 iOS 双击缩放把旋转体带偏。 */
+    touch-action: manipulation;
+  }
+
+  /* 旋转舞台：宽 = 物理高，高 = 物理宽，绕左上角转 90° 后平移回来。
+     --stage-h / --stage-w 由 stage.ts 写入精确像素，CSS 值只是首帧兜底。 */
+  #root {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--stage-h, 100dvh);
+    height: var(--stage-w, 100vw);
+    transform-origin: 0 0;
+    transform: translateX(var(--stage-w, 100vw)) rotate(90deg);
+    overflow: hidden;
+    background: #f7f7f2;
+    /* transform 会成为 fixed 后代的包含块，弹窗会跟着一起转——这正是我们要的。 */
+  }
+}
+
+/* ── 顶层对话框：补一次旋转 ────────────────────────────────────────
+ *
+ * showModal() 的 <dialog> 在 top layer 里，包含块是物理视口，
+ * 祖先 #root 的 transform 对它无效。竖屏下它会以「竖屏方向」横躺在屏幕上。
+ * 这里把它撑到物理视口大小，再套同样的 90° 旋转，视觉上就与舞台对齐了；
+ * 卡片本身（.dlg-win / .evwin）保持原有的宽高与居中规则。
+ */
+@media (orientation: portrait) and (max-width: 900px) {
+  .demo-app dialog[open] {
+    position: fixed;
+    inset: 0;
+    /* 和 #root 同一套：宽取物理高、高取物理宽，转 90° 后正好铺满物理视口。 */
+    width: var(--stage-h, 100dvh);
+    height: var(--stage-w, 100vw);
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: inherit;
+    overflow: visible;
+    transform-origin: 0 0;
+    transform: translateX(var(--stage-w, 100vw)) rotate(90deg);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: min-content;
+    place-content: center;
+    justify-items: center;
+    overscroll-behavior: contain;
+  }
+}
+
+@keyframes card-arrive {
+  0% {
+    opacity: 0;
+    transform: translateY(var(--from-y, 130px)) rotate(var(--from-angle, 12deg))
+      scale(0.75);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-8px) rotate(-3deg) scale(1.04);
+  }
+  100% {
+    transform: translateY(0) rotate(0) scale(1);
+  }
+}
+
+@keyframes feedback-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes clue-arrive {
+  from {
+    opacity: 0.2;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes impact-number {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(1.3);
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-35px);
+  }
+}
+
+@keyframes hit-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: perspective(1000px) rotateY(35deg) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(1000px) rotateY(0) translateY(0);
+  }
+}
+
+@keyframes demo-stat-in {
+  from {
+    transform: translateY(-3px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes headline-enter {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sea-moon {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  30%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sea-words {
+  0%,
+  26% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  42%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sea-lyric {
+  0%,
+  34% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  48%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sea-lyric-later {
+  0%,
+  44% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  60%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shutter-left {
+  0% {
+    transform: translateX(-100%);
+  }
+  25%,
+  80%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes shutter-right {
+  0% {
+    transform: translateX(100%);
+  }
+  25%,
+  80%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes phase-message {
+  0%,
+  20% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  40%,
+  85% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes modal-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes content-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes artwork-reveal {
+  from {
+    opacity: 0;
+    transform: rotateY(-78deg) translateY(20px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: rotateY(0) translateY(0) scale(1);
+  }
+}
+
+/* Keyboard adjustments apply only while an editable field is focused.
+   Keep the existing card dimensions and visual styles. */
+@media (orientation: portrait) and (max-width: 900px) {
+  html[data-kb] .demo-app dialog[open] {
+    overflow: hidden;
+  }
+  html[data-kb] .demo-app dialog[open] > :not(.guess-dialog-new),
+  html[data-kb] .mg-sheet,
+  html[data-kb] .mg-exit-card,
+  html[data-kb] .mg-search-wrap {
+    translate: var(--kb-shift, 0px) 0;
+  }
+  html[data-kb]
+    #root
+    .app-shell.demo-app.manga-shell
+    .mg-search-wrap
+    .mg-search {
+    width: min(100%, calc(var(--stage-h) - var(--kb) - 24px));
+  }
+  html[data-kb] #root .app-shell.demo-app.manga-shell .mg-sheet .mg-code-input,
+  html[data-kb] #root .app-shell.demo-app.manga-shell .mg-sheet form .mg-btn {
+    width: min(100%, calc(var(--stage-h) - var(--kb) - 24px));
+  }
+  html[data-kb] .guess-dialog-new {
+    /* Entry transform must finish before fixed children anchor to the frame. */
+    animation: none;
+    transform: none;
+    position: relative;
+    left: calc(var(--kb) * -0.5);
+    height: var(--kb-card-height);
+    --kb-card-inset: calc(
+      (var(--stage-w) - var(--kb-card-height)) * 0.5 + 16px
+    );
+  }
+  html[data-kb] .guess-dialog-new .dh,
+  html[data-kb] .guess-dialog-new .cands,
+  html[data-kb] .guess-dialog-new .search,
+  html[data-kb] .guess-dialog-new .gfoot {
+    position: fixed;
+    left: 12px;
+    width: calc(var(--stage-h) - var(--kb) - 24px);
+    margin: 0;
+  }
+  html[data-kb] .guess-dialog-new .dh {
+    top: var(--kb-card-inset);
+  }
+  html[data-kb] .guess-dialog-new .cands {
+    top: calc(var(--kb-card-inset) + 62px);
+    bottom: calc(var(--kb-card-inset) + 112px);
+    max-height: none;
+    overflow: auto;
+  }
+  html[data-kb] .guess-dialog-new .search {
+    bottom: calc(var(--kb-card-inset) + 46px);
+  }
+  html[data-kb] .guess-dialog-new .gfoot {
+    bottom: var(--kb-card-inset);
+  }
+}
+
+/* Landscape IME: the keyboard covers the physical bottom. Freeze the table,
+   and move only the existing input surfaces into the visual viewport. */
+@media (orientation: landscape) {
+  html[data-kb] {
+    --vph: var(--stage-h);
+  }
+  html[data-kb] .demo-app dialog[open] {
+    position: fixed;
+    inset: var(--kb-top) 0 auto;
+    width: var(--stage-w);
+    height: var(--kb-visible-h);
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    overflow: auto;
+  }
+  html[data-kb] .demo-app dialog[open] > .manga-dialog {
+    max-height: calc(var(--kb-visible-h) - 16px);
+    display: flex;
+    flex-direction: column;
+  }
+  html[data-kb] .manga-dialog .mdh {
+    flex: none;
+  }
+  html[data-kb] .manga-dialog .mdb {
+    min-height: 0;
+    overflow: auto;
+  }
+  html[data-kb] .guess-dialog-new {
+    animation: none;
+    height: calc(var(--kb-visible-h) - 16px);
+    max-height: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto 36px;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 8px;
+    padding: 8px;
+    overflow: hidden;
+  }
+  html[data-kb] .guess-dialog-new .dh,
+  html[data-kb] .guess-dialog-new .gfoot {
+    display: contents;
+  }
+  html[data-kb] .guess-dialog-new .dh > div,
+  html[data-kb] .guess-dialog-new .risk {
+    display: none;
+  }
+  html[data-kb] .guess-dialog-new .search {
+    grid-area: 1 / 1;
+    margin: 0;
+  }
+  html[data-kb] .guess-dialog-new .gconfirm {
+    grid-area: 1 / 2;
+    margin: 0;
+  }
+  html[data-kb] .guess-dialog-new .xb {
+    grid-area: 1 / 3;
+    margin: 0;
+  }
+  html[data-kb] .guess-dialog-new .cands {
+    grid-area: 2 / 1 / 3 / -1;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+    overflow: auto;
+  }
+  html[data-kb] #root .app-shell.demo-app.manga-shell .mg-overlay {
+    top: var(--kb-top);
+    bottom: auto;
+    height: var(--kb-visible-h);
+    padding-bottom: 8px;
+  }
+  html[data-kb] #root .app-shell.demo-app.manga-shell .mg-sheet {
+    max-height: calc(var(--kb-visible-h) - 16px);
+  }
+  html[data-kb] #root .app-shell.demo-app.manga-shell .mg-join-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  html[data-kb]
+    #root
+    .app-shell.demo-app.manga-shell
+    .mg-join-form
+    .mg-code-input {
+    flex: 1;
+    min-width: 0;
+    width: 0;
+    margin-bottom: 0;
+  }
+  html[data-kb] #root .app-shell.demo-app.manga-shell .mg-join-form .mg-btn {
+    flex: none;
+    width: auto;
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,2671 @@
+/* Production binding: keep the supplied geometry, use real cards and server state. */
+.app-shell.demo-app.in-duel {
+  height: var(--vph);
+  min-height: 0;
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #f6f5f0;
+}
+.app-shell.in-duel > .duel-header {
+  display: none;
+}
+.app-shell.in-duel .room-main,
+.app-shell.in-duel .room-content {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+}
+.app-shell.in-duel .room-top {
+  display: none;
+}
+.app-shell.in-duel .room-toast {
+  position: fixed;
+  z-index: 130;
+  top: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(var(--vpw) * 0.9);
+}
+.md-duel {
+  --paper: #f6f5f0;
+  --card: #fff;
+  --ink: #111214;
+  --lime: #c6f04a;
+  --lime-deep: #b4e22f;
+  --lime-soft: #eefbd0;
+  --muted: #8a8f8a;
+  --line: rgba(17, 18, 20, 0.14);
+  --silver: #c9ccd1;
+  --gold: #e8c15a;
+  position: relative;
+  isolation: isolate;
+  flex: 1;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-width: none;
+  margin: 0;
+  padding: env(safe-area-inset-top) var(--app-safe-inline)
+    env(safe-area-inset-bottom) var(--app-safe-inline);
+  color: var(--ink);
+  background: var(--paper);
+  font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  overflow: hidden;
+}
+.md-duel button {
+  min-height: 0;
+  color: inherit;
+  font: inherit;
+  font-weight: 900;
+  text-transform: none;
+  letter-spacing: normal;
+}
+.md-duel button:focus-visible,
+.md-duel input:focus-visible {
+  outline: 3px solid var(--lime-deep);
+  outline-offset: 3px;
+}
+.md-duel button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+.md-duel p {
+  max-width: none;
+}
+.md-duel .page {
+  width: 100%;
+  height: 100%;
+}
+.md-duel .board {
+  overflow: hidden;
+}
+.md-duel .topbar {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  z-index: 4;
+}
+.md-duel .av {
+  overflow: hidden;
+}
+.md-duel .av img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.md-duel .press .bar i {
+  transition: width 0.24s ease-out;
+}
+.md-duel .urgent {
+  color: #a52323;
+}
+.md-duel .evs {
+  max-width: 25%;
+  overflow: auto;
+  scrollbar-width: none;
+}
+.md-duel .me-stack .evs {
+  max-width: 100%;
+}
+.md-duel .mini-hand {
+  align-items: center;
+}
+.md-duel .mini-hand b {
+  font-size: 8px;
+}
+.md-duel .mb {
+  background-size: cover;
+  background-position: center;
+}
+.md-duel .mb::after {
+  display: none;
+}
+.md-duel .my-deck .dk {
+  background-size: cover;
+  background-position: center;
+}
+.md-duel .decktag {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+}
+.md-duel .stage-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px 12px 32px;
+}
+/* 出牌预览按卡重挂载，保留 music-duel.css 里的 pvIn 淡入，
+   位移与旋转交给 useCardMotion 的飞行关键帧（统一从出牌者那一侧起飞）。 */
+.md-duel .played-card {
+  width: 130px;
+  aspect-ratio: 465/800;
+  flex: none;
+  filter: drop-shadow(4px 4px 0 #111214);
+  transform-origin: 50% 68%;
+  will-change: transform;
+}
+.md-duel .skill-card {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  overflow: hidden;
+  box-shadow: none;
+  transform: none;
+}
+.md-duel .hand-wrap {
+  align-self: flex-end;
+  /* Legacy .hand-zone sets mobile overflow-x:auto/overflow-y:hidden and clips
+     the confirmation bar above this wrapper. Only the inner .hand scrolls. */
+  overflow: visible;
+}
+.md-duel .hand {
+  --cw: 114px;
+  --step: 8px;
+  /* 顶部给倒计时读条留足空间：读条约 18px 高，选中卡会上浮 14px，
+     再加卡片的 3px 投影，合计约 35px，这里抬到 38px 彻底错开。 */
+  padding: 38px 5px 5px;
+  /* 必须是 none：X5(微信/QQ 内核)对 touch-action 交集实现有缺陷，
+     祖先链上残留 pan-x 会抢走手势发 pointercancel，拖牌闪一下就被杀。
+     横向滚动手牌已由 useHandPointer 手动接管，这里不再交给浏览器。 */
+  touch-action: none;
+}
+/* 底部区域整体隔离原生手势，X5 不再有机会把拖拽当成滚动取消。 */
+.md-duel .hand-wrap,
+.md-duel .dock {
+  touch-action: none;
+}
+.md-duel .duel-hand-card {
+  position: relative;
+  flex: 0 0 var(--cw);
+  width: var(--cw);
+  height: auto;
+  aspect-ratio: 465/800;
+  margin-left: var(--step);
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: 3px 3px 0 var(--ink);
+  scroll-snap-align: center;
+  /* 必须是 none：pan-x 时浏览器会在判定前抢走手势发 pointercancel，
+     手机上永远拖不出牌；横向滚动手牌由 useHandPointer 手动接管。 */
+  touch-action: none;
+  transition:
+    transform 0.2s cubic-bezier(0.25, 0.8, 0.3, 1),
+    box-shadow 0.2s cubic-bezier(0.25, 0.8, 0.3, 1),
+    filter 0.22s ease,
+    opacity 0.22s ease,
+    outline-color 0.22s ease;
+}
+.md-duel .duel-hand-card:first-child {
+  margin-left: 0;
+}
+@media (hover: hover) {
+  .md-duel .duel-hand-card:hover {
+    transform: translateY(-5px);
+    z-index: 6;
+  }
+}
+.md-duel .duel-hand-card.sel {
+  transform: translateY(-14px);
+  box-shadow:
+    0 0 0 2px var(--lime-deep),
+    4px 6px 0 var(--ink);
+  z-index: 7;
+}
+.md-duel .duel-hand-card.unavailable {
+  filter: none;
+}
+/* 想打打不出的牌：出牌被拒绝时弹一下再回位，比「拖不动」更好懂 */
+@keyframes handReject {
+  0% {
+    transform: translateY(-14px) translateX(0) rotate(0deg);
+  }
+  32% {
+    transform: translateY(-16px) translateX(14px) rotate(2.4deg);
+  }
+  62% {
+    transform: translateY(-14px) translateX(-7px) rotate(-1.2deg);
+  }
+  100% {
+    transform: translateY(-14px) translateX(0) rotate(0deg);
+  }
+}
+.md-duel .duel-hand-card.reject {
+  animation: handReject 0.42s cubic-bezier(0.25, 0.8, 0.3, 1);
+  z-index: 8;
+}
+.md-duel .duel-hand-card.reject .card-face {
+  box-shadow:
+    inset 0 0 0 2px rgba(212, 85, 63, 0.55),
+    inset 0 0 12px rgba(212, 85, 63, 0.18);
+  border-radius: inherit;
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-duel .duel-hand-card.reject {
+    animation: none;
+  }
+}
+.md-duel .duel-hand-card.dragging {
+  opacity: 0.25;
+}
+.md-duel .duel-drag-ghost {
+  position: fixed;
+  z-index: 150;
+  pointer-events: none;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  transform: rotate(-3deg) scale(1.03);
+  filter: drop-shadow(6px 6px 0 #11121455);
+  background: none;
+}
+.md-duel .tapbar {
+  left: 50%;
+  max-width: min(calc(var(--vpw) * 0.94), 520px);
+  /* 整条抬到手牌容器之上：原来压进容器 4px，正好切掉倒计时读条的顶边。 */
+  bottom: calc(100% + 2px);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+/* 自伤警告：选中的信息牌会把压力推到上限时，先在这条确认栏里说明白。 */
+.md-duel .tap-danger {
+  flex: 1 0 100%;
+  padding: 4px 8px;
+  border: 1.5px solid #b8402c;
+  border-radius: 7px;
+  background: #fff3ef;
+  color: #8f2f1f;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.45;
+  text-align: center;
+}
+.md-duel .tap-reason {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 230px;
+  padding: 4px 7px;
+  border-radius: 6px;
+  background: var(--ink);
+  color: white;
+  font-size: 10px;
+}
+/* 响应提示条回到牌桌顶部。
+   上一版挪到「进度条上方」，实测会同时压住倒计时读条和出牌确认栏——
+   底部那条带子只够放一个东西，提示条占上去就必然互相遮挡。
+   顶部是牌桌唯一的空白区，放这里和倒计时、手牌都不碰。 */
+.md-duel .stage-prompt {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  bottom: auto;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  max-width: min(94%, 460px);
+  padding: 7px 11px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--card);
+  box-shadow: 2px 2px 0 var(--ink);
+  font-size: 11px;
+  text-align: center;
+  animation: promptRise 0.18s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+@keyframes promptRise {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+/* 确认栏（打出 / 确认响应）悬在手牌正上方，和左下角的最新动态是同一条带子。
+   只在真正选中卡牌时让位——平时那句话不该被藏起来。 */
+.md-duel:has(.tapbar) .ticker {
+  opacity: 0;
+  pointer-events: none;
+}
+.md-duel .stage-prompt span {
+  color: var(--muted);
+  font-size: 10px;
+}
+.md-duel .stage-prompt button {
+  min-height: 34px;
+  padding: 7px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 9px;
+  background: var(--lime);
+  font-size: 11.5px;
+  font-weight: 900;
+  white-space: nowrap;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+.md-duel .stage-prompt button:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-duel .stage-prompt {
+    animation: none;
+  }
+}
+.md-duel .decision {
+  width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  padding: 14px;
+  text-align: center;
+}
+.md-duel .decision h2 {
+  font-size: 18px;
+}
+.md-duel .decision p {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+.md-duel .decision-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px 0;
+}
+.md-duel .decision-actions button,
+.md-duel .decision-confirm {
+  border: 2px solid var(--ink);
+  border-radius: 11px;
+  background: var(--lime);
+  padding: 10px 16px;
+  font-size: 12px;
+}
+.md-duel .lock-cards {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  overflow: auto;
+  margin: 8px 0;
+}
+.md-duel .lock-card {
+  width: 85px;
+  aspect-ratio: 465/800;
+  flex: none;
+  border: 0;
+  background: transparent;
+  border-radius: 8px;
+}
+.md-duel .lock-card.sel {
+  outline: 3px solid var(--lime-deep);
+}
+.md-duel .row.spent .rc p {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+.md-duel .thumb {
+  object-fit: cover;
+  background: none;
+  opacity: 1;
+}
+.md-duel .audio-clue {
+  align-items: flex-start;
+}
+.md-duel .duel-audio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 3px 0 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  min-width: 0;
+}
+.md-duel .duel-audio > button {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--lime);
+  font-size: 11px;
+  /* 线索栏很窄，指头容易点空：给个最小点击面积和按压反馈。 */
+  touch-action: manipulation;
+}
+.md-duel .duel-audio > button:active {
+  transform: translateY(1px);
+}
+.md-duel .duel-audio > small {
+  display: block;
+  flex: 1;
+  font-size: 8px;
+  line-height: 1.4;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.md-duel .duel-audio > a {
+  font-size: 9px;
+}
+.md-duel .duel-dialog {
+  width: min(600px, calc(var(--vpw) - 28px - 2 * var(--app-safe-inline)));
+  max-height: calc(var(--vph) - 28px);
+  margin: auto;
+  padding: 16px;
+  overflow: auto;
+  color: var(--ink);
+}
+.md-duel .dlg-frame:not(.duel-event-dialog)::backdrop {
+  background: rgba(17, 18, 20, 0.44);
+}
+.md-duel .duel-dialog .dh {
+  position: sticky;
+  top: -16px;
+  z-index: 1;
+  padding-top: 4px;
+  background: var(--card);
+}
+.md-duel .duel-dialog .search {
+  width: 100%;
+}
+.md-duel .cands {
+  max-height: calc(var(--vph) * 0.4);
+  overflow: auto;
+  padding: 0 3px 3px 0;
+}
+.md-duel .search-state {
+  padding: 10px 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+.md-duel .mcv {
+  overflow: hidden;
+}
+.md-duel .mcv img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.md-duel .risk {
+  font-size: 10px;
+}
+.md-duel .menu-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.md-duel .menu-actions button,
+.md-duel .tabs button {
+  padding: 8px 12px;
+  border: 1.5px solid var(--ink);
+  border-radius: 9px;
+  background: var(--card);
+  font-size: 12px;
+}
+.md-duel .tabs button[aria-pressed='true'] {
+  background: var(--lime);
+}
+.md-duel .status-line {
+  font-size: 12px;
+  margin-top: 10px;
+}
+.md-duel .event-detail {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.md-duel .event-detail small {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  margin: 4px 0;
+}
+.md-duel .event-detail p,
+.md-duel .full-description {
+  font-size: 13px;
+  line-height: 1.8;
+}
+.md-duel .duel-event-dialog {
+  width: min(720px, calc(var(--vpw) - 28px - 2 * var(--app-safe-inline)));
+  height: auto;
+  max-width: none;
+  max-height: calc(var(--vph) - 70px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+.md-duel .dlg-frame:not(.duel-event-dialog)::backdrop {
+  background: rgba(17, 18, 20, 0.42);
+}
+.md-duel .evwin {
+  width: 100%;
+  max-width: none;
+  max-height: calc(var(--vph) - 70px);
+}
+.md-duel .ev-close {
+  font-size: 9px;
+  text-decoration: underline;
+}
+.md-duel .evgrid {
+  align-items: flex-start;
+}
+.md-duel .gt-event-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  perspective: 1000px;
+}
+.md-duel .gt-event {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 465/782;
+  border: 0;
+  border-radius: 14px;
+  padding: 0;
+  background: #f2f1ec;
+  box-shadow: 4px 4px 0 var(--ink);
+  container-type: inline-size;
+}
+.md-duel .event-flipper {
+  display: block;
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
+  transition: transform 0.48s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* 翻转中间态（rotateY 接近 ±90°）两面对称背向屏幕，容器会短暂露底；
+     提前铺纸色，避免那一瞬间发白。 */
+  background: #f2f1ec;
+  border-radius: 14px;
+}
+.md-duel .is-revealed .event-flipper {
+  transform: rotateY(0);
+}
+.md-duel .event-front,
+.md-duel .event-back {
+  display: block;
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 14px;
+}
+.md-duel .event-back {
+  transform: rotateY(180deg);
+}
+.md-duel .event-art-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+}
+.md-duel .event-front > img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+.md-duel .gt-event-title {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 5.3%;
+  height: 8.4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 10cqw;
+  font-weight: 900;
+  font-family: 'Songti SC', SimSun, serif;
+  background: #faf9f5;
+  transform: skew(-5deg);
+  color: var(--ink);
+}
+.md-duel .gt-event-rarity {
+  position: absolute;
+  left: 29%;
+  right: 24%;
+  top: 58%;
+  height: 5%;
+  opacity: 0;
+}
+.md-duel .gt-event-desc {
+  position: absolute;
+  left: 9%;
+  right: 8%;
+  top: 70%;
+  bottom: 8%;
+  padding: 3px 0;
+  display: flex;
+  align-items: safe center;
+  justify-content: center;
+  text-align: left;
+  overflow: auto;
+  font-size: 4.8cqw;
+  line-height: 1.55;
+  font-weight: 800;
+  background: #f9f8f4;
+  color: var(--ink);
+}
+.md-duel .gt-refresh {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  z-index: 3;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 15px;
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.md-duel .selected-event .gt-event {
+  outline: 3px solid var(--lime-deep);
+  outline-offset: 2px;
+}
+.md-duel .selected-event::after {
+  content: '已选择';
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  padding: 3px 8px;
+  background: var(--lime);
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 900;
+  pointer-events: none;
+}
+.md-duel .evfoot {
+  margin-top: 14px;
+}
+.md-duel .result-visual {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+.md-duel .cover {
+  overflow: hidden;
+}
+.md-duel .cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.md-duel .answer-label {
+  font-size: 9px;
+  color: var(--muted);
+  font-weight: 800;
+}
+.md-duel .rbadge {
+  max-width: 100%;
+  font-size: 10px;
+  line-height: 1.5;
+}
+/* 压力到顶的结算解释：把「为什么输」写在结果页上，而不是只给一句「对方获胜」。 */
+.md-duel .why-lost {
+  margin: 9px 0 2px;
+  padding: 9px 11px;
+  border: 1.5px solid var(--ink);
+  border-radius: 11px;
+  background: var(--lime-soft);
+}
+.md-duel .why-lost > b {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+.md-duel .why-lost p {
+  margin-top: 4px;
+  font-size: 10.5px;
+  line-height: 1.55;
+  color: #43443f;
+  overflow-wrap: anywhere;
+}
+.md-duel .why-lost p b {
+  font-weight: 900;
+  color: var(--ink);
+}
+.md-duel .result-log {
+  align-self: flex-start;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 10px;
+}
+.md-duel .result-return {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  padding: 12px 20px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--lime);
+}
+.md-duel .duel-notice {
+  position: absolute;
+  left: 50%;
+  bottom: 15px;
+  transform: translateX(-50%);
+  z-index: 10;
+  padding: 8px;
+  background: var(--ink);
+  color: white;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.md-duel .motion-feedback-layer {
+  z-index: 8;
+}
+.md-duel .motion-number {
+  background: var(--card);
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  padding: 4px 8px;
+  font-family: inherit;
+  font-size: 12px;
+  box-shadow: 2px 2px 0 var(--ink);
+  text-shadow: none;
+}
+.md-duel .motion-wave,
+.md-duel .motion-spark {
+  stroke: var(--ink);
+}
+/* Original new fronts are preserved; variable fields are rendered from current server definitions. */
+.card-face.art-duel {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  container-type: inline-size;
+  background: #faf8f2;
+  color: #111214;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.card-face.art-duel .card-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+.card-face.art-duel .face-title,
+.card-face.art-duel .face-category {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.card-face.art-duel .face-cost {
+  position: absolute;
+  left: 82%;
+  right: 9%;
+  top: 5.2%;
+  height: 8.3%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111214;
+  color: white;
+  font-size: 15cqw;
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1;
+}
+.card-face.art-duel .face-description {
+  position: absolute;
+  left: 13.6%;
+  right: 9.5%;
+  top: 73%;
+  bottom: 8%;
+  display: flex;
+  align-items: safe center;
+  text-align: left;
+  padding: 0;
+  background: #faf8f2;
+  color: #111214;
+  font-size: 5.3cqw;
+  font-weight: 800;
+  line-height: 1.48;
+  overflow: hidden;
+  font-synthesis: weight;
+}
+.card-face.art-duel .face-description.medium-copy {
+  font-size: 4.7cqw;
+}
+.card-face.art-duel .face-description.long-copy {
+  font-size: 4.4cqw;
+}
+@media (max-width: 1000px) {
+  .md-duel .hand {
+    --cw: 92px;
+  }
+  .md-duel .played-card {
+    width: 104px;
+  }
+}
+@media (max-height: 460px), (max-width: 460px) {
+  .md-duel .hand {
+    --cw: 76px;
+    --step: 7px;
+    /* 矮屏同样抬高：给读条 + 卡面上浮 + 投影留出完整空间，避免读条被卡角切掉。 */
+    padding-top: 30px;
+  }
+  .md-duel .played-card {
+    width: 74px;
+  }
+  .md-duel .pv-copy {
+    max-width: 150px;
+  }
+  .md-duel .pv-copy h3 {
+    font-size: 14px;
+  }
+  .md-duel .pv-copy p {
+    font-size: 9px;
+  }
+  .md-duel .stage-prompt {
+    font-size: 9px;
+    top: 3px;
+    padding: 4px 7px;
+  }
+  .md-duel .stage-prompt span {
+    font-size: 8px;
+  }
+  .md-duel .stage-prompt button {
+    padding: 3px 5px;
+  }
+  .md-duel .decision h2 {
+    font-size: 13px;
+  }
+  .md-duel .decision-actions button,
+  .md-duel .decision-confirm {
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+  .md-duel .decision p {
+    font-size: 9px;
+  }
+  .md-duel .lock-card {
+    width: 45px;
+  }
+  .md-duel .tapbar {
+    bottom: calc(100% + 2px);
+  }
+  .md-duel .duel-event-dialog {
+    width: min(620px, calc(var(--vpw) - 28px - 2 * var(--app-safe-inline)));
+    max-height: calc(var(--vph) - 48px);
+  }
+  .md-duel .evwin {
+    max-height: calc(var(--vph) - 48px);
+  }
+  .md-duel .gt-event-wrap {
+    flex: 0 1 min(calc(var(--vpw) * 0.25), calc((var(--vph) - 140px) * 0.5946));
+  }
+  .md-duel .gt-refresh {
+    width: 21px;
+    height: 21px;
+    right: 3px;
+    top: 3px;
+    font-size: 12px;
+  }
+  .md-duel .evttl b {
+    font-size: 9px;
+  }
+  .md-duel .ev-close {
+    font-size: 8px;
+  }
+  .md-duel .evhead .pill {
+    font-size: 7px;
+  }
+  .md-duel .gt-event-title {
+    font-size: 9cqw;
+  }
+  .md-duel .gt-event-desc {
+    font-size: max(7.5px, 4.8cqw);
+  }
+  .md-duel .duel-dialog {
+    padding: 12px;
+    max-height: calc(var(--vph) - 18px);
+  }
+  .md-duel .duel-dialog .dh {
+    top: -12px;
+  }
+  .md-duel .cands {
+    max-height: calc(var(--vph) * 0.36);
+    gap: 5px;
+  }
+  .md-duel .cand {
+    padding: 5px 8px;
+  }
+  .md-duel .mcv {
+    width: 28px;
+    height: 28px;
+  }
+  .md-duel .cc b {
+    font-size: 11px;
+  }
+  .md-duel .cc small {
+    font-size: 8px;
+  }
+  .md-duel .search {
+    height: 35px;
+    font-size: 11px;
+  }
+  .md-duel .gfoot {
+    margin-top: 8px;
+  }
+  .md-duel .gconfirm {
+    height: 34px;
+    font-size: 11px;
+  }
+  .md-duel .rmain {
+    padding: 10px 15px;
+  }
+  .md-duel .rcard {
+    grid-template-columns: 150px minmax(0, 1fr);
+    width: min(650px, 100%);
+    gap: 16px;
+    padding: 13px;
+  }
+  .md-duel .rbody h1 {
+    font-size: 20px;
+    margin: 6px 0;
+  }
+  .md-duel .ans {
+    padding-top: 7px;
+  }
+  .md-duel .ans h2 {
+    font-size: 19px;
+  }
+  .md-duel .ans p {
+    font-size: 11px;
+  }
+  .md-duel .stats {
+    margin-top: 8px;
+  }
+  .md-duel .st {
+    padding: 5px;
+  }
+  .md-duel .st b {
+    font-size: 12px;
+  }
+  .md-duel .racts {
+    margin-top: 9px;
+  }
+  .md-duel .racts button {
+    height: 34px;
+    font-size: 11px;
+  }
+  .md-duel .result-log {
+    margin-top: 6px;
+    font-size: 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-duel *,
+  .md-duel *::before,
+  .md-duel *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.md-duel .event-artwork {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+.md-duel .ans h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Explicit isolation from the legacy green table and its inverse flip convention. */
+.md-duel .board {
+  background: var(--paper);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.md-duel .duel-event-dialog {
+  color: var(--ink);
+}
+.md-duel .event-front {
+  transform: none;
+}
+.md-duel .event-front::before {
+  content: none;
+}
+.md-duel .event-front .gt-event-title {
+  left: 7%;
+  right: 7%;
+  top: 5.3%;
+  height: 8.4%;
+  width: auto;
+  font-size: 10cqw;
+  font-weight: 900;
+  font-family: SimSun, serif;
+  line-height: 1.1;
+  transform: skew(-5deg);
+  border: 0;
+  letter-spacing: 0;
+  text-shadow: none;
+}
+.md-duel .event-front .gt-event-desc {
+  left: 9%;
+  right: 8%;
+  top: 70%;
+  bottom: 8%;
+  font-size: 4.8cqw;
+  line-height: 1.55;
+  display: block;
+  align-content: safe center;
+  font-weight: 800;
+}
+@media (max-height: 460px), (max-width: 460px) {
+  .md-duel .event-front .gt-event-title {
+    font-size: 9cqw;
+  }
+  .md-duel .event-front .gt-event-desc {
+    font-size: max(7.5px, 4.8cqw);
+  }
+}
+
+.md-duel .gt-event-wrap {
+  aspect-ratio: auto;
+  height: auto;
+  max-height: none;
+  flex: 0 1 min(206px, calc((var(--vph) - 190px) * 0.5946));
+}
+.md-duel .gt-event {
+  flex: none;
+}
+@media (max-height: 460px), (max-width: 460px) {
+  .md-duel .gt-event-wrap {
+    flex-basis: min(
+      calc(var(--vpw) * 0.25),
+      calc((var(--vph) - 140px) * 0.5946)
+    );
+  }
+}
+
+.md-duel .duel-deal-ghost {
+  position: fixed;
+  z-index: 20;
+  pointer-events: none;
+  filter: drop-shadow(3px 3px 0 #11121466);
+}
+
+.app-shell.demo-app.in-duel {
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.md-duel {
+  max-height: var(--vph);
+}
+
+.md-duel .stage {
+  container-type: size;
+}
+.md-duel .played-card {
+  width: min(130px, calc((100cqh - 22px) * 0.58125));
+}
+.md-duel .racts button {
+  color: var(--ink);
+  border-radius: 12px;
+}
+.md-duel .duel-dialog .xb {
+  border-radius: 11px;
+}
+@media (max-height: 460px), (max-width: 460px) {
+  .md-duel .played-card {
+    width: min(96px, calc((100cqh - 18px) * 0.58125));
+  }
+}
+
+/* 手机横屏：.stage-cards 继承了旧 demo 的 padding「上 32 / 下 16」，
+   出牌预览在展示区里整体偏上，卡顶会蹭到虚线边框、被 overflow 裁掉一小条
+   （784×360 实测卡顶超出边框 1px，底部反而空 21px）。
+   矮屏档把上下调平，下侧仍给「最新：」ticker 留位。
+   只在 ≤620px 高的横屏生效；端游（dvh ≥ 677 才开始缩卡）一像素不变。 */
+@media (max-height: 620px) and (orientation: landscape),
+  (max-width: 620px) and (orientation: portrait) {
+  .md-duel .stage-cards {
+    padding-top: 8px;
+    padding-bottom: 24px;
+  }
+}
+
+.card-face.art-duel .face-description {
+  left: 11.5%;
+}
+.card-face.art-duel.kind-information .face-description {
+  top: 67%;
+  bottom: 6.5%;
+}
+
+/* Overflow falls back to the leading edge so every card remains reachable on small H5 screens. */
+.md-duel .hand {
+  justify-content: safe center;
+}
+.md-duel .me-line .lab {
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+/* ================= 禁用态与事件卡文字：统一收口 =================
+   下面这些规则刻意放在文件最后，用来压住 cards-090.css 与 music-duel.css 里
+   同名但更早出现的声明（事件卡文字被三层文件各自改过一次）。 */
+
+/* styles.css 里那条旧版浅绿底 button:hover 已在源头限定到旧面板，
+   这里只补齐牌桌自己的悬停反馈（原来按下才有反馈，悬停是死的）。 */
+.md-duel .pgo:hover:not(:disabled),
+.md-duel .gconfirm:hover:not(:disabled),
+.md-duel .guess:hover:not(:disabled),
+.md-duel .tapbar .go:hover:not(:disabled) {
+  background: var(--lime-deep);
+}
+.md-duel .end:hover:not(:disabled) {
+  background: var(--lime-soft);
+}
+
+/* 整体降透明度会把按钮文字洗成浅灰（黑字 42% 压在浅底上约 2.5:1），
+   所以实心主操作按钮改成“灰底 + 深灰字”，保留约 4.6:1 的可读对比。 */
+.md-duel .pgo:disabled,
+.md-duel .pgo.on:disabled,
+.md-duel .gconfirm:disabled,
+.md-duel .guess:disabled,
+.md-duel .end:disabled,
+.md-duel .tapbar .go:disabled,
+.md-duel .racts button:disabled,
+.md-duel .decision-actions button:disabled,
+.md-duel .decision-confirm:disabled {
+  opacity: 1;
+  background: #e7e9e2;
+  border-color: #a2a89e;
+  color: #5e645c;
+  box-shadow: none;
+}
+.md-duel .guess:disabled .badge {
+  background: #f4f5f1;
+  border-color: #a2a89e;
+  color: #5e645c;
+}
+/* styles.css 的旧 .badge 带 8px 右边距，会把猜歌次数徽标顶偏。 */
+.md-duel .guess .badge {
+  margin: 0;
+}
+
+.md-duel .duel-event-dialog .gt-event-title {
+  font-size: 10.5cqw;
+}
+.md-duel .duel-event-dialog .gt-event-desc {
+  font-size: 5.4cqw;
+  line-height: 1.5;
+}
+@media (max-height: 460px), (max-width: 460px) {
+  .md-duel .duel-event-dialog .gt-event-title {
+    font-size: 9cqw;
+  }
+  .md-duel .duel-event-dialog .gt-event-desc {
+    font-size: max(7.5px, 4.8cqw);
+  }
+}
+
+/* ================= 0.9 对局界面收口：播放器 / 响应进度 / 响应展示 =================
+   这些规则统一放文件末尾，压住 music-duel.css 里更早的同名声明。 */
+
+/* ---- 顶栏迷你播放器 ---- */
+.md-duel .mini-player {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  min-width: 0;
+  max-width: 240px;
+  margin-left: 4px;
+  padding: 3px 6px 3px 8px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+/* 房间号会让位给曲名：曲名至少留 64px，房间标签自己省略。 */
+.md-duel .tl .room {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.md-duel .mini-player .mp-note {
+  flex: none;
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--lime-deep);
+}
+.md-duel .mini-player .mp-title {
+  display: block;
+  min-width: 64px;
+  max-width: 120px;
+  line-height: 1.1;
+}
+.md-duel .mini-player .mp-title b {
+  display: block;
+  font-size: 10px;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.md-duel .mini-player .mp-title small {
+  display: block;
+  font-size: 8px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.md-duel .mini-player .mp-btn {
+  width: 21px;
+  height: 21px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1.5px solid var(--ink);
+  border-radius: 7px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: none;
+}
+.md-duel .mini-player .mp-play {
+  background: var(--lime);
+  font-size: 8px;
+}
+.md-duel .mini-player .mp-btn:hover:not(:disabled) {
+  background: var(--lime-soft);
+}
+.md-duel .mini-player.is-paused .mp-note {
+  color: var(--muted);
+}
+.md-duel .mini-player.is-previewing .mp-title small {
+  color: var(--ink);
+  font-weight: 900;
+}
+@media (max-width: 1180px) {
+  .md-duel .mini-player .mp-title {
+    display: none;
+  }
+  .md-duel .mini-player {
+    padding-left: 7px;
+  }
+}
+@media (max-width: 860px) {
+  .md-duel .mini-player {
+    display: none;
+  }
+}
+
+/* ---- 响应倒计时：手牌正上方 ---- */
+.md-duel .resp-timer {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  /* 手牌选中时是 z-index 7，读条要压在上面，不能被卡角切掉。
+     提高到 50：彻底压过手牌（7）、hover（6）和一切卡面，读条永远完整可见；
+     tapbar（40）浮在手牌容器上方，空间上不与读条重叠，不受影响。 */
+  z-index: 50;
+  width: min(320px, 78%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow: 2px 2px 0 var(--ink);
+  animation: respIn 0.22s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+@keyframes respIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+.md-duel .resp-timer .rt-lab,
+.md-duel .resp-timer .rt-num {
+  flex: none;
+  font-size: 8.5px;
+  font-weight: 900;
+  line-height: 1;
+}
+.md-duel .resp-timer .rt-num {
+  min-width: 22px;
+  text-align: right;
+  color: var(--muted);
+}
+.md-duel .resp-timer .rt-bar {
+  flex: 1;
+  height: 7px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+  overflow: hidden;
+}
+.md-duel .resp-timer .rt-bar i {
+  display: block;
+  height: 100%;
+  background: var(--lime-deep);
+  /* 数字每 120ms 跳一次；过渡略长于刷新间隔，条子才会连续下滑而不是一格格抖。 */
+  transition: width 0.2s linear;
+}
+.md-duel .resp-timer.urgent {
+  animation:
+    respIn 0.22s cubic-bezier(0.2, 0.9, 0.3, 1) both,
+    respPulse 0.9s ease-in-out 0.3s infinite;
+}
+.md-duel .resp-timer.urgent .rt-bar i {
+  background: #d4553f;
+}
+.md-duel .resp-timer.urgent .rt-num {
+  color: #b8402c;
+  font-weight: 900;
+}
+@keyframes respPulse {
+  0%,
+  100% {
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  50% {
+    box-shadow:
+      2px 2px 0 var(--ink),
+      0 0 0 3px rgba(212, 85, 63, 0.22);
+  }
+}
+
+/* ---- 手牌可用性：不能出的灰而不透明，能响应的亮出来 ---- */
+/* 变量只在卡面内部生效：整张牌仍然 opacity:1，叠压时不会把后面那张透出来。
+   灰度 + 一层中性罩表达「打不出」，卡面内容依旧可读，不影响选中/投影/描边。 */
+.md-duel .duel-hand-card.unavailable {
+  opacity: 1;
+}
+.md-duel .duel-hand-card.unavailable .card-face {
+  filter: grayscale(1) brightness(0.95) contrast(0.9);
+  transition: filter 0.18s ease;
+}
+.md-duel .duel-hand-card.unavailable .card-face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(240, 240, 234, 0.18);
+  box-shadow: inset 0 0 0 2px rgba(17, 18, 20, 0.18);
+  pointer-events: none;
+}
+.md-duel .duel-hand-card.unavailable.sel {
+  box-shadow:
+    0 0 0 2px rgba(17, 18, 20, 0.28),
+    4px 6px 0 var(--ink);
+}
+.md-duel .hand-wrap.is-responding .duel-hand-card:not(.unavailable) {
+  outline: 3px solid var(--lime-deep);
+  outline-offset: 1px;
+  border-radius: 11px;
+  animation: respCard 1.4s ease-in-out infinite;
+}
+@keyframes respCard {
+  0%,
+  100% {
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  50% {
+    box-shadow:
+      3px 3px 0 var(--ink),
+      0 0 0 4px rgba(198, 240, 74, 0.4);
+  }
+}
+/* ---- 响应展示：牌桌上的那张牌 ---- */
+.md-duel .pv-copy .tag.resp {
+  background: var(--ink);
+  color: var(--card);
+}
+.md-duel .pv.responded .played-card {
+  animation: respShield 0.6s cubic-bezier(0.2, 0.9, 0.3, 1) both;
+}
+@keyframes respShield {
+  0% {
+    filter: brightness(1.45);
+  }
+  100% {
+    filter: none;
+  }
+}
+.md-duel .pv.responded::after {
+  content: '响应';
+  position: absolute;
+  right: -6px;
+  top: -8px;
+  padding: 2px 8px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--lime);
+  color: var(--ink);
+  font-size: 9px;
+  font-weight: 900;
+  transform: rotate(4deg);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.md-duel .pv {
+  position: relative;
+}
+
+/* ---- 弹窗滚动条：透明轨道 + 内缩圆角滑块，别再露出一条灰白层 ---- */
+.md-duel .duel-dialog {
+  scrollbar-width: thin;
+  scrollbar-color: #c9cec3 transparent;
+  overscroll-behavior: contain;
+}
+.md-duel .duel-dialog::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+.md-duel .duel-dialog::-webkit-scrollbar-track {
+  background: transparent;
+}
+.md-duel .duel-dialog::-webkit-scrollbar-thumb {
+  background: #c9cec3 content-box;
+  border: 3px solid transparent;
+  border-radius: 999px;
+}
+.md-duel .duel-dialog::-webkit-scrollbar-thumb:hover {
+  background: #aab1a4 content-box;
+}
+.md-duel .duel-dialog::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ---- 事件选择弹窗：面板贴着内容，短屏不顶到视口外 ---- */
+/*
+ * dialog 是 fixed + inset:0，height:auto 时会被撑到 max-height；
+ * 而 .evwin 只有内容那么高，多出来的一截盒子没有面板、也不吃自己的投影，
+ * 于是面板下面就留出一条比周围更亮的「白带」。把盒子高度交给内容。
+ */
+.md-duel .duel-event-dialog {
+  height: fit-content;
+}
+.md-duel .evwin {
+  height: fit-content;
+  align-content: flex-start;
+  overflow: hidden;
+}
+@media (max-height: 620px), (max-width: 620px) {
+  .md-duel .evwin {
+    max-height: calc(var(--vph) - 24px);
+    padding: 10px 12px;
+  }
+  .md-duel .evhead {
+    margin-bottom: 8px;
+  }
+  .md-duel .evfoot {
+    margin-top: 8px;
+  }
+}
+
+/* ---- 响应提示条：永远压在最上层，贴着进度条上沿 ---- */
+.md-duel .stage-prompt {
+  z-index: 9;
+}
+@media (max-height: 620px), (max-width: 620px) {
+  .md-duel .stage-prompt {
+    top: 4px;
+    max-width: min(92%, 420px);
+  }
+}
+
+/* ============================================================
+   1.1 稳定版收尾：猜歌列表 / 同步提示 / 线索拥挤 / 事件卡
+   ============================================================ */
+
+/* ---- 猜歌候选列表：不能被 flex 压扁 ---- */
+/* .cands 是 column 弹性列并且有 max-height，子项默认 flex-shrink:1，
+   网络慢/内容多时每一行会被压成一条，歌名互相叠在一起。
+   这里让每一行保持自身高度，超出就交给 .cands 自己滚动。 */
+.md-duel .cands .cand {
+  flex: 0 0 auto;
+}
+.md-duel .cands {
+  overscroll-behavior: contain;
+}
+
+/* ---- 同步/错误提示：换成漫画白卡，不再用旧的墨绿条 ---- */
+.app-shell .room-toast {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: min(calc(var(--vpw) * 0.92), 520px);
+  padding: 10px 14px;
+  background: #fff;
+  border: 2px solid #111214;
+  border-radius: 14px;
+  box-shadow: 4px 4px 0 #111214;
+  color: #111214;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+  animation: toastPop 0.24s cubic-bezier(0.2, 0.9, 0.3, 1.1) both;
+}
+.app-shell .room-toast.error {
+  background: #fff3ef;
+  border-color: #b8402c;
+  box-shadow: 4px 4px 0 #b8402c;
+  color: #8f2f1f;
+}
+.app-shell .room-toast button {
+  flex: none;
+  padding: 5px 11px;
+  border: 1.5px solid currentColor;
+  border-radius: 9px;
+  background: transparent;
+  color: inherit;
+  font-size: 11px;
+  font-weight: 900;
+  box-shadow: none;
+}
+@keyframes toastPop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+/* 对局内那个提示是 fixed + translateX(-50%)，动画要带着位移写。 */
+.app-shell.in-duel .room-toast {
+  animation-name: toastPopFixed;
+}
+@keyframes toastPopFixed {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+/* ---- 歌曲线索：文字与徽标不再互相压住 ---- */
+/* 线索列是 flex 列 + overflow。行上原本只有 min-height，等于把 flex 的自动
+   最小高度（min-height:auto）关掉了，行会被压到比内容还矮：多行线索被裁一半、
+   试听行被挤没、滚动条还会浮在卡片右边。 */
+.md-duel .clue-list > .row {
+  flex: 0 0 auto;
+}
+/* 占位行仍然吃掉剩余空间，列表不满时把「下一条线索」顶到底。 */
+.md-duel .clue-list > .row.slot {
+  flex: 1 0 46px;
+  min-height: 46px;
+}
+.md-duel .row {
+  overflow: hidden;
+}
+.md-duel .rc {
+  min-width: 0;
+  overflow: hidden;
+}
+.md-duel .rc p {
+  /* 行高由内容决定后不必再截断：线索全文都要看得见。 */
+  display: block;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.md-duel .rc small {
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+.md-duel .gen {
+  flex: none;
+  white-space: nowrap;
+}
+.md-duel .thumb {
+  flex: none;
+}
+/* 真封面图：原来那套点阵底 + 0.7 透明是给占位方块用的，套到 <img> 上会把封面压暗。 */
+.md-duel img.thumb {
+  object-fit: cover;
+  opacity: 1;
+  background: #eeece4;
+}
+/* 滚动条画成细胶囊并占位，避免浮在行右缘上挡住文字和缩略图。 */
+.md-duel .clue-list {
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+  padding-right: 5px;
+}
+.md-duel .clue-list::-webkit-scrollbar {
+  width: 10px;
+}
+.md-duel .clue-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.md-duel .clue-list::-webkit-scrollbar-thumb {
+  border: 3px solid var(--card);
+  border-radius: 99px;
+  background: #c9c8c0;
+}
+.md-duel .clue-list::-webkit-scrollbar-thumb:hover {
+  background: #a9a8a0;
+}
+/* 窄栏（手机横屏 / 小窗）里一行塞不下「档位 + 文案 + 徽标 + 封面」：
+   改成上面一排标签、文案独占一行的两段式，中文才不会一个字一行地竖着排。 */
+.md-duel .clue {
+  container-type: inline-size;
+}
+@container (max-width: 212px) {
+  /* 只有带封面的行真的塞不下，其余保持一行，列表才不至于被撑得很长。 */
+  .md-duel .row:has(.thumb) {
+    flex-wrap: wrap;
+    row-gap: 5px;
+    padding: 8px 8px 9px;
+  }
+  .md-duel .row .thumb {
+    order: 3;
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+  }
+  .md-duel .row:has(.thumb) .rc {
+    order: 4;
+    flex: 1 0 100%;
+  }
+}
+@media (max-height: 460px), (max-width: 460px) {
+  /* 老内核没有容器查询时的兜底，和上面的两段式一致。 */
+  .md-duel .row {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+  .md-duel .row .thumb {
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+  }
+  .md-duel .rc {
+    flex: 1 0 100%;
+  }
+  /* 手机横屏线索栏很窄：缩略图让位给文字，避免一行里挤四块内容。 */
+  .md-duel .clue-list {
+    gap: 5px;
+    padding: 6px 4px 8px 6px;
+  }
+  .md-duel .row {
+    padding: 9px 8px;
+    gap: 6px;
+  }
+  .md-duel .rc p {
+    font-size: 8.5px;
+    line-height: 1.35;
+  }
+  .md-duel .row .thumb {
+    width: 30px;
+    height: 30px;
+  }
+  .md-duel .gen {
+    display: none;
+  }
+  .md-duel .row.spent .rc p {
+    opacity: 0.55;
+  }
+}
+
+/* ---- 事件卡：换图时不再整张发白 ---- */
+.md-duel .event-artwork {
+  /* 图片没解码完之前先铺纸色，避免白块；解码完再淡入。 */
+  background: #f2f1ec;
+  animation: artFadeIn 0.24s ease both;
+}
+@keyframes artFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-duel .event-artwork {
+    animation: none;
+  }
+}
+
+/* ---- 刷新事件：原地翻一次牌 ---- */
+.md-duel .gt-event-wrap.is-refreshing .event-flipper {
+  animation: evRefreshFlip 0.52s cubic-bezier(0.4, 0.05, 0.25, 1) both;
+}
+@keyframes evRefreshFlip {
+  0% {
+    transform: rotateY(0);
+  }
+  42% {
+    transform: rotateY(88deg) scale(0.97);
+  }
+  58% {
+    transform: rotateY(-88deg) scale(0.97);
+  }
+  100% {
+    transform: rotateY(0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-duel .gt-event-wrap.is-refreshing .event-flipper {
+    animation: none;
+  }
+}
+
+/* ---- 猜错提示：双方都能看到猜了什么 ---- */
+.md-duel .guess-miss {
+  /* 固定到报头下方：手牌正上方是读条和阶段提示的地盘，贴上去会互相压字。
+     固定定位既躲开读条，也不会随手牌滚动跑掉。 */
+  position: fixed;
+  left: 50%;
+  top: 96px;
+  bottom: auto;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  max-width: min(94%, 420px);
+  padding: 6px 12px;
+  border: 2px solid #b8402c;
+  border-radius: 999px;
+  background: #fff3ef;
+  box-shadow: 3px 3px 0 #b8402c;
+  color: #8f2f1f;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: missPop 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.1) both;
+}
+.md-duel .guess-miss b {
+  flex: none;
+  font-size: 9px;
+  padding: 2px 7px;
+  border-radius: 99px;
+  background: #b8402c;
+  color: #fff;
+}
+.md-duel .guess-miss span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.md-duel .guess-miss.mine {
+  border-color: #111214;
+  box-shadow: 3px 3px 0 #111214;
+  background: #fff;
+  color: #111214;
+}
+.md-duel .guess-miss.mine b {
+  background: #111214;
+  color: #c6f04a;
+}
+@keyframes missPop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+/* ---- 所有弹窗统一一个轻微弹出，避免生硬出现 ---- */
+.md-duel .duel-dialog,
+.md-duel .duel-event-dialog > .evwin {
+  animation: dlgPop 0.24s cubic-bezier(0.2, 0.9, 0.3, 1.06) both;
+}
+@keyframes dlgPop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .md-duel .duel-dialog,
+  .md-duel .duel-event-dialog > .evwin,
+  .md-duel .guess-miss {
+    animation: none;
+  }
+}
+
+/* ---- 手牌：拖动时不吃浏览器的默认手势 ---- */
+.md-duel .duel-hand-card {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+}
+.md-duel .duel-hand-card.dragging {
+  opacity: 0.25;
+  /* 拖拽中不要再被 hover 抬起，否则手指和卡片位置对不上。 */
+  transform: none !important;
+}
+
+/* ================= 牌桌动画统一打磨 =================
+   原则：同一屏内只用两种节奏——位移 .2~.46s（settle 曲线收尾），
+   状态色 .18~.22s。避免瞬移、硬停，以及几种动画互相抢注意力。 */
+
+/* 拖拽投放高亮不再是「啪」一下变色 */
+.md-duel .stage {
+  transition:
+    border-color 0.18s cubic-bezier(0.25, 0.8, 0.3, 1),
+    background-color 0.18s cubic-bezier(0.25, 0.8, 0.3, 1);
+}
+
+/* 手牌选中：抬起和投影一起走，不会「牌先弹起来、影子后到」 */
+.md-duel .duel-hand-card.sel {
+  transition:
+    transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 出牌预览的说明文字：卡先落位，字后淡入，视线先跟卡再读字 */
+.md-duel .pv-copy {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .md-duel .pv,
+  .md-duel .resp-timer,
+  .md-duel .duel-hand-card.unavailable.sel {
+    box-shadow:
+      0 0 0 2px rgba(17, 18, 20, 0.28),
+      4px 6px 0 var(--ink);
+  }
+  .md-duel .hand-wrap.is-responding .duel-hand-card:not(.unavailable) {
+    animation: none;
+  }
+  .md-duel .duel-hand-card,
+  .md-duel .duel-hand-card.sel,
+  .md-duel .stage {
+    transition: none;
+  }
+}
+
+/* ---- 旧 demo 的 card-arrive 必须关掉 ----
+   original-demo-base.css 给 .played-card 挂了一条 0.55s 的入场动画
+   （translateY(130px) + rotate(12deg) + scale(.75)，还有 both 填充）。
+   它和 useCardMotion 从手牌起飞的脚本动画改的是同一个 transform：
+   脚本动画先跑 440ms，结束后回落到这条 CSS 动画残留的帧上，
+   卡片就会在落位瞬间「跳一下」，起始角度也被多叠了一层 12°。
+   位移与旋转统一交给脚本动画，这里彻底关掉。 */
+.md-duel .played-card {
+  animation: none;
+}
+
+/* ---- 旧 demo 的 card-arrive 必须关掉 ----
+   original-demo-base.css 给 .played-card 挂了一条 0.55s 的入场动画
+   （translateY(130px) + rotate(12deg) + scale(.75)，还有 both 填充）。
+   它和 useCardMotion 从手牌起飞的脚本动画改的是同一个 transform：
+   脚本动画先跑 440ms，结束后回落到这条 CSS 动画残留的帧上，
+   卡片就会在落位瞬间「跳一下」，起始角度也被多叠了一层 12°。
+   位移与旋转统一交给脚本动画，这里彻底关掉。 */
+.md-duel .played-card {
+  animation: none;
+}
+
+/* ---- 底部信息与按钮：对齐与呼吸感 ---- */
+/* 牌库/弃牌原来是「图标顶对齐 + 两行数字左对齐」，在窄屏会歪成一条斜线。
+   现在图标垂直居中，数字右对齐、等宽数字，两行贴成一个紧凑块。 */
+.md-duel .my-deck {
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  padding-bottom: 0;
+}
+.md-duel .decknums {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.md-duel .decknums .decktag {
+  display: grid;
+  grid-template-columns: auto 15px;
+  column-gap: 3px;
+  align-items: center;
+  font-size: 8px;
+  line-height: 1.25;
+  color: var(--muted);
+}
+.md-duel .decknums .decktag b {
+  text-align: right;
+  font-size: 10.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.md-duel .acts {
+  margin-left: 2px;
+}
+/* 猜歌次数徽标原来外挂在右上角，压住按钮描边且贴到线索栏。
+   移进按钮内侧，作为「剩余次数」的角标，不再越界。 */
+.md-duel .guess .badge {
+  top: 50%;
+  right: 7px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 3px;
+  border-width: 1.5px;
+  font-size: 9px;
+  line-height: 1;
+  transform: translateY(-50%);
+}
+/* 线索栏副标题原来 8.5px 且贴标题，1440 下几乎看不清。 */
+.md-duel .clue-rule {
+  padding: 2px 13px 9px;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #6d7268;
+}
+/* 空态引导不要掉到面板底部，跟着标题往下读。 */
+.md-duel .clue-list:has(.clue-empty) .row.slot {
+  margin-top: 0;
+}
+@media (max-height: 460px), (max-width: 460px) {
+  .md-duel .clue-rule {
+    padding: 1px 10px 7px;
+    font-size: 8.5px;
+  }
+  .md-duel .decknums .decktag {
+    font-size: 7.5px;
+  }
+  .md-duel .decknums .decktag b {
+    font-size: 9.5px;
+  }
+  .md-duel .guess .badge {
+    right: 5px;
+    min-width: 15px;
+    height: 15px;
+    font-size: 8px;
+  }
+}
+/* ---- 手牌：高度固定 + 张数多时叠放（三国杀式），永不缩水、永不裁切 ----
+   1) 卡宽只跟屏幕高度有关，和手牌张数无关：打到第 9 张也不会变小；
+   2) 放不下时 --step 自动变负，卡片互相叠压，最后一张永远完整可见；
+   3) 卡面文字全部走 cqw 跟随卡宽，配合 text-size-adjust:100%
+      关掉安卓浏览器的「字体放大」，文字不会再撑爆卡面。 */
+.md-duel .hand-wrap {
+  container-type: inline-size;
+  width: 100%;
+  z-index: 5;
+  isolation: isolate;
+}
+.md-duel .hand {
+  /* 卡高按视口高度成比例（calc(var(--vph) * 0.3)），卡宽 = 卡高 × 0.58125。
+     上限 203px 等价于原桌面档卡宽 118px，所以 720 高以上的端游网页完全不变；
+     下限 84px 只在小横屏兜底。旧公式 (var(--vph)-216)*0.58125 在 360 高的机型上
+     把手牌顶到 51%、展示区只剩 92px，矮屏可用高越多、比例越歪。 */
+  --ch: clamp(84px, calc(var(--vph) * 0.3), 203px);
+  --cw: calc(var(--ch) * 0.58125);
+  /* 每张卡各自占的横向宽度：够放就 8px 间距，放不下就负值叠放。 */
+  --step: clamp(
+    calc(var(--cw) * -0.56),
+    calc((100cqw - 16px - var(--n, 6) * var(--cw)) / max(1, var(--n, 6) - 1)),
+    8px
+  );
+  width: 100%;
+  justify-content: flex-start;
+  padding: 36px 8px 5px;
+  /* 空手牌（猜先/等待结算/打空）时高度必须不变：
+     没有这行，手牌块会塌成一行字（~40px），省下的 80~100px 全被
+     展示区吃掉，出牌预览跟着涨到上限——整个牌桌「跳一下」。
+     41 = padding 上 36 + 下 5。 */
+  min-height: calc(var(--ch) + 41px);
+  /* 叠放已经把总宽压在容器内，这里必须可见：
+     overflow:hidden 的裁剪盒会按自身高度切掉卡底（不同机型高度差 20px 就露馅）。 */
+  overflow: visible;
+}
+/* 安全居中：overflow 容器上 justify-content:center 会把左半裁进不可滚动区，
+   卡看起来「错位、被切」。改用 auto margin——溢出时自动退化为 0，永不裁切。 */
+.md-duel .hand > .duel-hand-card:first-child {
+  margin-left: auto;
+}
+.md-duel .hand > .duel-hand-card:last-child {
+  margin-right: auto;
+}
+@media (max-height: 460px), (max-width: 460px) {
+  .md-duel .hand {
+    /* 尺寸交给上面的 dvh 封顶统一算，这里只收紧间距。 */
+    padding-top: 34px;
+  }
+  .md-duel .resp-timer {
+    padding: 1px 6px;
+  }
+  .md-duel .resp-timer .rt-bar {
+    height: 6px;
+  }
+}
+
+/* ---- dock 三栏改 grid：左右两栏等宽，手牌永远对齐牌桌中线 ----
+   原来 flex 布局里左栏(132px)和右侧牌库宽度不等，手牌中心会向右偏，
+   看起来整块牌桌「靠右」。grid 固定左右各 132px，中栏自动居中。 */
+.md-duel .dock {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr) 132px;
+  align-items: end;
+  gap: 12px;
+}
+.md-duel .dock > .me-stack {
+  justify-self: start;
+}
+.md-duel .dock > .hand-wrap {
+  grid-column: 2;
+}
+.md-duel .dock > .my-deck {
+  justify-self: end;
+}
+@media (max-width: 740px) {
+  .md-duel .dock {
+    grid-template-columns: 96px minmax(0, 1fr) 96px;
+    gap: 8px;
+  }
+}
+
+/* ---- 矮屏（≤520px 高）：线索栏按屏宽比例伸缩 + 主区加宽 ----
+   固定 268px 在不同手机上占比差异很大：宽屏看着正常，窄/矮屏把主区
+   挤到牌桌偏移、手牌裁切。改成 clamp 比例宽，任何机型主区都占大头，
+   牌桌自然靠向屏幕中心。 */
+@media (max-height: 520px) and (orientation: landscape),
+  (max-width: 520px) and (orientation: portrait) {
+  .md-duel .board {
+    grid-template-columns: minmax(0, 1fr) clamp(
+        190px,
+        calc(var(--vpw) * 0.21),
+        240px
+      );
+    gap: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .md-duel .dock {
+    grid-template-columns: 96px minmax(0, 1fr) 96px;
+    gap: 8px;
+  }
+}
+
+/* 实际 CSS 视口较窄时，底部状态栏使用紧凑宽度；不用空白牌库栏挤压手牌。 */
+@media (max-width: 860px) and (max-height: 520px) and (orientation: landscape),
+  (max-height: 860px) and (max-width: 520px) and (orientation: portrait) {
+  .md-duel .dock {
+    grid-template-columns: 68px minmax(0, 1fr) 68px;
+    gap: 4px;
+  }
+  .md-duel .me-stack {
+    width: 68px;
+  }
+  .md-duel .me-line {
+    gap: 2px;
+  }
+  .md-duel .me-line .lab {
+    width: 12px;
+  }
+  .md-duel .me-line .pip {
+    width: 6px;
+  }
+  .md-duel .me-line .press .bar {
+    width: 30px;
+  }
+  .md-duel .me-id {
+    gap: 4px;
+  }
+  .md-duel .me-id strong {
+    max-width: 38px;
+  }
+}
+
+/* ---------- 手机矮屏：确认条不再挤掉「打出」按钮（1.0.5） ---------- */
+@media (max-height: 500px), (max-width: 500px) {
+  .md-duel .tapbar {
+    flex-wrap: nowrap;
+    max-width: calc(var(--vpw) * 0.96);
+    padding: 4px 6px;
+    gap: 5px;
+  }
+  .md-duel .tapbar .go {
+    height: 30px;
+    padding: 0 12px;
+    font-size: 11px;
+  }
+  .md-duel .tapbar .x {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+  /* 长文案在窄屏上是把「打出」顶出条的元凶：理由收进问号详情，红线截断。 */
+  .md-duel .tap-reason {
+    display: none;
+  }
+  .md-duel .tap-danger {
+    max-width: calc(var(--vpw) * 0.34);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* ---- 结算页：手机横屏紧凑版 ----
+   .rcard 原本按桌面竖排内容设计（230px 封面 + 大标题 + 输因解释 + 统计 + 按钮），
+   360~560 高的横屏装不下，.rmain 只能整页滚动。
+   这里在 ≤620px 高的横屏把各块收紧凑：封面随屏高缩放、字号降档、
+   统计数字与标签同行、按钮压扁——目标是任何主流横屏一屏放下、不滚动。
+   端游（≥677px 才缩卡）不在此档，结算页维持原样。 */
+@media (max-height: 620px) and (orientation: landscape),
+  (max-width: 620px) and (orientation: portrait) {
+  .md-duel .rmain {
+    padding: 8px 14px;
+  }
+  .md-duel .rcard {
+    width: min(780px, 100%);
+    grid-template-columns: clamp(96px, calc(var(--vph) * 0.24), 150px) minmax(0, 1fr);
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 16px;
+  }
+  .md-duel .result-visual {
+    gap: 6px;
+  }
+  .md-duel .rbadge {
+    font-size: 9px;
+    padding: 2px 9px;
+  }
+  .md-duel .why-lost {
+    margin: 6px 0 0;
+    padding: 6px 9px;
+    border-radius: 9px;
+  }
+  .md-duel .why-lost > b {
+    font-size: 10px;
+  }
+  .md-duel .why-lost p {
+    font-size: 9px;
+    line-height: 1.45;
+  }
+  .md-duel .rbody h1 {
+    font-size: 17px;
+    margin: 5px 0 6px;
+  }
+  .md-duel .ans {
+    padding-top: 6px;
+  }
+  .md-duel .answer-label {
+    font-size: 8.5px;
+  }
+  .md-duel .ans h2 {
+    font-size: 15px;
+    margin: 2px 0 1px;
+  }
+  .md-duel .ans p {
+    font-size: 9.5px;
+  }
+  .md-duel .ans .al {
+    font-size: 8.5px;
+  }
+  .md-duel .stats {
+    gap: 6px;
+    margin-top: 7px;
+  }
+  .md-duel .st {
+    padding: 4px 6px;
+    border-radius: 8px;
+  }
+  .md-duel .st b {
+    display: inline;
+    font-size: 13px;
+    margin-right: 4px;
+  }
+  .md-duel .st span {
+    font-size: 8px;
+  }
+  .md-duel .racts {
+    gap: 7px;
+    margin-top: 8px;
+  }
+  .md-duel .racts button {
+    height: 34px;
+    font-size: 11px;
+    border-radius: 10px;
+  }
+  .md-duel .result-log {
+    margin-top: 6px;
+    font-size: 9px;
+  }
+}
+
+/* ---- 结算页：手机横屏紧凑版 ----
+   .rcard 原本按桌面竖排内容设计（230px 封面 + 大标题 + 输因解释 + 统计 + 按钮），
+   360~560 高的横屏装不下，.rmain 只能整页滚动。
+   这里在 ≤620px 高的横屏把各块收紧凑：封面随屏高缩放、字号降档、
+   统计数字与标签同行、按钮压扁——目标是任何主流横屏一屏放下、不滚动。
+   端游（≥677px 才缩卡）不在此档，结算页维持原样。 */
+@media (max-height: 620px) and (orientation: landscape),
+  (max-width: 620px) and (orientation: portrait) {
+  .md-duel .rmain {
+    padding: 8px 14px;
+  }
+  .md-duel .rcard {
+    width: min(780px, 100%);
+    grid-template-columns: clamp(96px, calc(var(--vph) * 0.24), 150px) minmax(0, 1fr);
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 16px;
+  }
+  .md-duel .result-visual {
+    gap: 6px;
+  }
+  .md-duel .rbadge {
+    font-size: 9px;
+    padding: 2px 9px;
+  }
+  .md-duel .why-lost {
+    margin: 6px 0 0;
+    padding: 6px 9px;
+    border-radius: 9px;
+  }
+  .md-duel .why-lost > b {
+    font-size: 10px;
+  }
+  .md-duel .why-lost p {
+    font-size: 9px;
+    line-height: 1.45;
+  }
+  .md-duel .rbody h1 {
+    font-size: 17px;
+    margin: 5px 0 6px;
+  }
+  .md-duel .ans {
+    padding-top: 6px;
+  }
+  .md-duel .answer-label {
+    font-size: 8.5px;
+  }
+  .md-duel .ans h2 {
+    font-size: 15px;
+    margin: 2px 0 1px;
+  }
+  .md-duel .ans p {
+    font-size: 9.5px;
+  }
+  .md-duel .ans .al {
+    font-size: 8.5px;
+  }
+  .md-duel .stats {
+    gap: 6px;
+    margin-top: 7px;
+  }
+  .md-duel .st {
+    padding: 4px 6px;
+    border-radius: 8px;
+  }
+  .md-duel .st b {
+    display: inline;
+    font-size: 13px;
+    margin-right: 4px;
+  }
+  .md-duel .st span {
+    font-size: 8px;
+  }
+  .md-duel .racts {
+    gap: 7px;
+    margin-top: 8px;
+  }
+  .md-duel .racts button {
+    height: 34px;
+    font-size: 11px;
+    border-radius: 10px;
+  }
+  .md-duel .result-log {
+    margin-top: 6px;
+    font-size: 9px;
+  }
+}
+
+/* ================= 结算揭幕：定格 → 结果横幅 → 收进结算卡 =================
+   背景：以前 outcome 一到，GameBoard 的 early return 会在同一帧把整块 .md-duel
+   换成 SongReveal，玩家只看到「啪」一下换屏；唯一的胜负标识是 9~10.5px 的 .rbadge，
+   360 高的手机上基本读不到。
+
+   这里只做三件事，全部走 transform / opacity，不动任何布局尺寸，
+   所以不会碰到 --ch、手牌、也碰不到那 68 条媒体查询：
+     1) .end-curtain 压暗牌桌（四周薄、中心厚，角落的压力条要留着看）；
+     2) .end-bar 把结果放大成横幅（大字 >= 22px，360 高屏上 31px）；
+     3) 交接时横幅收缩飞向结算卡左上角，.rcard 同时推入，内容逐行浮现。
+
+   注意：交接那一帧起，横幅由 SongReveal 的兄弟节点渲染，已经不在 .md-duel 里，
+   所以这一整段选择器都不能写 .md-duel 前缀，颜色也不能用 --lime 这类变量。 */
+
+.end-curtain {
+  --end-ink: #111214;
+  --end-lime: #c6f04a;
+  --end-card: #ffffff;
+  --end-muted: #8a8f8a;
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  display: grid;
+  place-items: center;
+  /* 中心厚、边缘薄：输掉那侧的压力条在屏幕角落，必须还能看见。 */
+  background: radial-gradient(
+    ellipse at 50% 48%,
+    rgba(246, 245, 240, 0.95) 0%,
+    rgba(246, 245, 240, 0.82) 46%,
+    rgba(246, 245, 240, 0.52) 100%
+  );
+  font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  cursor: pointer;
+  animation: endScrimIn 0.16s ease-out both;
+}
+.end-curtain.leaving {
+  pointer-events: none;
+  animation: endScrimOut 0.3s ease-in both;
+}
+.end-bar {
+  width: min(760px, 86%);
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  padding: 13px 26px 15px;
+  border: 3px solid var(--end-ink);
+  border-radius: 18px;
+  background: var(--end-lime);
+  box-shadow: 8px 8px 0 var(--end-ink);
+  color: var(--end-ink);
+  text-align: center;
+  animation: endBarIn 0.44s cubic-bezier(0.2, 0.85, 0.25, 1.12) 0.06s both;
+}
+.end-curtain[data-kind='loss'] .end-bar,
+.end-curtain[data-kind='draw'] .end-bar {
+  background: var(--end-ink);
+  color: var(--end-card);
+  box-shadow: 8px 8px 0 var(--end-lime);
+}
+.end-kicker {
+  font-size: clamp(9px, calc(var(--vph) * 0.024), 12px);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  opacity: 0.72;
+  animation: endItemIn 0.26s ease-out 0.16s both;
+}
+.end-bar strong {
+  font-size: clamp(22px, calc(var(--vph) * 0.086), 46px);
+  font-weight: 900;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  animation: endItemIn 0.26s ease-out 0.22s both;
+}
+.end-note {
+  max-width: 94%;
+  font-size: clamp(9.5px, calc(var(--vph) * 0.026), 12.5px);
+  font-weight: 600;
+  line-height: 1.45;
+  opacity: 0.78;
+  animation: endItemIn 0.26s ease-out 0.28s both;
+}
+.end-skip {
+  position: absolute;
+  left: 50%;
+  bottom: max(10px, env(safe-area-inset-bottom));
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--end-muted);
+  animation: endSkipIn 0.3s ease-out 0.5s both;
+}
+/* 交接：横幅朝结算卡左上角（.rbadge 的位置）收缩，读起来是同一块元素在移动。 */
+.end-curtain.leaving .end-bar {
+  animation: endBarOut 0.3s cubic-bezier(0.45, 0, 0.7, 0.25) both;
+}
+/* 交接这一帧，横幅是重新挂载的（从牌桌里挪到结算卡的兄弟位置），
+   子元素的入场动画会从头再播一遍——延迟期间 opacity 仍是 0，
+   画面就会看到一块没有字的黑板。这里把子元素钉在最终态。 */
+.end-curtain.leaving .end-kicker,
+.end-curtain.leaving .end-bar strong,
+.end-curtain.leaving .end-note {
+  animation: none;
+}
+
+/* 结算卡入场：整卡推入 + 内容逐行浮现。任何一次挂载都播，
+   从「查看结算」回来重播一次 0.34s，反而像翻回这一页。 */
+.md-duel .rcard {
+  /* 延迟 0.12s：横幅还在收缩时不露脸，避免两行大标题同时压在屏幕上。 */
+  animation: endCardIn 0.36s cubic-bezier(0.2, 0.85, 0.3, 1.05) 0.12s both;
+}
+.md-duel .rcard .cover {
+  animation: endCoverIn 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) 0.16s both;
+}
+.md-duel .rcard .rbadge {
+  animation: endItemIn 0.26s ease-out 0.24s both;
+}
+.md-duel .rcard .rbody h1 {
+  /* 和横幅同名的那一行，必须等横幅淡得差不多了再出现。 */
+  animation: endItemIn 0.26s ease-out 0.3s both;
+}
+.md-duel .rcard .ans {
+  animation: endItemIn 0.26s ease-out 0.36s both;
+}
+.md-duel .rcard .stats {
+  animation: endItemIn 0.26s ease-out 0.42s both;
+}
+.md-duel .rcard .racts {
+  animation: endItemIn 0.26s ease-out 0.48s both;
+}
+
+/* 输因高亮：横幅停住时，让压力到顶那侧的压力条脉冲一下。
+   用的是「黑描边 + 绿外环 + 放大一下」——光靠色相在当前压暗层上读不出来。 */
+.md-duel.end-hit-me .me-stack .press,
+.md-duel.end-hit-both .me-stack .press,
+.md-duel.end-hit-opp .opp-row .press,
+.md-duel.end-hit-both .opp-row .press {
+  transform-origin: left center;
+  animation: endPulse 0.66s cubic-bezier(0.3, 0, 0.4, 1) both;
+}
+.md-duel.end-hit-me .me-stack .press em,
+.md-duel.end-hit-both .me-stack .press em,
+.md-duel.end-hit-opp .opp-row .press em,
+.md-duel.end-hit-both .opp-row .press em {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+@keyframes endScrimIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes endScrimOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes endBarIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.86);
+  }
+  62% {
+    opacity: 1;
+    transform: translateY(2px) scale(1.012);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes endBarOut {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-24%, -42%) scale(0.46);
+  }
+}
+@keyframes endSkipIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+@keyframes endCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.988);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes endItemIn {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes endCoverIn {
+  from {
+    opacity: 0;
+    transform: rotate(-7deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes endPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(17, 18, 20, 0);
+  }
+  34% {
+    transform: scale(1.24);
+    box-shadow:
+      0 0 0 2px #111214,
+      0 0 0 6px rgba(198, 240, 74, 0.95);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(17, 18, 20, 0);
+  }
+}
+
+/* 系统设了「减少动态效果」：全部取消。JS 那边也会直接跳到 done，
+   这层是兜底，保证任何路径下都不会出现卡在半透明的卡片。 */
+@media (prefers-reduced-motion: reduce) {
+  .end-curtain,
+  .end-curtain.leaving,
+  .end-bar,
+  .end-skip,
+  .end-curtain.leaving .end-bar,
+  .md-duel .rcard,
+  .md-duel .rcard .cover,
+  .md-duel .rcard .rbadge,
+  .md-duel .rcard .rbody h1,
+  .md-duel .rcard .ans,
+  .md-duel .rcard .stats,
+  .md-duel .rcard .racts,
+  .md-duel .press {
+    animation: none !important;
+  }
+}
+

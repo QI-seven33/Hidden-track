@@ -1,0 +1,13 @@
+/*
+ * 旧 demo 外壳样式（只负责大厅/登录/资料页的底子与 Token）。
+ *
+ * 这些文件来自最初移植的 demo，选择器统一挂在 `.demo-app` 下；新的漫画风界面在
+ * `manga.css` / `music-duel.css` / `music-duel-integration.css` 里，不依赖这里的类。
+ * 单独收进 legacy/ 是为了让「旧壳」和「新界面」在目录上分开：
+ * 新组件不要再引用这里的选择器；要替换旧页面时，整块删掉也不会影响牌桌。
+ *
+ * 顺序不能改：base 定义变量与基础排版，interface 写组件外观，compat 做旧版覆盖。
+ */
+@import './original-demo-base.css';
+@import './original-demo-interface.css';
+@import './original-demo-compat.css';

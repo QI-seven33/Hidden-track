@@ -1,0 +1,75 @@
+{
+  "name": "hidden-track",
+  "version": "1.1.1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "scripts": {
+    "format": "prettier --write .",
+    "dev": "node scripts/dev.mjs",
+    "build": "tsc --noEmit && node scripts/build.mjs",
+    "start": "node scripts/start.mjs",
+    "start:local": "node scripts/start-07.mjs",
+    "test": "node --import tsx --test --test-concurrency=1 tests/*.test.ts",
+    "preview:manga": "node scripts/preview-manga.mjs",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test && npm run build",
+    "probe:qq": "node --env-file-if-exists=.env --import tsx scripts/probe-qq.ts",
+    "package:server": "npm run package:local",
+    "playtest:start": "node --env-file-if-exists=.env scripts/playtest.mjs start",
+    "playtest:stop": "node scripts/playtest.mjs stop",
+    "playtest:status": "node scripts/playtest.mjs status",
+    "review": "node --env-file-if-exists=.env --import tsx scripts/review.ts",
+    "review:status": "node --env-file-if-exists=.env --import tsx scripts/review.ts status",
+    "review:stop": "node --env-file-if-exists=.env --import tsx scripts/review.ts stop",
+    "playtest": "node scripts/playtest-ready.mjs",
+    "start:lan": "node scripts/start-07.mjs --lan",
+    "simulate": "node --import tsx scripts/simulate-07.ts",
+    "docs:rules": "node --import tsx scripts/export-rules-090.ts",
+    "export:source": "node scripts/export-open-source.mjs",
+    "package:local": "npm run build && node scripts/package-local.mjs"
+  },
+  "overrides": {
+    "@fastify/static": {
+      "glob": "14.0.2"
+    }
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/rate-limit": "^10.3.0",
+    "@fastify/static": "^10.1.8",
+    "@fastify/websocket": "^11.2.0",
+    "fastify": "^5.12.7",
+    "qrcode": "^1.5.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "undici": "^6.29.1",
+    "ws": "^8.18.3",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^5.1.0",
+    "esbuild": "^0.25.12",
+    "prettier": "^3.9.10",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2"
+  },
+  "description": "拜托，这么小众的歌都被你发现了，我的底牌又少了一张",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QI-seven33/Hidden-track.git"
+  },
+  "bugs": {
+    "url": "https://github.com/QI-seven33/Hidden-track/issues"
+  },
+  "homepage": "https://github.com/QI-seven33/Hidden-track#readme"
+}
