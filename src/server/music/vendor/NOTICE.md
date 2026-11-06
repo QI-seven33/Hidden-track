@@ -1,11 +1,5 @@
-# QQ 音乐接口来源
+# 第三方组件声明
 
-按项目所有者要求，从其朋友提供的 UnifyAPI 副本复制 QQMusicApi 的客户端模块及所需 runtime，保留源文件注释。未复制 Express 服务、演示网页、其他音乐源、node_modules 或任何账号/设备运行数据。
+本目录包含 QQMusicApi 组件及所需 runtime，保留原有代码注释。
 
-gateway/runtime.js 仅保留 QQ 客户端实际使用的超时与请求上下文函数，改为 ESM 以直接构建进现有服务；去掉独立网关的 Express 中间件、用户目录及凭证迁移逻辑。Hidden Track 的账号与接口适配层在 vendor 目录之外。
-
-本项目修正 `modules/song.js` 中 RS02 试听文件名：media_mid 只拼接一次。原双拼地址返回 404，单拼由 QQ vkey 服务返回后可正常下载试听 MP3。其他文件类型沿用原逻辑。
-
-移除原 QQ 客户端/登录模块会输出 Cookie、登录响应或授权地址的调试日志；错误仅保留状态码。QQ 登录回跳的 code 用 URL 参数解析，兼容 code 位于最后一个参数的情况。
-
-原分享包根目录标记 UNLICENSED；具体来源链接、作者署名及许可信息由项目作者后续补充。这里不代替原作者授予许可，这些文件不纳入根目录对 Hidden Track 自有代码的 MIT 授权。项目所有者要求先公开项目源码、后补许可资料；公开可见本身不等于取得再分发许可。
+提供版本标注为 `UNLICENSED`。根目录 MIT License 适用于 Hidden Track 自有代码，不改变本目录组件的许可。
